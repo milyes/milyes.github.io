@@ -45,7 +45,8 @@ body {
 
 /* Bannière */
 #banner {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
+    background-image: url("url_de_votre_image.jpg");
+    background-size: cover;
     color: #fff;
     text-align: center;
     padding: 100px 0;
@@ -81,76 +82,45 @@ body {
 /* Section Services */
 #services {
     background-color: #1a1a1a; /* Noir ou gris foncé */
-    color: #fff; /* Texte en blanc */
     padding: 50px 0;
 }
 
-#services header h2 {
-    color: #ff0000; /* Rouge */
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#services p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-#services .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#services .col-4 {
-    width: 25%;
-    padding: 10px;
-}
-
-#services .box {
-    background-color: #363636; /* Gris foncé */
-    padding: 30px;
+/* Centre le texte dans le header de la section "Services" */
+.section-header {
     text-align: center;
 }
 
-#services .box i {
+/* Styles pour les boîtes de service */
+#services .box {
+    background-color: #444; /* Gris sombre */
+    padding: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#services .box .icon {
     color: #ff0000; /* Rouge */
     font-size: 48px;
-}
-
-#services .box h3 {
-    color: #fff; /* Texte en blanc */
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#services .box p {
-    font-size: 16px;
-    line-height: 1.6;
     margin-bottom: 20px;
 }
 
-#services .button {
-    background-color: #ff0000; /* Rouge */
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    text-decoration: none;
-    font-size: 16px;
+#services .box h3 {
+    font-size: 24px;
     font-weight: bold;
-    border-radius: 4px;
+    color: #fff; /* Texte en blanc */
+    margin-bottom: 15px;
 }
 
-#services .button:hover {
-    background-color: #cc0000; /* Rouge plus sombre au survol */
+#services .box p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #fff; /* Texte en blanc */
+    margin-bottom: 0;
 }
 
 /* Pied de page */
 #footer {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
+    background-color: #1a1a1a;
     color: #fff;
     padding: 20px;
     text-align: center;
