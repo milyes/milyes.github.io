@@ -1,0 +1,104 @@
+/* main.css */
+
+/* ... Le reste de votre code CSS ... */
+
+/* En-tête */
+#header {
+    background-color: #1a1a1a; /* Noir ou gris foncé */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+#header .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Aligner le logo et les liens verticalement */
+    align-items: center; /* Centrer horizontalement */
+}
+
+#header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0000; /* Rouge */
+    text-decoration: none;
+    margin-bottom: 10px; /* Espacement entre le logo et les liens */
+}
+
+#nav {
+    display: flex;
+}
+
+#nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px; /* Espacement horizontal entre les liens */
+}
+
+#nav a:hover {
+    text-decoration: underline;
+}
+
+/* Formulaire de contact */
+#contact {
+    background-color: #1a1a1a; /* Noir ou gris foncé */
+    color: #fff; /* Texte en blanc */
+    padding: 50px 0;
+    text-align: center; /* Centrer le contenu du formulaire */
+    min-height: 100vh; /* Définit une hauteur minimale de 100% de la hauteur de la vue */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contact header h2 {
+    color: #ff0000; /* Rouge */
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#contact form .field {
+    margin-bottom: 20px;
+}
+
+#contact form .field label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#contact form input[type="text"],
+#contact form textarea {
+    width: 100%;
+    padding: 12px;
+    border: none; /* Suppression de la bordure */
+    background-color: rgba(255, 255, 255, 0.1); /* Fond transparent avec opacité */
+    color: #fff; /* Texte en blanc */
+    border-radius: 4px;
+}
+
+#contact form textarea {
+    resize: vertical; /* Permettre le redimensionnement vertical de la zone de texte */
+}
+
+#contact form input[type="submit"] {
+    background-color: #ff0000; /* Rouge */
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transition pour le changement de couleur au survol */
+}
+
+#contact form input[type="submit"]:hover {
+    background-color: #cc0000; /* Rouge plus sombre au survol */
+}
+
+/* ... Le reste de votre code CSS ... */
