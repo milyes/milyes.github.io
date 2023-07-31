@@ -45,8 +45,7 @@ body {
 
 /* Bannière */
 #banner {
-    background-image: url("url_de_votre_image.jpg");
-    background-size: cover;
+    background-color: #1a1a1a; /* Noir ou gris foncé */
     color: #fff;
     text-align: center;
     padding: 100px 0;
@@ -82,45 +81,79 @@ body {
 /* Section Services */
 #services {
     background-color: #1a1a1a; /* Noir ou gris foncé */
+    color: #fff; /* Texte en blanc */
     padding: 50px 0;
 }
 
-/* Centre le texte dans le header de la section "Services" */
-.section-header {
-    text-align: center;
+#services header h2 {
+    color: #ff0000; /* Rouge */
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-/* Styles pour les boîtes de service */
-#services .box {
-    background-color: #444; /* Gris sombre */
-    padding: 40px;
+#services p {
+    font-size: 18px;
+    line-height: 1.6;
     margin-bottom: 30px;
-    text-align: center;
 }
 
-#services .box .icon {
+#services .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#services .col-4 {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+}
+
+#services .box {
+    background-color: #363636; /* Gris foncé */
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#services .box i {
     color: #ff0000; /* Rouge */
     font-size: 48px;
     margin-bottom: 20px;
 }
 
 #services .box h3 {
+    color: #fff; /* Texte en blanc */
     font-size: 24px;
     font-weight: bold;
-    color: #fff; /* Texte en blanc */
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 #services .box p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.6;
-    color: #fff; /* Texte en blanc */
-    margin-bottom: 0;
+    margin-bottom: 20px;
+}
+
+#services .button {
+    background-color: #ff0000; /* Rouge */
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+#services .button:hover {
+    background-color: #cc0000; /* Rouge plus sombre au survol */
 }
 
 /* Pied de page */
 #footer {
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; /* Noir ou gris foncé */
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -139,3 +172,5 @@ body {
 #footer a:hover {
     text-decoration: underline;
 }
+
+/* ... Vos autres styles CSS personnalisés ... */
