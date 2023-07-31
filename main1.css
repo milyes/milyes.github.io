@@ -83,6 +83,7 @@ body {
     background-color: #1a1a1a; /* Noir ou gris foncé */
     color: #fff; /* Texte en blanc */
     padding: 50px 0;
+    margin-bottom: 40px; /* Ajout d'un espace en bas */
 }
 
 #services header h2 {
