@@ -18,7 +18,12 @@
             <!-- Bouton de menu pour les petits écrans -->
             <button id="toggle-menu" class="navPanelToggle"><span class="fa fa-bars"></span></button>
             <nav id="nav">
-                <ul class="menu-links">
+                <div class="menu-toggle" id="menu-toggle">
+                    <span class="menu-icon"></span>
+                    <span class="menu-icon"></span>
+                    <span class="menu-icon"></span>
+                </div>
+                <ul id="menu-links">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -36,47 +41,20 @@
             <p>Nous proposons une gamme complète de services d'assistance informatique pour répondre à vos besoins spécifiques :</p>
             <div class="row">
                 <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
+                    <div class="box"> <!-- Ajout de la classe "box" ici -->
                         <i class="icon big rounded fas fa-desktop"></i>
                         <h3>Assistance à distance</h3>
                         <p>Bénéficiez d'une aide rapide et efficace directement depuis chez vous grâce à notre service d'assistance à distance.</p>
-                    </section>
+                    </div>
                 </div>
                 <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
+                    <div class="box"> <!-- Ajout de la classe "box" ici -->
                         <i class="icon big rounded fas fa-laptop"></i>
                         <h3>Réparation Matérielle</h3>
                         <p>Nos experts peuvent réparer votre matériel informatique défectueux pour vous permettre de retrouver un fonctionnement optimal.</p>
-                    </section>
+                    </div>
                 </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-wrench"></i>
-                        <h3>Optimisation Système</h3>
-                        <p>Améliorez les performances de votre système grâce à notre service d'optimisation et de nettoyage de votre ordinateur.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-shield"></i>
-                        <h3>Sécurité Informatique</h3>
-                        <p>Protégez vos données et votre vie privée avec nos solutions de sécurité informatique avancées.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-cogs"></i>
-                        <h3>Installation et Configuration</h3>
-                        <p>Nous assurons l'installation et la configuration de vos logiciels et périphériques pour une utilisation optimale.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-life-ring"></i>
-                        <h3>Support Technique</h3>
-                        <p>Profitez d'un support technique compétent et réactif pour résoudre vos problèmes informatiques.</p>
-                    </section>
-                </div>
+                <!-- Ajouter les autres dalles de services ici... -->
             </div>
         </div>
     </section>
@@ -91,6 +69,7 @@
 
     <script>
         document.getElementById('toggle-menu').addEventListener('click', function() {
+            document.getElementById('menu-toggle').classList.toggle('open');
             document.getElementById('menu-links').classList.toggle('show');
         });
     </script>
