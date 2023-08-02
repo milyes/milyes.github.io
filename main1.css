@@ -36,17 +36,22 @@ body {
     margin-bottom: 20px; /* Espacement entre le logo et les onglets */
 }
 
+/* Barre de navigation */
 #nav {
     display: flex;
-    flex-direction: column; /* Afficher les onglets en colonne */
-    align-items: center; /* Centrer horizontalement les onglets */
+    flex-direction: row; /* Afficher les onglets côte à côte */
+    align-items: center;
     margin-top: 20px; /* Espacement entre le logo et les onglets */
 }
 
 #nav a {
     color: #fff;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 20px; /* Ajouter de l'espace entre les onglets */
+}
+
+#nav a:last-child {
+    margin-right: 0; /* Supprimer la marge droite du dernier onglet */
 }
 
 #nav a:hover {
