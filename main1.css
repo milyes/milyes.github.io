@@ -27,6 +27,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center; /* Centrer le contenu */
 }
 
 #header .logo {
@@ -165,12 +166,20 @@ body {
 
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
-    /* Afficher le menu déroulant en dessous sur les petits écrans */
+    /* Afficher l'icône de menu sur les petits écrans */
+    #toggle-menu {
+        display: block;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    /* Masquer le menu sur les grands écrans */
     #nav {
         display: none;
     }
 
-    /* Afficher le menu déroulant en dessous lorsque l'icône est cliquée */
+    /* Afficher le menu déroulant en dessous sur les petits écrans */
     #nav.show {
         display: flex;
         flex-direction: column; /* Afficher le menu déroulant en colonne */
@@ -191,4 +200,9 @@ body {
     .no-marker::marker {
         content: none;
     }
+}
+
+/* Supprimer le marqueur de liste pour la classe "no-marker" */
+.no-marker {
+    list-style: none;
 }
