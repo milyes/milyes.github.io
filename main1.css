@@ -23,10 +23,20 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center; /* Centrer le contenu de l'en-tête sur tous les périphériques */
+    flex-direction: column;
+    align-items: center; /* Centrer horizontalement tout le contenu dans l'en-tête */
+    justify-content: center; /* Centrer verticalement tout le contenu dans l'en-tête */
+    height: 100vh; /* Ajuster la hauteur de l'en-tête pour qu'il occupe 100% de la hauteur de l'écran */
 }
+
+#header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0000; /* Rouge */
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
 
 #header .logo {
     font-size: 24px;
