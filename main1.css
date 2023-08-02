@@ -37,15 +37,13 @@ body {
 
 #nav {
     display: flex;
-    flex-direction: column; /* Afficher les onglets en colonne */
     align-items: center; /* Centrer horizontalement les onglets */
-    margin-top: 20px; /* Espacement entre le logo et les onglets */
 }
 
 #nav a {
     color: #fff;
     text-decoration: none;
-    margin-bottom: 10px; /* Espacement vertical entre les onglets */
+    margin-right: 20px;
 }
 
 #nav a:hover {
@@ -220,26 +218,28 @@ body {
         text-decoration: none;
         margin: 5px 0;
     }
+
+    #menu-toggle.open + #menu-links {
+        display: block;
+    }
+
+    #menu-toggle.open {
+        transform: rotate(90deg);
+    }
 }
 
 /* Styles pour les écrans larges (ordinateurs) */
 @media screen and (min-width: 768px) {
-    .navPanelToggle {
-        display: none;
-    }
+  .navPanelToggle {
+    display: none;
+  }
 
-    #menu-toggle {
-        display: none;
-    }
+  #menu-toggle {
+    display: none;
+  }
 
-    #nav {
-        display: flex;
-        align-items: center;
-        flex-direction: row; /* Afficher les onglets en ligne horizontalement */
-    }
-
-    #nav a {
-        margin-right: 20px; /* Espacement horizontal entre les onglets */
-        margin-bottom: 0; /* Réinitialiser l'espacement vertical pour les écrans d'ordinateur */
-    }
+  #nav {
+    display: flex;
+    align-items: center;
+  }
 }
