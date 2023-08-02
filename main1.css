@@ -33,6 +33,13 @@ body {
     text-decoration: none;
 }
 
+/* Navigation */
+#nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 #nav a {
     color: #fff;
     text-decoration: none;
@@ -158,11 +165,22 @@ body {
     }
 
     #nav.show {
-        display: block; /* Afficher le menu sur les petits écrans */
+        display: flex; /* Afficher le menu sur les petits écrans */
+        flex-direction: column; /* Afficher les liens de navigation en colonne */
     }
 
     #nav a {
         margin: 5px 0; /* Réduire l'espace entre les liens de navigation */
+    }
+
+    /* Afficher le bouton de menu sur les petits écrans */
+    #toggle-menu {
+        display: block;
+        color: #fff;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
     }
 }
 
