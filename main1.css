@@ -1,3 +1,5 @@
+/* main1.css */
+
 /* Réinitialisation de la marge et du remplissage pour tous les éléments */
 body, h1, p, ul, li, a {
     margin: 0;
@@ -182,12 +184,16 @@ body {
     }
 
     /* Supprimer le marqueur de liste pour la classe "no-marker" */
-    .no-marker, #nav .no-marker {
-        list-style: none;
-    }
-    
-    /* Supprimer le marqueur de liste pour la classe "no-marker" dans le menu déroulant */
-    #nav .no-marker::marker {
+    .no-marker::marker {
         content: none;
     }
+
+    /* Centrer le contenu de l'en-tête sur tous les périphériques */
+    #header .inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center; /* Ajouter cette ligne pour centrer le contenu */
+    }
+
 }
