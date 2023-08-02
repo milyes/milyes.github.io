@@ -105,6 +105,7 @@ body {
 /* Bouton "Nous Contacter" */
 .actions {
     text-align: center;
+    margin-top: 20px; /* Ajout d'une marge en haut pour séparer le bouton des éléments de la liste */
 }
 
 .actions .button {
@@ -129,43 +130,4 @@ body {
     background-color: #1a1a1a; /* Noir ou gris foncé */
     color: #fff;
     padding: 20px;
-    text-align: center;
-}
-
-#footer .inner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#footer a {
-    color: #fff;
-    text-decoration: none;
-}
-
-#footer a:hover {
-    text-decoration: underline;
-}
-
-/* Médias queries pour les appareils mobiles */
-@media screen and (max-width: 768px) {
-    #header .inner {
-        align-items: center; /* Centrer le contenu sur les petits écrans */
-    }
-
-    #nav {
-        display: none; /* Masquer le menu sur les grands écrans */
-    }
-
-    #nav.show {
-        display: block; /* Afficher le menu sur les petits écrans */
-    }
-
-    #nav a {
-        margin: 5px 0; /* Réduire l'espace entre les liens de navigation */
-    }
-}
-
-/* Supprimer le marqueur de liste pour la classe "no-marker" */
-.no-marker {
-    list-style: none;
-}
+    text-align: center
