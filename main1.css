@@ -27,7 +27,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: center; /* Ajouter cette ligne pour centrer le contenu */
 }
 
 #header .logo {
@@ -151,17 +150,22 @@ body {
     text-decoration: underline;
 }
 
+/* Icône de menu pour les petits écrans */
+#toggle-menu {
+    display: none; /* Masquer l'icône de menu sur les grands écrans */
+}
+
+/* Centrer le contenu de l'en-tête sur tous les périphériques */
+#header .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center; /* Ajouter cette ligne pour centrer le contenu */
+}
+
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
-    /* Afficher l'icône de menu sur les petits écrans */
-    #toggle-menu {
-        display: block;
-        color: #fff;
-        font-size: 24px;
-        cursor: pointer;
-    }
-
-    /* Masquer le menu sur les grands écrans */
+    /* Afficher le menu déroulant en dessous sur les petits écrans */
     #nav {
         display: none;
     }
@@ -187,9 +191,4 @@ body {
     .no-marker::marker {
         content: none;
     }
-}
-
-/* Supprimer le marqueur de liste pour la classe "no-marker" */
-.no-marker {
-    list-style: none;
 }
