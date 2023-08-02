@@ -36,22 +36,16 @@ body {
     margin-bottom: 20px; /* Espacement entre le logo et les onglets */
 }
 
-/* Barre de navigation */
 #nav {
     display: flex;
-    flex-direction: row; /* Afficher les onglets côte à côte */
-    align-items: center;
+    justify-content: center; /* Centrer horizontalement les onglets */
     margin-top: 20px; /* Espacement entre le logo et les onglets */
 }
 
 #nav a {
     color: #fff;
     text-decoration: none;
-    margin-right: 20px; /* Ajouter de l'espace entre les onglets */
-}
-
-#nav a:last-child {
-    margin-right: 0; /* Supprimer la marge droite du dernier onglet */
+    margin: 0 10px; /* Espacement entre les onglets */
 }
 
 #nav a:hover {
@@ -237,5 +231,14 @@ body {
 @media screen and (min-width: 768px) {
   .navPanelToggle {
     display: none;
+  }
+
+  /* Afficher les onglets côte à côte sur les écrans d'ordinateur */
+  #nav {
+    flex-direction: row;
+  }
+
+  #nav a {
+    margin: 0 10px;
   }
 }
