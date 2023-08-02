@@ -23,10 +23,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
     align-items: center; /* Centrer horizontalement tout le contenu dans l'en-tête */
     justify-content: center; /* Centrer verticalement tout le contenu dans l'en-tête */
-    height: 100vh; /* Ajuster la hauteur de l'en-tête pour qu'il occupe 100% de la hauteur de l'écran */
 }
 
 #header .logo {
@@ -36,6 +34,7 @@ body {
     text-decoration: none;
     margin-bottom: 10px;
 }
+
 
 
 #header .logo {
