@@ -24,6 +24,10 @@ body {
 #header .inner {
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center; /* Ajouter cette ligne pour centrer le contenu */
 }
 
 #header .logo {
@@ -147,18 +151,6 @@ body {
     text-decoration: underline;
 }
 
-/* Icône de menu pour les petits écrans */
-#toggle-menu {
-    display: none; /* Masquer l'icône de menu sur les grands écrans */
-}
-
-/* Centrer le contenu de l'en-tête sur les ordinateurs */
-#header .inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
     /* Afficher l'icône de menu sur les petits écrans */
@@ -174,19 +166,26 @@ body {
         display: none;
     }
 
-    /* Afficher le menu déroulant sur les petits écrans lorsque l'icône est cliquée */
+    /* Afficher le menu déroulant en dessous lorsque l'icône est cliquée */
     #nav.show {
         display: flex;
-        flex-direction: column;
+        flex-direction: column; /* Afficher le menu déroulant en colonne */
         background-color: #1a1a1a; /* Noir ou gris foncé */
         padding: 10px;
-        position: static; /* Modifier la position en statique pour que le menu soit intégré au flux de la page */
+        position: absolute;
+        top: 60px; /* Ajuster la position verticale du menu déroulant */
+        right: 20px; /* Ajuster la position horizontale du menu déroulant */
         z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
     }
 
     /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
     #nav a {
         margin: 5px 0;
+    }
+
+    /* Supprimer le marqueur de liste pour la classe "no-marker" */
+    .no-marker::marker {
+        content: none;
     }
 }
 
