@@ -23,9 +23,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
     align-items: center; /* Centrer horizontalement tout le contenu dans l'en-tête */
-    justify-content: center; /* Centrer verticalement tout le contenu dans l'en-tête */
+    justify-content: space-between; /* Espacement égal entre les éléments (logo et menu) */
 }
 
 #header .logo {
@@ -33,7 +32,7 @@ body {
     font-weight: bold;
     color: #ff0000; /* Rouge */
     text-decoration: none;
-    margin-bottom: 20px; /* Espacement entre le logo et les onglets */
+    margin-bottom: 10px;
 }
 
 #nav {
@@ -46,7 +45,7 @@ body {
 #nav a {
     color: #fff;
     text-decoration: none;
-    margin-right: 20px;
+    margin-bottom: 10px; /* Espacement vertical entre les onglets */
 }
 
 #nav a:hover {
@@ -221,28 +220,26 @@ body {
         text-decoration: none;
         margin: 5px 0;
     }
-
-    #menu-toggle.open + #menu-links {
-        display: block;
-    }
-
-    #menu-toggle.open {
-        transform: rotate(90deg);
-    }
 }
 
 /* Styles pour les écrans larges (ordinateurs) */
 @media screen and (min-width: 768px) {
-  .navPanelToggle {
-    display: none;
-  }
+    .navPanelToggle {
+        display: none;
+    }
 
-  #menu-toggle {
-    display: none;
-  }
+    #menu-toggle {
+        display: none;
+    }
 
-  #nav {
-    display: flex;
-    justify-content: center;
-  }
+    #nav {
+        display: flex;
+        align-items: center;
+        flex-direction: row; /* Afficher les onglets en ligne horizontalement */
+    }
+
+    #nav a {
+        margin-right: 20px; /* Espacement horizontal entre les onglets */
+        margin-bottom: 0; /* Réinitialiser l'espacement vertical pour les écrans d'ordinateur */
+    }
 }
