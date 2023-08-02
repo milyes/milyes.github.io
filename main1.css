@@ -164,3 +164,8 @@ body {
         margin: 5px 0; /* Réduire l'espace entre les liens de navigation */
     }
 }
+
+/* Supprimer le marqueur de liste pour la classe "no-marker" */
+.no-marker {
+    list-style: none;
+}
