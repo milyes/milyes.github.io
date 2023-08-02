@@ -18,9 +18,16 @@
             <!-- Bouton de menu pour les petits écrans -->
             <button id="toggle-menu" class="navPanelToggle"><span class="fa fa-bars"></span></button>
             <nav id="nav">
-                <a href="index.html">Accueil</a>
-                <a href="services.html">Services</a>
-                <a href="contact.html">Contact</a>
+                <div class="menu-toggle" id="menu-toggle">
+                    <span class="menu-icon"></span>
+                    <span class="menu-icon"></span>
+                    <span class="menu-icon"></span>
+                </div>
+                <ul id="menu-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </nav>
         </div>
     </header>
@@ -89,7 +96,8 @@
 
     <script>
         document.getElementById('toggle-menu').addEventListener('click', function() {
-            document.getElementById('nav').classList.toggle('show');
+            document.getElementById('menu-toggle').classList.toggle('open');
+            document.getElementById('menu-links').classList.toggle('show');
         });
     </script>
 
