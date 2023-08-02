@@ -1,186 +1,49 @@
 /* main1.css */
 
-/* Réinitialisation de la marge et du remplissage pour tous les éléments */
-body, h1, p, ul, li, a {
-    margin: 0;
-    padding: 0;
+/* ... (votre code CSS actuel) ... */
+
+/* Icône de menu pour les petits écrans */
+#toggle-menu {
+    display: none; /* Masquer l'icône de menu sur les grands écrans */
 }
 
-/* Style de fond pour le corps de la page */
-body {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
-    font-family: Arial, sans-serif;
-    color: #fff; /* Texte en blanc */
-}
-
-/* En-tête */
-#header {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
+/* Centrer le contenu de l'en-tête sur les ordinateurs */
 #header .inner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#header .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff0000; /* Rouge */
-    text-decoration: none;
-}
-
-/* Navigation */
-#nav {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-#nav a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 20px;
-}
-
-#nav a:hover {
-    text-decoration: underline;
-}
-
-/* Contenu spécifique de la page "Services" */
-#services {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
-    padding: 50px 0;
-}
-
-#services .inner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#services header h2 {
-    color: #ff0000; /* Rouge */
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#services p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: -15px;
-}
-
-.col-4 {
-    width: 33.3333%;
-    padding: 15px;
-}
-
-.box {
-    background-color: #363636; /* Gris foncé */
-    padding: 20px;
-    text-align: center;
-}
-
-.box i {
-    font-size: 48px;
-    color: #ff0000; /* Rouge */
-    margin-bottom: 10px;
-}
-
-.box h3 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.box p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* Bouton "Nous Contacter" */
-.actions {
-    text-align: center;
-    margin-top: 20px; /* Ajout d'une marge en haut pour séparer le bouton des éléments de la liste */
-}
-
-.actions .button {
-    background-color: #ff0000; /* Rouge */
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transition pour le changement de couleur au survol */
-}
-
-.actions .button:hover {
-    background-color: #cc0000; /* Rouge plus sombre au survol */
-}
-
-/* Pied de page */
-#footer {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-#footer .inner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#footer a {
-    color: #fff;
-    text-decoration: none;
-}
-
-#footer a:hover {
-    text-decoration: underline;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
-    #header .inner {
-        align-items: center; /* Centrer le contenu sur les petits écrans */
-    }
-
-    #nav {
-        display: none; /* Masquer le menu sur les grands écrans */
-    }
-
-    #nav.show {
-        display: flex; /* Afficher le menu sur les petits écrans */
-        flex-direction: column; /* Afficher les liens de navigation en colonne */
-    }
-
-    #nav a {
-        margin: 5px 0; /* Réduire l'espace entre les liens de navigation */
-    }
-
-    /* Afficher le bouton de menu sur les petits écrans */
+    /* Afficher l'icône de menu sur les petits écrans */
     #toggle-menu {
         display: block;
         color: #fff;
-        background: none;
-        border: none;
+        font-size: 24px;
         cursor: pointer;
-        font-size: 16px;
+    }
+
+    /* Masquer le menu sur les grands écrans */
+    #nav {
+        display: none;
+    }
+
+    /* Afficher le menu déroulant sur les petits écrans lorsque l'icône est cliquée */
+    #nav.show {
+        display: flex;
+        flex-direction: column;
+        background-color: #1a1a1a; /* Noir ou gris foncé */
+        padding: 10px;
+        position: absolute;
+        top: 60px; /* Ajuster la position verticale du menu déroulant */
+        right: 20px; /* Ajuster la position horizontale du menu déroulant */
+        z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
+    }
+
+    /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
+    #nav a {
+        margin: 5px 0;
     }
 }
 
