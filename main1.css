@@ -33,6 +33,10 @@ body {
     font-weight: bold;
     color: #ff0000; /* Rouge */
     text-decoration: none;
+    flex: 1; /* Utiliser autant d'espace que possible dans le conteneur flex */
+    display: flex; /* Activer le modèle flex pour centrer le logo */
+    justify-content: center; /* Centrer horizontalement le contenu dans le conteneur flex */
+    align-items: center; /* Centrer verticalement le contenu dans le conteneur flex */
 }
 
 #nav a {
