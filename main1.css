@@ -192,6 +192,40 @@ body {
     #nav a {
         margin: 5px 0;
     }
+
+    /* Styles pour le menu déroulant */
+    #menu-toggle {
+        display: none;
+    }
+
+    #menu-links {
+        display: none;
+        background-color: #1a1a1a; /* Noir ou gris foncé */
+        padding: 10px;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        z-index: 1;
+    }
+
+    #menu-links li {
+        list-style-type: none;
+    }
+
+    #menu-links li a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        margin: 5px 0;
+    }
+
+    #menu-toggle.open {
+        transform: rotate(90deg);
+    }
+
+    #menu-links.show {
+        display: block;
+    }
 }
 
 /* Styles pour les écrans larges (ordinateurs) */
