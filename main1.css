@@ -172,9 +172,7 @@ body {
         flex-direction: column; /* Afficher le menu déroulant en colonne */
         background-color: #1a1a1a; /* Noir ou gris foncé */
         padding: 10px;
-        position: absolute;
-        top: 60px; /* Ajuster la position verticale du menu déroulant */
-        right: 20px; /* Ajuster la position horizontale du menu déroulant */
+        position: static; /* Modifier la position en statique pour que le menu soit intégré au flux de la page */
         z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
     }
 
@@ -187,7 +185,7 @@ body {
     .no-marker::marker {
         content: none;
     }
-    
+
     /* Supprimer le marqueur de liste pour la classe "no-marker" dans le menu déroulant */
     #nav .no-marker::marker {
         content: none;
