@@ -195,7 +195,10 @@ body {
 
     /* Styles pour le menu déroulant */
     #menu-toggle {
-        display: none;
+        display: block;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
     }
 
     #menu-links {
@@ -219,12 +222,12 @@ body {
         margin: 5px 0;
     }
 
-    #menu-toggle.open {
-        transform: rotate(90deg);
+    #menu-toggle.open + #menu-links {
+        display: block;
     }
 
-    #menu-links.show {
-        display: block;
+    #menu-toggle.open {
+        transform: rotate(90deg);
     }
 }
 
@@ -232,5 +235,14 @@ body {
 @media screen and (min-width: 768px) {
   .navPanelToggle {
     display: none;
+  }
+
+  #menu-toggle {
+    display: none;
+  }
+
+  #nav {
+    display: flex;
+    justify-content: center;
   }
 }
