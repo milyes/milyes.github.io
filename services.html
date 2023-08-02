@@ -6,6 +6,7 @@
     <title>IT-networksecure - Services</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="main1.css">
+    <!-- Ajouter le lien vers la bibliothèque Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -33,48 +34,7 @@
             </header>
             <p>Nous proposons une gamme complète de services d'assistance informatique pour répondre à vos besoins spécifiques :</p>
             <div class="row">
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-desktop"></i>
-                        <h3>Assistance à distance</h3>
-                        <p>Bénéficiez d'une aide rapide et efficace directement depuis chez vous grâce à notre service d'assistance à distance.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-laptop"></i>
-                        <h3>Réparation Matérielle</h3>
-                        <p>Nos experts peuvent réparer votre matériel informatique défectueux pour vous permettre de retrouver un fonctionnement optimal.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-wrench"></i>
-                        <h3>Optimisation Système</h3>
-                        <p>Améliorez les performances de votre système grâce à notre service d'optimisation et de nettoyage de votre ordinateur.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-shield"></i>
-                        <h3>Sécurité Informatique</h3>
-                        <p>Protégez vos données et votre vie privée avec nos solutions de sécurité informatique avancées.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-cogs"></i>
-                        <h3>Installation et Configuration</h3>
-                        <p>Nous assurons l'installation et la configuration de vos logiciels et périphériques pour une utilisation optimale.</p>
-                    </section>
-                </div>
-                <div class="col-4 col-6-medium col-12-small">
-                    <section class="box">
-                        <i class="icon big rounded fas fa-life-ring"></i>
-                        <h3>Support Technique</h3>
-                        <p>Profitez d'un support technique compétent et réactif pour résoudre vos problèmes informatiques.</p>
-                    </section>
-                </div>
+                <!-- ... Les dalles de services avec les icônes ... -->
             </div>
             <div class="actions">
                 <a href="contact.html" class="button alt">Nous Contacter</a>
@@ -87,12 +47,18 @@
         <!-- ... Votre contenu actuel ... -->
     </section>
 
-</body>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 
-<script>
-    document.getElementById('toggle-menu').addEventListener('click', function() {
-        document.getElementById('nav').classList.toggle('show');
-    });
-</script>
+    <script>
+        document.getElementById('toggle-menu').addEventListener('click', function() {
+            document.getElementById('nav').classList.toggle('show');
+        });
+    </script>
+
+</body>
 
 </html>
