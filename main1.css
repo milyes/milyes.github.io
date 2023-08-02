@@ -185,3 +185,10 @@ body {
         margin: 5px 0;
     }
 }
+
+/* Styles pour les écrans larges (ordinateurs) */
+@media screen and (min-width: 768px) {
+  .navPanelToggle {
+    display: none;
+  }
+}
