@@ -178,3 +178,18 @@ body {
         z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
     }
 
+    /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
+    #nav a {
+        margin: 5px 0;
+    }
+
+    /* Supprimer le marqueur de liste pour la classe "no-marker" */
+    .no-marker::marker {
+        content: none;
+    }
+    
+    /* Supprimer le marqueur de liste pour la classe "no-marker" dans le menu déroulant */
+    #nav .no-marker::marker {
+        content: none;
+    }
+}
