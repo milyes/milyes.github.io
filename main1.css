@@ -168,6 +168,7 @@ body {
         color: #fff;
         font-size: 24px;
         cursor: pointer;
+        text-align: center; /* Centrer le contenu du bouton */
     }
 
     /* Masquer le menu sur les grands écrans */
@@ -175,15 +176,16 @@ body {
         display: none;
     }
 
-    /* Afficher le menu déroulant en dessous lorsque l'icône est cliquée */
+    /* Afficher le menu déroulant au centre lorsque l'icône est cliquée */
     #nav.show {
         display: flex;
         flex-direction: column; /* Afficher le menu déroulant en colonne */
         background-color: #1a1a1a; /* Noir ou gris foncé */
         padding: 10px;
         position: absolute;
-        top: 60px; /* Ajuster la position verticale du menu déroulant */
-        right: 20px; /* Ajuster la position horizontale du menu déroulant */
+        top: 50%; /* Ajuster la position verticale du menu déroulant au centre */
+        left: 50%; /* Ajuster la position horizontale du menu déroulant au centre */
+        transform: translate(-50%, -50%); /* Centrer le contenu du menu déroulant */
         z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
     }
 
@@ -225,20 +227,4 @@ body {
     #menu-links.show {
         display: block;
     }
-}
-
-/* Styles pour les écrans larges (ordinateurs) */
-@media screen and (min-width: 768px) {
-  .navPanelToggle {
-    display: none;
-  }
-
-  /* Afficher les onglets côte à côte sur les écrans d'ordinateur */
-  #nav {
-    flex-direction: row;
-  }
-
-  #nav a {
-    margin: 0 10px;
-  }
 }
