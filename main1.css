@@ -27,7 +27,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: center; /* Centrer le contenu */
+    text-align: center; /* Centrer le contenu de l'en-tête sur tous les périphériques */
 }
 
 #header .logo {
@@ -151,22 +151,9 @@ body {
     text-decoration: underline;
 }
 
-/* Icône de menu pour les petits écrans */
-#toggle-menu {
-    display: none; /* Masquer l'icône de menu sur les grands écrans */
-}
-
-/* Centrer le contenu de l'en-tête sur tous les périphériques */
-#header .inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center; /* Ajouter cette ligne pour centrer le contenu */
-}
-
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
-    /* Afficher l'icône de menu sur les petits écrans */
+    /* Icône de menu pour les petits écrans */
     #toggle-menu {
         display: block;
         color: #fff;
@@ -179,7 +166,7 @@ body {
         display: none;
     }
 
-    /* Afficher le menu déroulant en dessous sur les petits écrans */
+    /* Afficher le menu déroulant en dessous lorsque l'icône est cliquée */
     #nav.show {
         display: flex;
         flex-direction: column; /* Afficher le menu déroulant en colonne */
@@ -191,18 +178,3 @@ body {
         z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
     }
 
-    /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
-    #nav a {
-        margin: 5px 0;
-    }
-
-    /* Supprimer le marqueur de liste pour la classe "no-marker" */
-    .no-marker::marker {
-        content: none;
-    }
-}
-
-/* Supprimer le marqueur de liste pour la classe "no-marker" */
-.no-marker {
-    list-style: none;
-}
