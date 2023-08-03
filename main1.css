@@ -24,8 +24,6 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrer horizontalement tout le contenu dans l'en-tête */
-    justify-content: center; /* Centrer verticalement tout le contenu dans l'en-tête */
 }
 
 #header .logo {
@@ -33,24 +31,40 @@ body {
     font-weight: bold;
     color: #ff0000; /* Rouge */
     text-decoration: none;
-    margin-bottom: 20px; /* Espacement entre le logo et les onglets */
+    margin-bottom: 10px;
 }
 
 #nav {
-    display: flex;
-    justify-content: center; /* Centrer horizontalement les onglets */
-    margin-top: 20px; /* Espacement entre le logo et les onglets */
+    display: none; /* Masquer le menu sur les petits écrans */
+}
+
+#toggle-menu {
+    display: block; /* Afficher le bouton de menu sur les petits écrans */
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#nav.show {
+    display: flex; /* Afficher le menu sur les petits écrans lorsque le bouton est cliqué */
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 10px;
 }
 
 #nav a {
     color: #fff;
     text-decoration: none;
-    margin: 0 10px; /* Espacement entre les onglets */
+    margin: 10px 0;
 }
 
 #nav a:hover {
     text-decoration: underline;
 }
+
 
 /* Contenu spécifique de la page "Services" */
 #services {
