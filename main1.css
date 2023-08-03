@@ -179,3 +179,23 @@ body {
         margin: 5px 0;
     }
 }
+
+/* Styles pour les écrans larges (ordinateurs) */
+@media screen and (min-width: 768px) {
+    /* Afficher le menu déroulant sur les grands écrans */
+    #nav {
+        display: flex;
+        flex-direction: column;
+        background-color: #1a1a1a; /* Noir ou gris foncé */
+        padding: 10px;
+        position: absolute;
+        top: 60px; /* Ajuster la position verticale du menu déroulant */
+        right: 20px; /* Ajuster la position horizontale du menu déroulant */
+        z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
+    }
+
+    /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
+    #nav a {
+        margin: 5px 0;
+    }
+}
