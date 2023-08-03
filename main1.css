@@ -23,8 +23,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* Aligner le logo à gauche et le menu à droite */
-    align-items: center; /* Centrer verticalement tout le contenu dans l'en-tête */
+    flex-direction: column;
+    align-items: center; /* Centrer horizontalement tout le contenu dans l'en-tête */
 }
 
 #header .logo {
@@ -37,6 +37,9 @@ body {
 #nav {
     list-style: none; /* Enlever les marqueurs des balises <li> */
     display: flex;
+    justify-content: center; /* Centrer horizontalement les onglets */
+    align-items: center; /* Centrer verticalement les onglets */
+    flex-wrap: wrap; /* Permettre le retour à la ligne si besoin */
 }
 
 #nav a {
