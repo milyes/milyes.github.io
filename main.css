@@ -50,15 +50,16 @@ body {
 }
 
 #nav.show {
-    display: block;
+    display: flex;
     flex-direction: column;
     background-color: #1a1a1a;
     padding: 10px;
-    position: relative; /* Changer la position en relative */
+    position: fixed; /* Changer la position en fixed */
     top: 60px;
     right: 20px;
     z-index: 1;
 }
+
 
 
 #nav a {
