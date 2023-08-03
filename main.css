@@ -52,14 +52,8 @@ body {
     font-size: 16px;
 }
 
-#nav.show {
-    display: flex;
-    background-color: #1a1a1a;
-    padding: 10px;
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    z-index: 1;
+#nav.show a {
+    display: block; /* Afficher les liens du menu déroulant lorsque le bouton est cliqué */
 }
 
 #nav a {
