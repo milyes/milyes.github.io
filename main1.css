@@ -23,9 +23,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Centrer horizontalement tout le contenu dans l'en-tête */
-    justify-content: center; /* Centrer verticalement tout le contenu dans l'en-tête */
+    justify-content: space-between; /* Aligner le logo à gauche et le menu à droite */
+    align-items: center; /* Centrer verticalement tout le contenu dans l'en-tête */
 }
 
 #header .logo {
@@ -33,13 +32,11 @@ body {
     font-weight: bold;
     color: #ff0000; /* Rouge */
     text-decoration: none;
-    margin-bottom: 20px; /* Espacement entre le logo et les onglets */
 }
 
 #nav {
+    list-style: none; /* Enlever les marqueurs des balises <li> */
     display: flex;
-    justify-content: center; /* Centrer horizontalement les onglets */
-    margin-top: 20px; /* Espacement entre le logo et les onglets */
 }
 
 #nav a {
@@ -178,8 +175,8 @@ body {
     /* Afficher le menu déroulant en dessous lorsque l'icône est cliquée */
     #nav.show {
         display: flex;
-        flex-direction: column; /* Afficher le menu déroulant en colonne */
         background-color: #1a1a1a; /* Noir ou gris foncé */
+        flex-direction: column; /* Afficher le menu déroulant en colonne */
         padding: 10px;
         position: absolute;
         top: 60px; /* Ajuster la position verticale du menu déroulant */
@@ -189,7 +186,7 @@ body {
 
     /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
     #nav a {
-        margin: 5px 0;
+        margin: 5px 10px; /* Réduire légèrement l'espace horizontal entre les liens */
     }
 
     /* Styles pour le menu déroulant */
@@ -224,21 +221,5 @@ body {
 
     #menu-links.show {
         display: block;
-    }
-}
-
-/* Styles pour les écrans larges (ordinateurs) */
-@media screen and (min-width: 768px) {
-    .navPanelToggle {
-        display: none;
-    }
-
-    /* Afficher les onglets côte à côte sur les écrans d'ordinateur */
-    #nav {
-        flex-direction: row;
-    }
-
-    #nav a {
-        margin: 0 10px;
     }
 }
