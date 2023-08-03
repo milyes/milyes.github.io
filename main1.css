@@ -240,7 +240,7 @@ body {
 
 /* Styles pour les écrans larges (ordinateurs) */
 @media screen and (min-width: 768px) {
-    /* Masquer le menu déroulant sur les grands écrans */
+    /* Afficher le menu déroulant sur les grands écrans */
     #nav {
         display: flex;
         justify-content: center; /* Centrer horizontalement les onglets */
@@ -248,19 +248,11 @@ body {
     }
 }
 
-/* Médias queries pour les appareils mobiles */
+/* Styles pour les appareils mobiles */
 @media screen and (max-width: 768px) {
-    /* Icône de menu pour les petits écrans */
-    #toggle-menu {
-        display: block;
-        color: #fff;
-        font-size: 24px;
-        cursor: pointer;
-    }
-
     /* Masquer le menu sur les petits écrans */
     #nav {
-        display: none;
+        display: flex;
         flex-direction: column;
         background-color: #1a1a1a; /* Noir ou gris foncé */
         padding: 10px;
