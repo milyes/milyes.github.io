@@ -65,6 +65,7 @@ body {
 
 #nav a:hover {
     text-decoration: underline;
+    margin-bottom: 10px; /* Espacement supplémentaire lorsque le lien est survolé */
 }
 
 /* Bannière */
@@ -149,4 +150,3 @@ body {
         margin: 5px 0; /* Réduire l'espace entre les liens de navigation */
     }
 }
-
