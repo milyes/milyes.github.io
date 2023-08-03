@@ -51,12 +51,18 @@
         </div>
     </section>
 
-    <script>
-        // Script pour afficher/masquer le menu de navigation sur les petits écrans
-        document.getElementById("toggle-menu").addEventListener("click", function () {
-            document.getElementById("nav").classList.toggle("show");
-        });
-    </script>
+   <script>
+    // JavaScript pour afficher/masquer le menu de navigation sur les ordinateurs
+    document.getElementById("toggle-menu").addEventListener("click", function () {
+        var nav = document.getElementById("nav");
+        if (nav.style.display === "flex") {
+            nav.style.display = "none";
+        } else {
+            nav.style.display = "flex";
+        }
+    });
+</script>
+
 
 </body>
 
