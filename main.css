@@ -50,15 +50,16 @@ body {
 }
 
 #nav.show {
-    display: flex;
-    flex-direction: column; /* Afficher le menu déroulant en colonne */
-    background-color: #1a1a1a; /* Noir ou gris foncé */
+    display: block;
+    flex-direction: column;
+    background-color: #1a1a1a;
     padding: 10px;
-    position: absolute;
-    top: 60px; /* Ajuster la position verticale du menu déroulant */
-    right: 20px; /* Ajuster la position horizontale du menu déroulant */
-    z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
+    position: relative; /* Changer la position en relative */
+    top: 60px;
+    right: 20px;
+    z-index: 1;
 }
+
 
 #nav a {
     color: #fff;
