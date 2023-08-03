@@ -1,3 +1,5 @@
+/* main.css */
+
 /* Réinitialisation de la marge et du remplissage pour tous les éléments */
 body, h1, p, ul, li, a {
     margin: 0;
@@ -63,79 +65,31 @@ body {
 
 #nav a:hover {
     text-decoration: underline;
+    margin-bottom: 10px; /* Espacement supplémentaire lorsque le lien est survolé */
 }
 
-
-/* Contenu spécifique de la page "Services" */
-#services {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
-    padding: 50px 0;
+/* Bannière */
+#banner {
+    background-image: url("url_de_votre_image.jpg");
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
 }
 
-#services .inner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#services header h2 {
-    color: #ff0000; /* Rouge */
+#banner h1 {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-#services p {
+#banner p {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 30px;
 }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: -15px;
-}
-
-.col-4 {
-    width: 33.3333%;
-    padding: 15px;
-}
-
-/* Style pour les dalles de services */
-.box {
-    background-color: #363636; /* Couleur de fond des dalles */
-    padding: 20px;
-    text-align: center;
-    border-radius: 4px; /* Ajouter des coins arrondis */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ajouter une ombre */
-    margin-bottom: 30px; /* Ajouter de l'espace entre les dalles */
-}
-
-.box i {
-    font-size: 48px;
-    color: #ff0000; /* Rouge */
-    margin-bottom: 10px;
-}
-
-.box h3 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.box p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* Bouton "Nous Contacter" */
-.actions {
-    text-align: center;
-    margin-top: 20px; /* Ajout d'une marge en haut pour séparer le bouton des éléments de la liste */
-}
-
-.actions .button {
+#banner .button {
     background-color: #ff0000; /* Rouge */
     color: #fff;
     padding: 12px 24px;
@@ -144,17 +98,21 @@ body {
     font-size: 16px;
     font-weight: bold;
     border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transition pour le changement de couleur au survol */
 }
 
-.actions .button:hover {
+#banner .button:hover {
     background-color: #cc0000; /* Rouge plus sombre au survol */
+}
+
+/* Section Services */
+#services {
+    background-color: #1a1a1a; /* Noir ou gris foncé */
+    padding: 50px 0;
 }
 
 /* Pied de page */
 #footer {
-    background-color: #1a1a1a; /* Noir ou gris foncé */
+    background-color: #1a1a1a;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -173,6 +131,7 @@ body {
 #footer a:hover {
     text-decoration: underline;
 }
+
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
     #header .inner {
