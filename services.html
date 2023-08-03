@@ -17,9 +17,9 @@
             <a href="index.html" class="logo">it-networksecure</a>
             <button id="toggle-menu"><i class="fas fa-bars"></i></button> <!-- Icône hamburger -->
             <nav id="nav">
-                <a href="index.html">Accueil</a>
-                <a href="services.html">Services</a> <!-- Lien vers la page "services.html" -->
-                <a href="contact.html">Contact</a>
+                <a href="index.html" class="menu-link">Accueil</a>
+                <a href="services.html" class="menu-link">Services</a> <!-- Lien vers la page "services.html" -->
+                <a href="contact.html" class="menu-link">Contact</a>
             </nav>
         </div>
     </header>
@@ -90,6 +90,10 @@
         // Script pour afficher/masquer le menu de navigation sur les petits écrans
         document.getElementById("toggle-menu").addEventListener("click", function () {
             document.getElementById("nav").classList.toggle("show");
+            const links = document.getElementsByClassName("menu-link");
+            for (let i = 0; i < links.length; i++) {
+                links[i].classList.toggle("menu-link-show");
+            }
         });
     </script>
 
