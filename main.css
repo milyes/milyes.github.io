@@ -130,7 +130,7 @@ body {
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
     #header .inner {
-        align-items: center; /* Centrer le contenu sur les petits écrans */
+        align-items: center;
     }
 
     #nav {
@@ -138,11 +138,17 @@ body {
     }
 
     #nav.show {
-        display: block; /* Afficher le menu sur les petits écrans */
+        display: flex;
+        flex-direction: column;
+        background-color: #1a1a1a;
+        padding: 10px;
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        z-index: 1;
     }
 
     #nav a {
-        margin: 5px 0; /* Réduire l'espace entre les liens de navigation */
+        margin: 5px 0;
     }
 }
-
