@@ -57,22 +57,57 @@ body {
     padding: 10px;
 }
 
-#nav a {
+#nav .menu-link {
     color: #fff;
     text-decoration: none;
-    margin: 10px 0;
+    margin: 10px 0; /* Espacement entre les liens du menu par défaut */
+}
+
+#nav.show .menu-link {
+    margin: 20px 0; /* Espacement plus grand entre les liens du menu lorsque le menu est ouvert */
 }
 
 #nav a:hover {
     text-decoration: underline;
-    margin-bottom: 10px; /* Espacement supplémentaire lorsque le lien est survolé */
 }
 
-#nav.show a {
-    margin: 20px 0; /* Espacement plus grand entre les liens du menu lorsque le menu est ouvert */
+/* Bannière */
+#banner {
+    background-image: url("url_de_votre_image.jpg");
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
 }
 
-/* Contenu spécifique de la page "Services" */
+#banner h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#banner p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+#banner .button {
+    background-color: #ff0000; /* Rouge */
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+#banner .button:hover {
+    background-color: #cc0000; /* Rouge plus sombre au survol */
+}
+
+/* Section Services */
 #services {
     background-color: #1a1a1a; /* Noir ou gris foncé */
     padding: 50px 0;
@@ -194,7 +229,11 @@ body {
         display: block; /* Afficher le menu sur les petits écrans */
     }
 
-    #nav a {
+    #nav .menu-link {
         margin: 5px 0; /* Réduire l'espace entre les liens de navigation */
+    }
+
+    #nav.show .menu-link {
+        margin: 20px 0; /* Espacement plus grand entre les liens du menu lorsque le menu est ouvert */
     }
 }
