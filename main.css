@@ -35,12 +35,14 @@ body {
     text-decoration: none;
     margin-bottom: 10px;
 }
+
 #nav {
-    display: flex; /* Afficher le menu en tant que barre de navigation horizontale */
+    display: flex;
+    justify-content: space-between; /* Espacer le bouton et les liens du menu horizontal */
 }
 
 #toggle-menu {
-    display: block; /* Afficher le bouton de menu sur les petits écrans */
+    display: block;
     color: #fff;
     background: none;
     border: none;
@@ -49,9 +51,15 @@ body {
 }
 
 #nav.show {
-    /* Supprimez cette règle pour ne pas affecter le positionnement du menu sur les grands écrans */
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+    padding: 10px;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    z-index: 1;
 }
-
 
 #nav a {
     color: #fff;
@@ -137,8 +145,12 @@ body {
         display: none; /* Masquer le menu sur les grands écrans */
     }
 
+    #toggle-menu {
+        display: block; /* Afficher le bouton de menu sur les petits écrans */
+    }
+
     #nav.show {
-        display: flex;
+        display: flex; /* Afficher le menu déroulant sur les petits écrans */
         flex-direction: column;
         background-color: #1a1a1a;
         padding: 10px;
@@ -148,7 +160,7 @@ body {
         z-index: 1;
     }
 
-    #nav a {
-        margin: 5px 0;
+    #nav.show a {
+        margin: 5px 0; /* Réduire l'espace entre les liens de navigation du menu déroulant */
     }
 }
