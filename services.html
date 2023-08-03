@@ -89,12 +89,15 @@
         </div>
     </section>
 
-   <script>
+ <script>
     document.getElementById('toggle-menu').addEventListener('click', function() {
         console.log("Le bouton de menu a été cliqué !"); // Vérifiez que cela s'affiche dans la console lors du clic.
-        document.getElementById('menu-links').classList.toggle('show');
+
+        var menuLinks = document.getElementById('nav');
+        menuLinks.classList.toggle('show');
     });
 </script>
+
 
 </body>
 </html>
