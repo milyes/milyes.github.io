@@ -42,17 +42,6 @@ body {
     margin-top: 20px; /* Espacement entre le logo et les onglets */
 }
 
-#nav.show {
-    display: flex;
-    flex-direction: column; /* Afficher le menu déroulant en colonne */
-    background-color: #1a1a1a; /* Noir ou gris foncé */
-    padding: 10px;
-    position: absolute;
-    top: 60px; /* Ajuster la position verticale du menu déroulant */
-    right: 20px; /* Ajuster la position horizontale du menu déroulant */
-    z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
-}
-
 #nav a {
     color: #fff;
     text-decoration: none;
@@ -173,83 +162,6 @@ body {
 
 /* Médias queries pour les appareils mobiles */
 @media screen and (max-width: 768px) {
-    /* Icône de menu pour les petits écrans */
-    #toggle-menu {
-        display: block;
-        color: #fff;
-        font-size: 24px;
-        cursor: pointer;
-    }
-
-    /* Masquer le menu sur les grands écrans */
-    #nav {
-        display: none;
-    }
-
-    /* Afficher le menu déroulant en dessous lorsque l'icône est cliquée */
-    #nav.show {
-        display: flex;
-        flex-direction: column; /* Afficher le menu déroulant en colonne */
-        background-color: #1a1a1a; /* Noir ou gris foncé */
-        padding: 10px;
-        position: absolute;
-        top: 60px; /* Ajuster la position verticale du menu déroulant */
-        right: 20px; /* Ajuster la position horizontale du menu déroulant */
-        z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
-    }
-
-    /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
-    #nav a {
-        margin: 5px 0;
-    }
-
-    /* Styles pour le menu déroulant */
-    #menu-toggle {
-        display: none;
-    }
-
-    #menu-links {
-        display: none;
-        background-color: #1a1a1a; /* Noir ou gris foncé */
-        padding: 10px;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        z-index: 1;
-    }
-
-    #menu-links li {
-        list-style-type: none;
-    }
-
-    #menu-links li a {
-        display: block;
-        color: #fff;
-        text-decoration: none;
-        margin: 5px 0;
-    }
-
-    #menu-toggle.open {
-        transform: rotate(90deg);
-    }
-
-    #menu-links.show {
-        display: block;
-    }
-}
-
-/* Styles pour les écrans larges (ordinateurs) */
-@media screen and (min-width: 768px) {
-    /* Afficher le menu déroulant sur les grands écrans */
-    #nav {
-        display: flex;
-        justify-content: center; /* Centrer horizontalement les onglets */
-        margin-top: 20px; /* Espacement entre le logo et les onglets */
-    }
-}
-
-/* Styles pour les appareils mobiles */
-@media screen and (max-width: 768px) {
     /* Masquer le menu sur les petits écrans */
     #nav {
         display: flex;
@@ -265,5 +177,15 @@ body {
     /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
     #nav a {
         margin: 5px 0;
+    }
+}
+
+/* Styles pour les écrans larges (ordinateurs) */
+@media screen and (min-width: 768px) {
+    /* Afficher le menu déroulant sur les grands écrans */
+    #nav {
+        display: flex;
+        justify-content: center; /* Centrer horizontalement les onglets */
+        margin-top: 20px; /* Espacement entre le logo et les onglets */
     }
 }
