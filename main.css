@@ -38,7 +38,9 @@ body {
 
 #nav {
     display: flex;
-    justify-content: space-between; /* Espacer le bouton et les liens du menu horizontal */
+    flex-direction: column; /* Afficher le menu déroulant en colonne sur les grands écrans */
+    justify-content: space-between; /* Espacer les éléments du menu déroulant */
+    height: 100vh; /* Faire en sorte que le menu déroulant occupe toute la hauteur de l'écran */
 }
 
 #toggle-menu {
@@ -52,7 +54,6 @@ body {
 
 #nav.show {
     display: flex;
-    flex-direction: column;
     background-color: #1a1a1a;
     padding: 10px;
     position: fixed;
@@ -151,7 +152,7 @@ body {
 
     #nav.show {
         display: flex; /* Afficher le menu déroulant sur les petits écrans */
-        flex-direction: column;
+        flex-direction: column; /* Afficher les liens en colonne */
         background-color: #1a1a1a;
         padding: 10px;
         position: fixed;
