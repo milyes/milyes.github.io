@@ -68,6 +68,10 @@ body {
     margin-bottom: 10px; /* Espacement supplémentaire lorsque le lien est survolé */
 }
 
+#nav.show a {
+    margin: 20px 0; /* Espacement plus grand entre les liens du menu lorsque le menu est ouvert */
+}
+
 /* Contenu spécifique de la page "Services" */
 #services {
     background-color: #1a1a1a; /* Noir ou gris foncé */
