@@ -175,8 +175,8 @@ body {
     /* Afficher le menu déroulant en dessous lorsque l'icône est cliquée */
     #nav.show {
         display: flex;
-        background-color: #1a1a1a; /* Noir ou gris foncé */
         flex-direction: column; /* Afficher le menu déroulant en colonne */
+        background-color: #1a1a1a; /* Noir ou gris foncé */
         padding: 10px;
         position: absolute;
         top: 60px; /* Ajuster la position verticale du menu déroulant */
