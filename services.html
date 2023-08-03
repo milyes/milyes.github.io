@@ -89,15 +89,12 @@
         </div>
     </section>
 
- <script>
-    document.getElementById('toggle-menu').addEventListener('click', function() {
-        console.log("Le bouton de menu a été cliqué !"); // Vérifiez que cela s'affiche dans la console lors du clic.
-
-        var menuLinks = document.getElementById('nav');
-        menuLinks.classList.toggle('show');
-    });
-</script>
-
+<script>
+        // Script pour afficher/masquer le menu de navigation sur les petits écrans
+        document.getElementById("toggle-menu").addEventListener("click", function () {
+            document.getElementById("nav").classList.toggle("show");
+        });
+    </script>
 
 </body>
 </html>
