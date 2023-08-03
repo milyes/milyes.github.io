@@ -25,6 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centrer horizontalement tout le contenu dans l'en-tête */
+    justify-content: center; /* Centrer verticalement tout le contenu dans l'en-tête */
 }
 
 #header .logo {
@@ -32,14 +33,13 @@ body {
     font-weight: bold;
     color: #ff0000; /* Rouge */
     text-decoration: none;
+    margin-bottom: 20px; /* Espacement entre le logo et les onglets */
 }
 
 #nav {
-    list-style: none; /* Enlever les marqueurs des balises <li> */
     display: flex;
     justify-content: center; /* Centrer horizontalement les onglets */
-    align-items: center; /* Centrer verticalement les onglets */
-    flex-wrap: wrap; /* Permettre le retour à la ligne si besoin */
+    margin-top: 20px; /* Espacement entre le logo et les onglets */
 }
 
 #nav a {
@@ -96,9 +96,6 @@ body {
     border-radius: 4px; /* Ajouter des coins arrondis */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ajouter une ombre */
     margin-bottom: 30px; /* Ajouter de l'espace entre les dalles */
-
-    /* Ajouter des bordures encadrant les dalles */
-    border: 1px solid #ff0000; /* Rouge */
 }
 
 .box i {
