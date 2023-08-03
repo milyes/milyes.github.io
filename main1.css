@@ -32,7 +32,6 @@ body {
     font-weight: bold;
     color: #ff0000; /* Rouge */
     text-decoration: none;
-    margin-bottom: 10px;
 }
 
 #nav {
@@ -100,6 +99,23 @@ body {
 
     /* Ajouter des bordures encadrant les dalles */
     border: 1px solid #ff0000; /* Rouge */
+}
+
+.box i {
+    font-size: 48px;
+    color: #ff0000; /* Rouge */
+    margin-bottom: 10px;
+}
+
+.box h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.box p {
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 /* Bouton "Nous Contacter" */
@@ -176,7 +192,7 @@ body {
 
     /* Réduire l'espace entre les liens de navigation dans le menu déroulant */
     #nav a {
-        margin: 5px 10px; /* Réduire légèrement l'espace horizontal entre les liens */
+        margin: 5px 0;
     }
 
     /* Styles pour le menu déroulant */
@@ -212,4 +228,20 @@ body {
     #menu-links.show {
         display: block;
     }
+}
+
+/* Styles pour les écrans larges (ordinateurs) */
+@media screen and (min-width: 768px) {
+  .navPanelToggle {
+    display: none;
+  }
+
+  /* Afficher les onglets côte à côte sur les écrans d'ordinateur */
+  #nav {
+    flex-direction: row;
+  }
+
+  #nav a {
+    margin: 0 10px;
+  }
 }
