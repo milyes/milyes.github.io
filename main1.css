@@ -42,6 +42,17 @@ body {
     margin-top: 20px; /* Espacement entre le logo et les onglets */
 }
 
+#nav.show {
+    display: flex;
+    flex-direction: column; /* Afficher le menu déroulant en colonne */
+    background-color: #1a1a1a; /* Noir ou gris foncé */
+    padding: 10px;
+    position: absolute;
+    top: 60px; /* Ajuster la position verticale du menu déroulant */
+    right: 20px; /* Ajuster la position horizontale du menu déroulant */
+    z-index: 1; /* Assurer que le menu déroulant s'affiche au-dessus du contenu */
+}
+
 #nav a {
     color: #fff;
     text-decoration: none;
