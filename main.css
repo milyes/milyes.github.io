@@ -35,9 +35,8 @@ body {
     text-decoration: none;
     margin-bottom: 10px;
 }
-
 #nav {
-    display: none; /* Masquer le menu sur les petits écrans */
+    display: flex; /* Afficher le menu en tant que barre de navigation horizontale */
 }
 
 #toggle-menu {
@@ -50,16 +49,8 @@ body {
 }
 
 #nav.show {
-    display: flex;
-    flex-direction: column;
-    background-color: #1a1a1a;
-    padding: 10px;
-    position: fixed; /* Changer la position en fixed */
-    top: 60px;
-    right: 20px;
-    z-index: 1;
+    /* Supprimez cette règle pour ne pas affecter le positionnement du menu sur les grands écrans */
 }
-
 
 
 #nav a {
