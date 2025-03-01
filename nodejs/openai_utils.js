@@ -10,14 +10,35 @@ const DEFAULT_MODEL = "gpt-4o";
 
 // Check if OpenAI API key is available
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const SIMULATION_MODE = !OPENAI_API_KEY || OPENAI_API_KEY === '';
+let SIMULATION_MODE = !OPENAI_API_KEY || OPENAI_API_KEY === '';
 
 // Initialize OpenAI client if not in simulation mode
 let openai;
 if (!SIMULATION_MODE) {
   try {
+    // Create the OpenAI client
     openai = new OpenAI({ apiKey: OPENAI_API_KEY });
-    console.log("OpenAI client initialized successfully");
+    
+    // Validate the API key with a minimal request
+    const validateApiKey = async () => {
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: "test" }],
+          max_tokens: 5
+        });
+        console.log("OpenAI API key validated successfully");
+        return true;
+      } catch (error) {
+        console.error(`Error with OpenAI API key: ${error.message}`);
+        SIMULATION_MODE = true;
+        console.warn("Falling back to simulation mode due to invalid or unauthorized API key");
+        return false;
+      }
+    };
+    
+    // Immediately execute the validation
+    validateApiKey();
   } catch (error) {
     console.error(`Error initializing OpenAI client: ${error.message}`);
     console.warn("Falling back to simulation mode");
