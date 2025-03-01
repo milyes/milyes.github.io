@@ -89,17 +89,22 @@ def index():
             {
                 "path": "/api/chat",
                 "method": "POST",
-                "description": "Generate a response using OpenAI's chat completion"
+                "description": "Générer une réponse à l'aide de la complétion de chat d'OpenAI"
             },
             {
                 "path": "/api/analyze/sentiment",
                 "method": "POST",
-                "description": "Analyze the sentiment of a given text"
+                "description": "Analyser le sentiment d'un texte donné"
             },
             {
                 "path": "/api/analyze/costs",
                 "method": "GET",
-                "description": "Analyze cost data from the CSV file"
+                "description": "Analyser les données de coût par période (jour, semaine, mois)"
+            },
+            {
+                "path": "/api/summarize",
+                "method": "POST",
+                "description": "Générer un résumé concis du texte fourni"
             }
         ]
     })

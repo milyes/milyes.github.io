@@ -87,17 +87,22 @@ app.get('/', (req, res) => {
       {
         path: "/api/chat",
         method: "POST",
-        description: "Generate a response using OpenAI's chat completion"
+        description: "Générer une réponse à l'aide de la complétion de chat d'OpenAI"
       },
       {
         path: "/api/analyze/sentiment",
         method: "POST",
-        description: "Analyze the sentiment of a given text"
+        description: "Analyser le sentiment d'un texte donné"
       },
       {
         path: "/api/analyze/costs",
         method: "GET",
-        description: "Analyze cost data from the CSV file (soon)"
+        description: "Analyser les données de coût par période (jour, semaine, mois)"
+      },
+      {
+        path: "/api/summarize",
+        method: "POST",
+        description: "Générer un résumé concis du texte fourni"
       }
     ]
   });
@@ -452,6 +457,71 @@ function getWeekNumber(date) {
 function formatDate(date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
+
+/**
+ * Text summarization endpoint.
+ * 
+ * Expects JSON with:
+ * - text: The text to summarize
+ * - model: (Optional) The model to use, defaults to gpt-4o
+ */
+app.post('/api/summarize', async (req, res) => {
+  try {
+    const { text, model = 'gpt-4o' } = req.body;
+    
+    // Validate required fields
+    if (!text) {
+      return res.status(400).json({ 
+        error: "Le champ 'text' est requis dans le corps de la requête" 
+      });
+    }
+    
+    // Validate input format and length
+    if (!isValidText(text)) {
+      return res.status(400).json({ 
+        error: "Le format ou la longueur du texte est invalide"
+      });
+    }
+    
+    // Validate model
+    if (!isValidModel(model)) {
+      return res.status(400).json({ 
+        error: `Modèle '${model}' non supporté. Utilisez l'un des modèles: gpt-4o, gpt-4, gpt-3.5-turbo`
+      });
+    }
+    
+    // Sanitize input
+    const sanitizedText = sanitizeInput(text);
+    
+    console.log("Processing text summarization request");
+    const summary = await summarizeText(sanitizedText, model);
+    
+    // Generate request hash for traceability
+    const requestId = crypto.createHash('md5')
+      .update(sanitizedText)
+      .digest('hex')
+      .substring(0, 8);
+    
+    console.log(`Successfully processed text summarization with ${sanitizedText.length} characters`);
+    
+    res.json({
+      summary,
+      original_length: text.length,
+      summary_length: summary.length,
+      compression_ratio: parseFloat((summary.length / text.length).toFixed(2)),
+      model,
+      mode: SIMULATION_MODE ? "simulation" : "api",
+      timestamp: new Date().toISOString(),
+      request_id: requestId
+    });
+  } catch (error) {
+    console.error(`Error processing text summarization: ${error.message}`);
+    res.status(500).json({ 
+      error: "Une erreur est survenue lors de la génération du résumé",
+      detail: process.env.NODE_ENV === 'development' ? error.message : "Contactez l'administrateur pour plus d'informations"
+    });
+  }
+});
 
 // Start the server
 const PORT = process.env.PORT || 8000;
