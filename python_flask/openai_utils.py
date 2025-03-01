@@ -21,13 +21,27 @@ logger = logging.getLogger(__name__)
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 SIMULATION_MODE = OPENAI_API_KEY is None or OPENAI_API_KEY == ""
 
+# Initialize the OpenAI client variable
+openai = None
+
 if not SIMULATION_MODE:
     try:
+        # Create the OpenAI client
         openai = OpenAI(api_key=OPENAI_API_KEY)
+        
+        # Validate the API key with a minimal request
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": "test"}],
+            max_tokens=5
+        )
+        
+        # If we get here, the API key is valid
+        logger.info("OpenAI API key validated successfully")
     except Exception as e:
-        logger.error(f"Error initializing OpenAI client: {str(e)}")
+        logger.error(f"Error with OpenAI API key: {str(e)}")
         SIMULATION_MODE = True
-        logger.warning("Falling back to simulation mode due to OpenAI client initialization error")
+        logger.warning("Falling back to simulation mode due to invalid or unauthorized API key")
 
 def chat_completion(prompt, model=DEFAULT_MODEL):
     """
