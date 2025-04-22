@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-04-22T13:04:18.093308",
+  "summary": {
+    "total_results": 4,
+    "data_columns": [
+      "run_id",
+      "timestamp",
+      "parameters",
+      "performance_summary",
+      "execution_time_seconds",
+      "success"
+    ],
+    "stats_file": "report_20250422_130417/summary_stats.json"
+  },
+  "visualizations": [
+    {
+      "type": "histogram",
+      "column": "execution_time_seconds",
+      "path": "report_20250422_130417/hist_execution_time_seconds.png"
+    },
+    {
+      "type": "boxplot",
+      "column": "execution_time_seconds",
+      "path": "report_20250422_130417/boxplot_execution_time_seconds.png"
+    },
+    {
+      "type": "barplot",
+      "column": "run_id",
+      "path": "report_20250422_130417/barplot_run_id.png"
+    },
+    {
+      "type": "barplot",
+      "column": "timestamp",
+      "path": "report_20250422_130417/barplot_timestamp.png"
+    }
+  ],
+  "report_directory": "report_20250422_130417"
+}

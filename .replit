@@ -2,7 +2,7 @@ modules = ["python-3.11", "nodejs-20", "python3"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["glibcLocales"]
+packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "pkg-config", "qhull", "tcl", "tk"]
 
 [workflows]
 runButton = "Project"
@@ -55,7 +55,7 @@ run = ["sh", "-c", "cd python_flask && python app.py"]
 
 [[ports]]
 localPort = 5000
-externalPort = 80
+externalPort = 4200
 
 [[ports]]
 localPort = 8000
