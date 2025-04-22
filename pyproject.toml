@@ -5,6 +5,10 @@ description = "Add your description here"
 requires-python = ">=3.11"
 dependencies = [
     "flask>=3.1.0",
+    "matplotlib>=3.10.1",
     "openai>=1.65.2",
     "pandas>=2.2.3",
+    "requests>=2.32.3",
+    "scikit-learn>=1.6.1",
+    "seaborn>=0.13.2",
 ]

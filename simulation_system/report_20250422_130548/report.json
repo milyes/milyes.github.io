@@ -1,0 +1,28 @@
+{
+  "timestamp": "2025-04-22T13:05:48.990440",
+  "summary": {
+    "total_results": 1,
+    "data_columns": [
+      "run_id",
+      "timestamp",
+      "parameters",
+      "performance_summary",
+      "execution_time_seconds",
+      "success"
+    ],
+    "stats_file": "report_20250422_130548/summary_stats.json"
+  },
+  "visualizations": [
+    {
+      "type": "barplot",
+      "column": "run_id",
+      "path": "report_20250422_130548/barplot_run_id.png"
+    },
+    {
+      "type": "barplot",
+      "column": "timestamp",
+      "path": "report_20250422_130548/barplot_timestamp.png"
+    }
+  ],
+  "report_directory": "report_20250422_130548"
+}
