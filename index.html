@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue sur mon site GitHub Pages</title>
+</head>
+    <head>
+    <title>Heure actuelle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+        <h1>Heure actuelle</h1>
+    <div id="clock"></div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            // Ajoutez un zéro devant les nombres inférieurs à 10
+            if (hours < 10) hours = '0' + hours;
+            if (minutes < 10) minutes = '0' + minutes;
+            if (seconds < 10) seconds = '0' + seconds;
+
+            var timeString = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('clock').innerHTML = timeString;
+        }
+
+        // Mettez à jour l'horloge toutes les secondes
+        setInterval(updateClock, 1000);
+        updateClock(); // Appelez-la immédiatement pour afficher l'heure sans délai
+    </script>
+    
+    
+    <h1>Bonjour, monde!</h1>
+    <p>Ceci est mon site GitHub Pages.</p>
+</body>
+</html>
