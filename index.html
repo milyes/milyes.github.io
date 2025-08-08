@@ -82,5 +82,17 @@
         console.error("Erreur JSON :", error);
       });
   </script>
+<button onclick="lireManifesto()">🔊 Lire le manifeste</button>
+
+<script>
+function lireManifesto() {
+  const synth = window.speechSynthesis;
+  const texte = Array.from(document.querySelectorAll('#manifesto p'))
+    .map(p => p.textContent).join('. ');
+  const utterance = new SpeechSynthesisUtterance(texte);
+  utterance.lang = 'fr-FR';
+  synth.speak(utterance);
+}
+</script>
 </body>
 </html>
