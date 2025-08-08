@@ -1,74 +1,86 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="NetSecurePro - IA, Cybersécurité, Développement Mobile Intelligent" />
-  <title>NetSecurePro | IA & Cybersécurité</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <meta charset="UTF-8">
+  <title>Orbitron Zero – Savoir-Faire</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ffe7;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 2em;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #00ff99;
+      text-transform: uppercase;
+      border-bottom: 1px solid #00ff99;
+      padding-bottom: 0.3em;
+    }
+    ul {
+      list-style-type: '🧠 ';
+      padding-left: 1em;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #111;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffe7;
+    }
+    #manifesto p {
+      margin: 0.5em 0;
+      padding-left: 1em;
+      border-left: 2px solid #00ff99;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-  <!-- Splash Banner -->
-  <section class="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-purple-900 to-black">
-    <h1 class="text-5xl font-bold mb-4">NetSecurePro</h1>
-    <p class="text-xl mb-6">Cybersécurité & Intelligence Artificielle Mobile</p>
-    <a href="#services" class="bg-purple-600 hover:bg-purple-800 px-6 py-2 rounded-lg">Explorer</a>
-  </section>
+<body>
+  <div class="container">
+    <h1>🛰️ Orbitron Zero</h1>
+    <p id="signature">Chargement...</p>
 
-  <!-- Services -->
-  <section id="services" class="py-16 px-4 text-center">
-    <h2 class="text-3xl font-semibold mb-8">Nos Services</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold mb-2">Audit Cybersécurité</h3>
-        <p>Analyse des vulnérabilités, monitoring, gestion des risques.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold mb-2">Intelligence Artificielle</h3>
-        <p>Modules IA personnalisés, assistants vocaux, analyse automatisée.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold mb-2">Applications Mobiles</h3>
-        <p>Développement Flutter, Termux CLI, APK IA offline/online.</p>
-      </div>
-    </div>
-  </section>
+    <h2>🔐 Valeurs</h2>
+    <ul id="valeurs"></ul>
 
-  <!-- Chatbot IA -->
-  <section class="py-16 px-4 bg-black text-center">
-    <h2 class="text-3xl font-semibold mb-6">Assistant IA</h2>
-    <p class="mb-4">Posez votre question à notre IA intégrée :</p>
-    <textarea id="userInput" class="w-full max-w-md mx-auto p-4 text-black rounded" placeholder="Décrivez votre besoin..."></textarea>
-    <button onclick="sendToIA()" class="mt-4 px-6 py-2 bg-purple-600 hover:bg-purple-800 rounded">Envoyer à l'IA</button>
-    <p id="iaResponse" class="mt-6 text-green-400"></p>
-  </section>
+    <h2>🧩 Modules</h2>
+    <ul id="modules"></ul>
 
-  <!-- Contact -->
-  <section id="contact" class="py-16 px-4 bg-gray-800 text-center">
-    <h2 class="text-3xl font-semibold mb-6">Contact</h2>
-    <form class="max-w-md mx-auto">
-      <input type="text" placeholder="Nom" class="w-full mb-4 p-3 text-black rounded" required />
-      <input type="email" placeholder="Email" class="w-full mb-4 p-3 text-black rounded" required />
-      <textarea placeholder="Votre message..." class="w-full mb-4 p-3 text-black rounded" required></textarea>
-      <button type="submit" class="bg-green-600 hover:bg-green-800 px-6 py-2 rounded">Envoyer</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-8 text-center bg-gray-900">
-    <p class="text-sm">&copy; 2025 NetSecurePro - Zoubirou Mohammed Ilyes | <a href="https://orcid.org/0009-0007-7571-3178" class="text-purple-400">ORCID</a></p>
-  </footer>
+    <h2>📜 Manifeste</h2>
+    <div id="manifesto"></div>
+  </div>
 
   <script>
-    function sendToIA() {
-      const input = document.getElementById("userInput").value;
-      const responseEl = document.getElementById("iaResponse");
-      if (input.toLowerCase().includes("audit")) {
-        responseEl.innerText = "L'IA recommande un audit de vulnérabilités en 3 étapes. Contactez-nous pour un devis personnalisé.";
-      } else {
-        responseEl.innerText = "Merci pour votre question. Un expert IA vous répondra sous peu.";
-      }
-    }
+    fetch('savoir_faire.json')
+      .then(response => response.json())
+      .then(data => {
+        const sf = data.savoir_faire;
+        document.getElementById('signature').textContent =
+          `Créateur : ${sf.créateur} | Origine : ${sf.origine.plateforme} / ${sf.origine.écosystème}`;
+
+        sf.valeurs.forEach(val => {
+          const li = document.createElement('li');
+          li.textContent = val;
+          document.getElementById('valeurs').appendChild(li);
+        });
+
+        sf.architecture.modules.forEach(mod => {
+          const li = document.createElement('li');
+          li.textContent = `${mod.nom} → ${mod.fonction} (Autonomie : ${mod.autonomie})`;
+          document.getElementById('modules').appendChild(li);
+        });
+
+        sf.manifesto.forEach(line => {
+          const p = document.createElement('p');
+          p.textContent = `» ${line}`;
+          document.getElementById('manifesto').appendChild(p);
+        });
+      })
+      .catch(error => {
+        document.getElementById('signature').textContent = "Erreur de chargement du manifeste.";
+        console.error("Erreur JSON :", error);
+      });
   </script>
 </body>
 </html>
