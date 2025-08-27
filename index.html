@@ -3,38 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IA22_LOGIC — Dossier de Stage</title>
+  <title>IA22_LOGIC — Présentation immersive</title>
   <style>
     body {
+      margin: 0;
+      font-family: monospace;
       background-color: #000;
       color: #00ffcc;
-      font-family: monospace;
-      margin: 0;
-      padding: 20px;
+      overflow-x: hidden;
     }
-    .container {
-      max-width: 800px;
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
       margin: auto;
-      background-color: #111;
-      padding: 30px;
-      border-radius: 10px;
-      border: 2px solid #00ffcc;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     h1, h2 {
       text-align: center;
       color: #00ffcc;
     }
-    p, li {
-      line-height: 1.6;
+    .btn {
+      background-color: #00ffcc;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
     }
-    ul {
-      padding-left: 20px;
+  </style>
+</head>
+<body>
+
+  <!-- Section 1: Intro animée -->
+  <section id="intro">
+    <h1>IA22_LOGIC</h1>
+    <pre id="ascii"></pre>
+    <audio controls autoplay>
+      <source src="manifeste_IA22.mp3" type="audio/mpeg">
+      Votre navigateur ne supporte pas l’audio.
+    </audio>
+  </section>
+
+  <!-- Section 2: Slides interactives -->
+  <section id="slides">
+    <h2>🔧 Modules IA</h2>
+    <p>Santé, Ville, Tunnel, Environnement, Sécurité</p>
+    <button class="btn" onclick="alert('Module IA simulé lancé ✅')">run</button>
+  </section>
+
+  <!-- Section 3: Carte interactive -->
+  <section id="carte">
+    <h2>🧠 Architecture IA</h2>
+    <p>Visualisation des flux entre modules (à venir)</p>
+  </section>
+
+  <!-- Section 4: Timeline -->
+  <section id="timeline">
+    <h2>📆 Évolution du projet</h2>
+    <ul>
+      <li>2023 — Conception initiale</li>
+      <li>2024 — Développement des modules</li>
+      <li>2025 — Publication & suivi Plausible</li>
+    </ul>
+  </section>
+
+  <!-- Section 5: Contact -->
+  <section id="contact">
+    <h2>📄 Dossier de stage</h2>
+    <a href="#" class="btn">Télécharger le dossier</a>
+    <p>🔗 ORCID : <a href="https://orcid.org/0009-0007-7571-3178" style="color:#00ffcc;">0009-0007-7571-3178</a></p>
+    <p>🔗 GitHub : <a href="https://github.com/milyes" style="color:#00ffcc;">github.com/milyes</a></p>
+  </section>
+
+  <script>
+    // Animation de gravure ASCII
+    const asciiArt = [
+      "╔════════════════════════════════════════════════════════════════════╗",
+      "║   IA locale • modulaire • sécurisée • humaine                     ║",
+      "║   Créé par : Zoubirou Mohammed Ilyes                              ║",
+      "║   ORCID : 0009-0007-7571-3178                                     ║",
+      "╚════════════════════════════════════════════════════════════════════╝"
+    ];
+    let i = 0;
+    function drawAscii() {
+      if (i < asciiArt.length) {
+        document.getElementById("ascii").innerHTML += asciiArt[i] + "\n";
+        i++;
+        setTimeout(drawAscii, 500);
+      }
     }
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 12px;
-      color: #888;
+    drawAscii();
+
+    // Animation d’apparition des sections
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>      color: #888;
     }
   </style>
 </head>
