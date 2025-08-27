@@ -2,39 +2,82 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IA22_LOGIC – Évaluation de la posture de sécurité</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IA22_LOGIC — Souveraineté Numérique</title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      background-color: #000;
+      color: #00ffcc;
+      font-family: monospace;
       margin: 0;
-      padding: 0;
-      background-color: #f4f6f8;
-      color: #333;
-    }
-    header {
-      background-color: #0a3d62;
-      color: white;
       padding: 20px;
+    }
+    .terminal {
+      border: 2px solid #00ffcc;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #111;
+    }
+    h1, h2 {
+      color: #00ffcc;
       text-align: center;
     }
-    nav {
-      background-color: #3c6382;
-      padding: 10px;
-      text-align: center;
+    .ascii {
+      white-space: pre;
+      font-size: 12px;
+      line-height: 1.2;
+      margin-top: 20px;
     }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
+    .btn {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 5px;
       font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
     }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
+    .btn:hover {
+      background-color: #00ccaa;
     }
+  </style>
+</head>
+<body>
+
+  <div class="terminal">
+    <h1>IA22_LOGIC</h1>
+    <h2>Microcore Vision System</h2>
+
+    <div class="ascii">
+╔════════════════════════════════════════════════════════════════════╗
+║   IA locale • modulaire • sécurisée • humaine                     ║
+║   Créé par : Zoubirou Mohammed Ilyes                              ║
+║   ORCID : 0009-0007-7571-3178                                     ║
+╚════════════════════════════════════════════════════════════════════╝
+    </div>
+
+    <p>
+      IA22_LOGIC est un moteur d’analyse intelligent conçu pour renforcer la souveraineté numérique.  
+      Il fonctionne en local, sans cloud, avec des modules FastAPI pour l’analyse JSON, la sécurité, la santé, et l’environnement.
+    </p>
+
+    <p>
+      <strong>Les 3 piliers :</strong><br>
+      🛡️ Réactivité — détecter et réagir aux menaces<br>
+      🔄 Résilience — maintenir la continuité<br>
+      🧠 Adaptabilité — évoluer grâce à l’intelligence artificielle
+    </p>
+
+    <a href="https://github.com/milyes/milyes.github.io" class="btn">Voir le code source</a>
+    <a href="lancer.sh" class="btn">Télécharger le script de lancement</a>
+  </div>
+
+</body>
+</html>    }
     h2 {
       color: #0a3d62;
     }
