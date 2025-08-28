@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commandes IA - IA22_LOGIC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Vert pour la réactivité */
+            --secondary-color: #2196F3; /* Bleu pour la résilience */
+            --tertiary-color: #FFC107; /* Jaune pour l'adaptabilité */
+            --text-color: #333;
+            --bg-color: #f4f7f6;
+            --card-bg: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c3e50; /* Couleur d'en-tête sombre */
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .command-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .command-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .command-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.6em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .command-card p {
+            font-size: 0.95em;
+            color: #555;
+            flex-grow: 1; /* Permet aux paragraphes de prendre l'espace disponible */
+        }
+
+        .command-card .tag {
+            display: inline-block;
+            background-color: #e0e0e0;
+            color: #777;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-top: 15px;
+            align-self: flex-start; /* Aligner le tag en bas à gauche */
+        }
+
+        /* Couleurs spécifiques pour les catégories si nécessaire */
+        .command-card.core h3 { border-color: #e74c3c; } /* Rouge pour Core */
+        .command-card.interface h3 { border-color: #f39c12; } /* Orange pour Interface */
+        .command-card.security h3 { border-color: #3498db; } /* Bleu pour Sécurité */
+        .command-card.network h3 { border-color: #9b59b6; } /* Violet pour Réseau */
+        .command-card.deployment h3 { border-color: #1abc9c; } /* Turquoise pour Déploiement */
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            font-size: 0.9em;
+            box-shadow: 0 -4px 8px var(--shadow-color);
+        }
+
+        footer a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 15px;
+            }
+            .commands-grid {
+                grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Commandes IA disponibles</h1>
+        <p>Explorez les composants et les fonctionnalités du moteur IA22_LOGIC de NetSecurePro IA.</p>
+    </header>
+
+    <div class="container">
+        <div class="commands-grid">
+
+            <div class="command-card core">
+                <h3>IA_LOGIC.py</h3>
+                <p>Le moteur central de l'Intelligence Artificielle. Gère l'exécution des algorithmes d'IA et l'interprétation des commandes.</p>
+                <span class="tag">Moteur Central</span>
+            </div>
+
+            <div class="command-card interface">
+                <h3>IA_STARTUP_CLI</h3>
+                <p>Interface de ligne de commande (CLI) pour interagir avec IA22_LOGIC, compatible Termux/Linux.</p>
+                <span class="tag">Interface</span>
+            </div>
+
+            <div class="command-card interface">
+                <h3>logic_cover.html</h3>
+                <p>Couche web locale pour l'IA, offrant une interface utilisateur accessible hors ligne avec un mécanisme de secours en ligne.</p>
+                <span class="tag">Interface Web</span>
+            </div>
+
+            <div class="command-card network">
+                <h3>launcher.hostlocalproxy.sh</h3>
+                <p>Script pour un proxy local hybride, permettant des connexions IA en ligne et hors ligne.</p>
+                <span class="tag">Proxy</span>
+            </div>
+
+            <div class="command-card security">
+                <h3>locke0</h3>
+                <p>Système de verrouillage basé sur l'IA, qui requiert un mot-clé spécifique ("unlock_ai") pour l'accès.</p>
+                <span class="tag">Sécurité</span>
+            </div>
+
+            <div class="command-card security">
+                <h3>unlock.sh</h3>
+                <p>Script d'authentification IA, utilisé pour déverrouiller et accéder aux fonctionnalités sécurisées du système.</p>
+                <span class="tag">Authentification</span>
+            </div>
+
+            <div class="command-card security">
+                <h3>NetSecurePro_USB_RemoteAccess</h3>
+                <p>Module pour la détection USB, l'établissement de tunnels sécurisés et le contrôle distant des accès.</p>
+                <span class="tag">Accès Sécurisé</span>
+            </div>
+
+            <div class="command-card deployment">
+                <h3>PowerShell_CL8.bin_launcher.sh_html5</h3>
+                <p>Lanceur d'applications APK compatible avec CL8 et intégrant des fonctionnalités WebView HTML5.</p>
+                <span class="tag">Déploiement Mobile</span>
+            </div>
+
+            <div class="command-card network">
+                <h3>IA Proxy Launcher</h3>
+                <p>Un proxy intelligent et adaptatif, capable de fonctionner en mode local ou en ligne pour les services IA.</p>
+                <span class="tag">Proxy Intelligent</span>
+            </div>
+
+            <div class="command-card deployment">
+                <h3>Modules ISO NetSecurePro IA</h3>
+                <p>Ensemble de scripts GRUB, signatures IA et intégration pour un environnement Live ISO bootable.</p>
+                <span class="tag">Déploiement Système</span>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Zoubirou Mohammed Ilyes - NetSecurePro IA. Tous droits réservés.</p>
+        <p>En savoir plus sur l'auteur : <a href="https://orcid.org/0009-0007-7571-3178" target="_blank">ORCID</a> | <a href="https://github.com/milyes" target="_blank">GitHub</a></p>
+    </footer>
+</body>
+</html>
