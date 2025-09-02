@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA22 Console</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #0a0a0f;
+            --text-color: #e0e0e0;
+            --primary-color: #4a90e2;
+            --accent-color: #50e3c2;
+            --error-color: #e35050;
+            --border-color: #333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        header .status {
+            color: var(--accent-color);
+            font-size: 0.9em;
+        }
+        header .status::before {
+            content: '●';
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .console-container {
+            display: flex;
+            flex-grow: 1;
+            gap: 20px;
+            min-height: 0;
+        }
+
+        .output-panel {
+            flex-grow: 1;
+            background-color: #111;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #output {
+            flex-grow: 1;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        #output .log-entry {
+            margin-bottom: 8px;
+        }
+        #output .timestamp {
+            color: #888;
+        }
+        #output .module {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        #output .info {
+            color: var(--text-color);
+        }
+        #output .success {
+            color: var(--accent-color);
+        }
+        #output .error {
+            color: var(--error-color);
+        }
+
+
+        .control-panel {
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .module-box {
+            background-color: #1a1a1f;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .module-box h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .module-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .module-box button:hover {
+            background-color: #6aa9f2;
+        }
+        
+        .input-area {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        #command-input {
+            flex-grow: 1;
+            background-color: #222;
+            border: 1px solid var(--border-color);
+            border-right: none;
+            color: var(--text-color);
+            padding: 10px;
+            font-family: 'Roboto Mono', monospace;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        #command-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        #send-button {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IA22_CONSOLE</h1>
+        <div class="status" id="system-status">SYSTEM ONLINE</div>
+    </header>
+
+    <div class="console-container">
+        <div class="output-panel">
+            <div id="output"></div>
+            <div class="input-area">
+                <input type="text" id="command-input" placeholder="Entrez une commande... (ex: scan --network 192.168.1.0/24)">
+                <button id="send-button">&gt;</button>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <div class="module-box">
+                <h3>MODULES PRINCIPAUX</h3>
+                <button onclick="runCommand('vision --start')">Lancer Vision IA</button>
+                <button onclick="runCommand('security --status')">Statut Sécurité</button>
+                <button onclick="runCommand('analysis --process-logs')">Analyser Logs</button>
+            </div>
+            <div class="module-box">
+                <h3>OPÉRATIONS</h3>
+                <button onclick="runCommand('scan --systems')">Scanner Systèmes</button>
+                <button onclick="runCommand('connect --ssh admin@host')">Connexion Distante</button>
+                <button onclick="runCommand('clear')" style="background-color: #c4c4c4; color: #333;">Nettoyer Console</button>
+            </div>
+             <div class="module-box">
+                <h3>IA22_LOGIC</h3>
+                <p><strong>Réactivité:</strong> <span id="reactivity-status">IDLE</span></p>
+                <p><strong>Résilience:</strong> <span id="resilience-status">STABLE</span></p>
+                <p><strong>Adaptabilité:</strong> <span id="adaptability-status">OK</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const commandInput = document.getElementById('command-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Fonction pour ajouter des logs à la console
+        function log(module, message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString('fr-CA', { hour12: false });
+            const logEntry = document.createElement('div');
+            logEntry.classList.add('log-entry');
+            logEntry.innerHTML = `<span class="timestamp">${timestamp}</span> [<span class="module">${module}</span>] <span class="${type}">${message}</span>`;
+            output.appendChild(logEntry);
+            output.scrollTop = output.scrollHeight; // Auto-scroll
+        }
+        
+        // Simule l'exécution d'une commande
+        function runCommand(command) {
+            log('CONSOLE', `Exécution de la commande : ${command}`, 'info');
+            
+            // Simulation d'une réponse de l'API backend
+            setTimeout(() => {
+                mockBackendResponse(command);
+            }, Math.random() * 1000 + 500);
+            
+            if(command !== 'clear'){
+               commandInput.value = '';
+            }
+        }
+        
+        // Fausse réponse du backend pour la démo
+        function mockBackendResponse(command) {
+            if (command === 'vision --start') {
+                log('VISION', 'Module activé. Caméras initialisées.', 'success');
+                log('VISION', 'Détection de mouvement en attente...', 'info');
+            } else if (command === 'security --status') {
+                log('SECURITY', 'Pare-feu : ACTIF | IDS : SURVEILLANCE', 'success');
+            } else if (command.startsWith('scan')) {
+                log('ANALYSIS', `Scan du réseau ${command.split(' ')[2] || 'local'} en cours...`, 'info');
+                 setTimeout(() => {
+                     log('ANALYSIS', 'Scan terminé. 3 appareils détectés, 1 vulnérabilité critique trouvée.', 'error');
+                 }, 2000);
+            } else if (command === 'clear'){
+                output.innerHTML = '';
+            } 
+            else {
+                log('CORE', `Commande "${command}" inconnue ou non implémentée.`, 'error');
+            }
+        }
+
+        // Événements
+        sendButton.addEventListener('click', () => {
+            const command = commandInput.value.trim();
+            if (command) runCommand(command);
+        });
+        
+        commandInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = commandInput.value.trim();
+                if (command) runCommand(command);
+            }
+        });
+
+        // Initialisation de la console
+        log('IA22_CORE', 'Moteur IA22 initialisé avec succès.');
+        log('IA22_PLATFORM', 'Console web connectée au backend. En attente de commandes...');
+        
+    </script>
+</body>
+</html>
