@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NetSecurePro — Vision: Détection Objets (Single HTML)</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#071023 0%,#081426 100%);color:#e6eef8}
+    .wrap{max-width:1100px;margin:28px auto;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+    header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+    header h1{font-size:18px;margin:0}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+    button,select{background:transparent;border:1px solid rgba(255,255,255,0.08);padding:8px 12px;border-radius:8px;color:inherit;cursor:pointer}
+    button.primary{background:var(--accent);color:#012;border:0;box-shadow:0 6px 18px rgba(6,182,212,0.12)}
+    .status{font-size:13px;color:var(--muted);margin-left:8px}
+    .video-wrap{position:relative;display:grid;place-items:center;border-radius:10px;overflow:hidden;background:#000}
+    video{width:100%;height:auto;transform:scaleX(-1);-webkit-transform:scaleX(-1)}
+    canvas{position:absolute;left:0;top:0;pointer-events:none;transform:scaleX(-1)}
+    .info{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)}
+    .legend{display:flex;gap:10px;align-items:center}
+    .legend .sample{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02)}
+    footer{margin-top:12px;font-size:12px;color:var(--muted)}
+    small.note{display:block;margin-top:8px;color:#c6d6e6;opacity:0.9}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 7h18M3 12h18M3 17h18" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div>
+        <h1>NetSecurePro — Détection d'objets (TensorFlow.js · COCO-SSD)</h1>
+        <div class="status">Un seul fichier HTML — caméra locale en temps réel</div>
+      </div>
+    </header>
+
+    <div class="controls" aria-hidden="false">
+      <button id="startBtn" class="primary">Démarrer</button>
+      <button id="stopBtn" disabled>Arrêter</button>
+
+      <label>
+        Résolution
+        <select id="resolutionSelect" title="Choisir résolution">
+          <option value="640x480">640 × 480</option>
+          <option value="960x720" selected>960 × 720</option>
+          <option value="1280x720">1280 × 720</option>
+        </select>
+      </label>
+
+      <label>
+        Taux détection (ms)
+        <select id="intervalSelect">
+          <option value="100">100 ms (rapide)</option>
+          <option value="200" selected>200 ms</option>
+          <option value="400">400 ms (léger)</option>
+        </select>
+      </label>
+
+      <div class="status" id="modelStatus">Modèle: <strong>non chargé</strong></div>
+    </div>
+
+    <div class="video-wrap" id="videoContainer" style="height:540px">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="overlay"></canvas>
+    </div>
+
+    <div class="info">
+      <div class="legend">
+        <div class="sample">Modèle COCO-SSD (objets courants)</div>
+        <div class="sample" id="detCount">Détections: 0</div>
+      </div>
+      <div>
+        <span id="fps">FPS: -</span>
+      </div>
+    </div>
+
+    <small class="note">Conseils : autorise la caméra. Sur des pages `file://` certains navigateurs peuvent bloquer la webcam — utiliser `http://localhost` ou un serveur simple si nécessaire.</small>
+
+    <footer>
+      <div>Auteur : Zoubirou Mohammed Ilyes — NetSecurePro</div>
+    </footer>
+  </div>
+
+  <!-- Librairies CDN (chargement asynchrone) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.13.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js"></script>
+
+  <script>
+    // == Variables principales ==
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('overlay');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const modelStatus = document.getElementById('modelStatus');
+    const detCount = document.getElementById('detCount');
+    const fpsEl = document.getElementById('fps');
+    const resolutionSelect = document.getElementById('resolutionSelect');
+    const intervalSelect = document.getElementById('intervalSelect');
+
+    let model = null;
+    let stream = null;
+    let detectLoop = null;
+    let lastTime = performance.now();
+    let fpsSMA = [];
+    const SMA_SIZE = 6;
+
+    // Charger le modèle COCO-SSD dès l'ouverture (préchargement)
+    (async ()=> {
+      try {
+        modelStatus.innerHTML = 'Modèle: <strong>chargement…</strong>';
+        // load() retourne le modèle prêt à détecter
+        model = await cocoSsd.load();
+        modelStatus.innerHTML = 'Modèle: <strong>chargé</strong>';
+      } catch (err) {
+        console.error('Erreur chargement modèle:', err);
+        modelStatus.innerHTML = 'Modèle: <strong>erreur</strong>';
+      }
+    })();
+
+    // Démarrer la caméra avec la résolution choisie
+    async function startCamera() {
+      const [w,h] = resolutionSelect.value.split('x').map(Number);
+      const constraints = {
+        audio: false,
+        video: {
+          width: { ideal: w },
+          height: { ideal: h },
+          facingMode: 'environment' // "user" pour selfie, "environment" pour caméra arrière
+        }
+      };
+      if (stream) stopCamera();
+      try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        await video.play();
+        // adapter canvas à la taille réelle du flux
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        document.getElementById('videoContainer').style.height = (video.videoHeight)+'px';
+        return true;
+      } catch (err) {
+        console.error('Impossible d\'accéder à la caméra :', err);
+        alert('Erreur accès caméra : ' + (err.message || err));
+        return false;
+      }
+    }
+
+    function stopCamera() {
+      if (!stream) return;
+      stream.getTracks().forEach(t => t.stop());
+      stream = null;
+      video.pause();
+      video.srcObject = null;
+    }
+
+    // Boucle de détection — exécute model.detect(frame) à l'intervalle choisi
+    async function runDetectionLoop() {
+      if (!model) {
+        alert('Modèle non chargé. Réessayez dans quelques secondes.');
+        return;
+      }
+      const interval = parseInt(intervalSelect.value, 10) || 200;
+      let running = true;
+      stopBtn.disabled = false;
+      startBtn.disabled = true;
+
+      const loop = async () => {
+        if (!running) return;
+        if (video.readyState < 2) {
+          requestAnimationFrame(loop);
+          return;
+        }
+        // Capture de la frame dans un canvas temporaire si besoin
+        try {
+          const predictions = await model.detect(video);
+          drawPredictions(predictions);
+          detCount.textContent = 'Détections: ' + predictions.length;
+        } catch (err) {
+          console.error('Erreur détection :', err);
+        }
+
+        // FPS calcul simple
+        const now = performance.now();
+        const elapsed = now - lastTime;
+        lastTime = now;
+        const fps = 1000 / Math.max(1, elapsed);
+        fpsSMA.push(fps);
+        if (fpsSMA.length > SMA_SIZE) fpsSMA.shift();
+        const avgFps = Math.round((fpsSMA.reduce((a,b)=>a+b,0)/fpsSMA.length) * 10)/10;
+        fpsEl.textContent = 'FPS: ' + avgFps;
+
+        // Attendre l'intervalle choisi
+        setTimeout(() => requestAnimationFrame(loop), interval);
+      };
+
+      detectLoop = { stop: ()=> running = false };
+      loop();
+    }
+
+    function drawPredictions(predictions) {
+      // Nettoyage
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // Style général
+      ctx.lineWidth = Math.max(2, Math.round(canvas.width/240));
+      ctx.font = `${Math.max(12, Math.round(canvas.width/64))}px Arial`;
+
+      predictions.forEach(pred => {
+        const [x,y,w,h] = pred.bbox;
+        const score = (pred.score * 100).toFixed(0) + '%';
+        // Couleur par label (hash rapide)
+        const color = labelToColor(pred.class);
+        // Rectangle
+        ctx.strokeStyle = color;
+        ctx.fillStyle = hexToRgba(color, 0.14);
+        ctx.beginPath();
+        ctx.rect(x, y, w, h);
+        ctx.fill();
+        ctx.stroke();
+
+        // Étiquette
+        const label = `${pred.class} (${score})`;
+        const textWidth = ctx.measureText(label).width + 8;
+        const textHeight = parseInt(ctx.font) + 6;
+        ctx.fillStyle = color;
+        // barre d'étiquette opaque
+        ctx.fillRect(x, y - textHeight, textWidth, textHeight);
+        ctx.fillStyle = '#fff';
+        ctx.fillText(label, x + 4, y - 6);
+      });
+    }
+
+    // Utils couleur
+    function labelToColor(label) {
+      // hash simple pour couleur hex
+      let h = 0;
+      for (let i=0;i<label.length;i++) h = label.charCodeAt(i) + ((h<<5)-h);
+      const c = (h & 0x00FFFFFF).toString(16).toUpperCase().padStart(6,'0');
+      return '#' + c;
+    }
+    function hexToRgba(hex, alpha=0.2) {
+      const h = hex.replace('#','');
+      const r = parseInt(h.substring(0,2),16);
+      const g = parseInt(h.substring(2,4),16);
+      const b = parseInt(h.substring(4,6),16);
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    // Contrôles UI
+    startBtn.addEventListener('click', async ()=> {
+      startBtn.disabled = true;
+      const ok = await startCamera();
+      if (!ok) { startBtn.disabled = false; return; }
+      // redimension canvas maintenant que la vidéo est prête
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      document.getElementById('videoContainer').style.height = (video.videoHeight)+'px';
+      runDetectionLoop();
+    });
+
+    stopBtn.addEventListener('click', ()=> {
+      if (detectLoop && detectLoop.stop) detectLoop.stop();
+      stopBtn.disabled = true;
+      startBtn.disabled = false;
+      stopCamera();
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      detCount.textContent = 'Détections: 0';
+      fpsEl.textContent = 'FPS: -';
+    });
+
+    // Arrêter proprement si l'utilisateur quitte ou recharge
+    window.addEventListener('beforeunload', ()=> {
+      if (stream) stopCamera();
+    });
+
+    // Option: changer la résolution relance la caméra si active
+    resolutionSelect.addEventListener('change', async ()=> {
+      if (stream) {
+        // relancer avec la nouvelle résolution
+        if (confirm('Changer la résolution nécessite de relancer la caméra. Continuer ?')) {
+          if (detectLoop && detectLoop.stop) detectLoop.stop();
+          stopCamera();
+          startBtn.disabled = false;
+          stopBtn.disabled = true;
+        } else {
+          // Restaurer selection précédente — ici on ne sait pas l'ancienne, donc on laisse comme tel
+        }
+      }
+    });
+  </script>
+</body>
+</html>

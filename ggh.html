@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>IA22_LOGIC – Plateforme Éducative NetSecurePro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5f8fa;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      background: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .module {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 12px 24px;
+      background-color: #0057b7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #003f8a;
+    }
+
+    #result {
+      margin-top: 15px;
+      padding: 12px;
+      background: #e0f3ff;
+      border-left: 4px solid #0078d4;
+      border-radius: 8px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #eaeaea;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    a {
+      color: #0078d4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎓 IA22_LOGIC</h1>
+    <h2>Plateforme Éducative IA – NetSecurePro</h2>
+  </header>
+
+  <main>
+    <div class="module">
+      <h3>🧠 Visionneur Logique IA</h3>
+      <input type="text" id="inputIA" placeholder="Ex : détection logique IA, structure algorithmique">
+      <button onclick="startVisionnerIA()">Analyser</button>
+      <div id="result">🟦 Résultat IA22 affiché ici.</div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Zoubirou Mohammed Ilyes · <a href="https://orcid.org/0009-0007-7571-3178" target="_blank">ORCID</a> · Plateforme IA NetSecurePro
+  </footer>
+
+  <script>
+    function startVisionnerIA() {
+      const input = document.getElementById('inputIA').value.trim();
+      const result = document.getElementById('result');
+
+      if (input === "") {
+        result.innerText = "⚠️ Veuillez entrer une instruction IA logique à analyser.";
+        return;
+      }
+
+      // Simuler une analyse logique IA22
+      const analysis = `
+📥 Entrée IA : "${input}"
+
+✅ Analyse IA22_LOGIC :
+- Type : Instruction pseudo-algorithmique
+- Niveau de cohérence : Élevé (91%)
+- Composants logiques détectés : ✓ structure, ✓ séquence, ✓ interprétation
+- Statut : VALIDE pour intégration IA
+
+📤 IA22 Feedback : "${input}" peut être utilisé dans un module IA éducatif.
+`;
+      result.innerText = analysis;
+    }
+  </script>
+
+</body>
+</html>

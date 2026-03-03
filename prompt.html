@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA-LOGIC NETSECURE PRO | milyes</title>
+    <style>
+        :root { --neon-green: #00FF41; --dark-bg: #050505; --cyber-blue: #00bcff; }
+        body { background: var(--dark-bg); color: var(--neon-green); font-family: 'Courier New', monospace; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        
+        .main-frame { width: 90%; max-width: 900px; height: 85vh; border: 2px solid var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); display: flex; flex-direction: column; background: rgba(0,0,0,0.9); position: relative; }
+        
+        /* Header */
+        header { padding: 10px; border-bottom: 1px solid var(--neon-green); display: flex; justify-content: space-between; align-items: center; background: rgba(0, 255, 65, 0.1); }
+        .dev-tag { color: var(--cyber-blue); font-weight: bold; font-size: 0.8em; }
+
+        /* Monitor / Graph */
+        .monitor-section { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+        .graph-container { height: 100px; display: flex; align-items: flex-end; gap: 4px; border-bottom: 1px solid #333; }
+        .bar { width: 15px; background: var(--neon-green); transition: height 0.5s ease; box-shadow: 0 0 5px var(--neon-green); }
+
+        /* Console */
+        #console { flex: 2; background: #000; border: 1px solid #1a1a1a; padding: 15px; overflow-y: auto; font-size: 13px; color: #aaa; border-radius: 4px; }
+        .log-entry { margin-bottom: 5px; }
+        .log-success { color: var(--neon-green); }
+        .log-alert { color: #ff4141; font-weight: bold; }
+
+        /* Input Zone */
+        .input-zone { padding: 15px; border-top: 1px solid #222; background: #111; }
+        input { width: 100%; background: transparent; border: none; color: var(--cyber-blue); font-family: inherit; font-size: 1.1em; outline: none; }
+
+        /* Footer Buttons */
+        .actions { display: flex; gap: 10px; padding: 10px; background: #000; }
+        button { flex: 1; padding: 10px; border: 1px solid var(--neon-green); background: transparent; color: var(--neon-green); cursor: pointer; text-transform: uppercase; font-size: 0.7em; }
+        button:hover { background: var(--neon-green); color: #000; }
+        .danger { border-color: #ff4141; color: #ff4141; }
+        .danger:hover { background: #ff4141; color: #fff; }
+
+        /* Scanline effect */
+        .scanline { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 65, 0.02) 50%); background-size: 100% 4px; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+<div class="main-frame">
+    <div class="scanline"></div>
+    <header>
+        <div>IA-LOGIC NETSECURE PRO <span style="font-size: 0.7em;">v2.6</span></div>
+        <div class="dev-tag">DEV_BY_MILYES</div>
+    </header>
+
+    <div class="monitor-section">
+        <div style="font-size: 0.8em;">FLUX RÉSEAU EN TEMPS RÉEL (AI_LOGIC)</div>
+        <div class="graph-container" id="graph">
+            </div>
+
+        <div id="console">
+            <div class="log-entry log-success">> [SYSTEM] Noyau de sécurité initialisé...</div>
+            <div class="log-entry log-success">> [AUTH] Développeur 'milyes' identifié.</div>
+            <div class="log-entry">> En attente d'une commande humaine ou système...</div>
+        </div>
+    </div>
+
+    <div class="input-zone">
+        <input type="text" id="humanInput" placeholder="Tapez une commande (ex: 'Lance un scan' ou 'Nettoyage')">
+    </div>
+
+    <div class="actions">
+        <button onclick="simulateScan()">Scan Réseau</button>
+        <button class="danger" onclick="executePurge()">Nettoyage Automatique</button>
+    </div>
+</div>
+
+<script>
+    const consoleDiv = document.getElementById('console');
+    const graphDiv = document.getElementById('graph');
+
+    // Générer les barres du graphique
+    for(let i=0; i<30; i++) {
+        let bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.style.height = Math.random() * 80 + 10 + '%';
+        graphDiv.appendChild(bar);
+    }
+
+    // Animation du graphique
+    setInterval(() => {
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach(b => {
+            b.style.height = Math.random() * 80 + 10 + '%';
+        });
+    }, 1000);
+
+    function addLog(msg, type = '') {
+        const p = document.createElement('div');
+        p.className = `log-entry ${type}`;
+        p.innerHTML = `> ${msg}`;
+        consoleDiv.appendChild(p);
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+    }
+
+    function simulateScan() {
+        addLog("Recherche de vulnérabilités en cours...", "log-success");
+        setTimeout(() => addLog("Analyse des ports terminée. Aucun risque détecté."), 1500);
+    }
+
+    function executePurge() {
+        addLog("[CRITICAL] Lancement du protocole de nettoyage...", "log-alert");
+        addLog("[OK] Logs de 30 jours purgés.");
+        addLog("[OK] SESSION_TERMINATED : Données utilisateur effacées à 100%.", "log-success");
+        alert("Sécurité milyes : Nettoyage et effacement des données effectués.");
+    }
+
+    document.getElementById('humanInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const val = this.value;
+            addLog(`Requête humaine : "${val}"`, 'log-success');
+            this.value = '';
+            
+            if(val.toLowerCase().includes('nettoie')) {
+                executePurge();
+            } else {
+                setTimeout(() => addLog("IA Logic : Analyse terminée. Infrastructure sécurisée."), 1000);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

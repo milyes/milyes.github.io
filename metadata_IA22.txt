@@ -1,0 +1,5 @@
+Projet: IA22_ALGORITHM_LOGIC
+Auteur: Zoubirou Mohammed Ilyes
+ORCID: 0009-0007-7571-3178
+Date: 2025
+Composants: index.html, style.css, ai_interaction.js, JSON, QR, console IA

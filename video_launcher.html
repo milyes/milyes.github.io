@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>NetSecurePro IA22 Video Launcher</title>
+  <script>
+    fetch("config.json")
+      .then(r => r.json())
+      .then(cfg => {
+        let url = "#";
+        if (cfg.flux === "youtube") url = cfg.youtube_url;
+        else if (cfg.flux === "peertube") url = cfg.peertube_url;
+        if (url !== "#") window.location.href = url;
+      });
+  </script>
+</head>
+<body>
+  <h2>🎥 Lancement IA22 Private/Live Video</h2>
+  <p>Chargement du flux en cours...</p>
+</body>
+</html>

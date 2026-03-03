@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>METADATA MANIFEST – NÉO_DZ</title>
+  <style>
+    body{font-family:monospace;background:#000;color:#f00;margin:0;padding:20px;line-height:1.4}
+    h1{color:#f44;text-shadow:0 0 10px #f44;margin:0}
+    pre{background:#111;padding:12px;border:1px solid #f44;border-radius:4px;overflow-x:auto;font-size:0.95em}
+    .btn{background:#f44;color:#000;border:none;padding:8px 16px;margin:6px;cursor:pointer;font-weight:bold;border-radius:4px}
+    .btn:hover{background:#c00}
+    footer{color:#555;font-size:0.8em;margin-top:30px}
+  </style>
+</head>
+<body>
+  <h1>METADATA MANIFEST</h1>
+  <p>Propriétaire : M.I. ZOUBIROU · NetSecurePro · IA22</p>
+  <p>Statut : <strong>Souverain · Zéro Rétention · STEALTH MODE</strong></p>
+
+  <h3>Accès rapides</h3>
+  <button class="btn" onclick="window.open('http://127.0.0.1:8000/api/ia','_blank')">Proxy IA (8000)</button>
+  <button class="btn" onclick="window.open('http://127.0.0.1:8081','_blank')">Proxy HTTP (8081)</button>
+  <button class="btn" onclick="window.open('http://127.0.0.1:9090','_blank')">Ghost Chat (9090)</button>
+  <button class="btn" onclick="window.location='https://aistudio.google.com/u/2/apps?source=user'">AI Studio</button>
+
+  <h3>Métadonnées live</h3>
+  <pre>
+NÉO_DZ v20.7.6 PRO
+Date     : $(date '+%Y-%m-%d %H:%M:%S')
+Kernel   : $(uname -r)
+User     : $(whoami)
+Host     : $(hostname)
+Uptime   : $(uptime -p)
+IP local : $(hostname -I | awk '{print $1}')
+  </pre>
+
+  <footer>© 2026 M.I. ZOUBIROU – Purge auto activée – All rights reserved</footer>
+</body>
+</html>

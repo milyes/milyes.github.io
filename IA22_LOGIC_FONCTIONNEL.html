@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>IA22_LOGIC – Analyse IA Médicale</title>
+  <style>
+    body {
+      background-color: #12141b;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+    }
+    h1 {
+      color: #00ffe0;
+    }
+    textarea, input {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #1e2128;
+      color: #ffffff;
+      resize: none;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #00b894;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00ffe0;
+      color: #000;
+    }
+    pre, .card {
+      background-color: #1c1f26;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .card {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💡 IA22_LOGIC Médicale Visionnaire</h1>
+  <p>Décrivez vos symptômes ou logique à analyser :</p>
+  <textarea id="inputIA" placeholder="Ex : maux de tête persistants..."></textarea>
+  <button onclick="runIA()">Lancer l’analyse IA</button>
+  <pre id="resultIA">En attente d'analyse...</pre>
+
+  <h2>🧠 Modules IA intégrés</h2>
+  <div id="module-cards"></div>
+
+  <footer style="margin-top: 40px; font-size: 14px; color: #888;">
+    Plateforme IA22_LOGIC – par Zoubirou Mohammed Ilyes | ORCID: 0009‑0007‑7571‑3178
+  </footer>
+
+  <script>
+    function runIA() {
+      const input = document.getElementById("inputIA").value;
+      const result = document.getElementById("resultIA");
+      result.innerText = "🧠 Réponse IA en cours...";
+      setTimeout(() => {
+        result.innerText = "✅ IA a analysé : '" + input + "'\n💡 Diagnostic probable : Fatigue, consultez un professionnel si les symptômes persistent.";
+      }, 1500);
+    }
+
+    // Modules IA simulés (JSON intégré ici)
+    const modules = [
+      {
+        "name": "Analyse Symptômes",
+        "description": "Détecte et interprète les symptômes courants avec logique IA.",
+        "status": "actif"
+      },
+      {
+        "name": "Moteur Prédictif Médical",
+        "description": "Suggère des diagnostics basés sur un moteur prédictif bayésien.",
+        "status": "en test"
+      },
+      {
+        "name": "Sécurité & Anonymisation",
+        "description": "Protège les données utilisateurs pendant l'analyse.",
+        "status": "actif"
+      }
+    ];
+
+    // Affichage des modules IA
+    const container = document.getElementById("module-cards");
+    modules.forEach(mod => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<h3>${mod.name}</h3><p>${mod.description}</p><p>Status: <strong>${mod.status}</strong></p>`;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

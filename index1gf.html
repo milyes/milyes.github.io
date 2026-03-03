@@ -1,0 +1,31 @@
+<div id="ai-assistant" style="border-top: 1px dashed #00FF41; margin-top: 20px; padding-top: 10px;">
+    <span style="color: #00bcff;">[IA_ASSISTANT] :</span> 
+    <input type="text" id="human-cmd" placeholder="Parlez-moi en humain (ex: 'Vérifie la sécurité du réseau')..." 
+           style="width: 70%; color: #00bcff; border-bottom: 1px solid #00bcff;">
+</div>
+
+<script>
+    const humanInput = document.getElementById('human-cmd');
+    
+    humanInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const query = humanInput.value;
+            const log = document.createElement('p');
+            log.innerHTML = `<span style="color:#00bcff;">[LOGIC] Analyse de la requête : "${query}"...</span>`;
+            document.getElementById('terminal').appendChild(log);
+            
+            // Simulation de la réponse IA
+            setTimeout(() => {
+                const response = document.createElement('p');
+                if(query.includes("nettoie") || query.includes("supprime")) {
+                    response.innerHTML = "<span style='color:red;'>[!] Protocole Nettoyage Automatique lancé. Traces de 30 jours effacées.</span>";
+                } else {
+                    response.innerHTML = "<span>[+] Requête traitée. L'IA a optimisé les règles de sécurité.</span>";
+                }
+                document.getElementById('terminal').appendChild(response);
+            }, 1500);
+            
+            humanInput.value = '';
+        }
+    });
+</script>

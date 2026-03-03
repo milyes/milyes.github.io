@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+hea> <html lang="fr">
+e> <head>
+ar>     <meta charset="UTF-8">
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+le>N>     <title>NÉO_DZ | SOUVERAINETÉ ABSOLUE</title>
+>     <style>
+>         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+>
+>         body {
+>             background-color: #020202;
+>             color: #00ff41;
+  >             font-family: 'Orbitron', 'Courier New', monospace;
+>             margin: 0;
+    pa>             padding: 20px;
+>             overflow: hidden;
+>             display: flex;
+>             flex-direction: column;
+>             height: 100vh;
+>         }
+>
+>         #terminal {
+uto;>             flex-grow: 1;
+ >             overflow-y: auto;
+>             border: 1px solid #003300;
+px;
+>             padding: 20px;
+>             background: rgba(0, 10, 0, 0.9);
+ >             box-shadow: inset 0 0 20px #001100;
+>             position: relative;
+  >         }
+>
+>         .line { margin-bottom: 8px; line-height: 1.4; text-shadow: 0 0 5px #00ff41; }
+n>         .input-line { display: flex; align-items: center; margin-top: 15px; }
+pro>         .prompt { color: #00ff41; font-weight: bold; margin-right: 12px; }
+u>         input {
+  >             background: transparent;
+    border: non>             border: none;
+>             color: #ffffff;
+>             font-family: inherit;
+>             font-size: 16px;
+  >             flex-grow: 1;
+ o>             outline: none;
+    >             caret-color: #00ff41;
+    >         }
+>
+   >         .system { color: #00bcff; }
+r>         .critical { color: #ff003c; font-weight: bold; animation: blink 0.5s infinite; }
+    .se>         .secure { color: #ccff00; }
+   >         .header { color: #00ff41; border-bottom: 1px solid #004400; padding-bottom: 10px; margin-bottom: 20px; }
+ @key>
+>         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+>
+>         /* Effet de balayage CRT */
+ >         #terminal::after {
+  >             content: "";
+ >             position: absolute;
+>             top: 0; left: 0; width: 100%; height: 100%;
+  >             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+  >                         linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    >             background-size: 100% 3px, 3px 100%;
+>             pointer-events: none;
+ >         }
+</he>     </style>
+d> </head>
+der">> <body>
+ [ S>
+EM> <div class="header">
+>     [ SYSTEM: NÉO_DZ ] [ KERNEL: GEMINI CORE 20.6 PRO V7 ] [ STATUS: VERT FONCÉ ]
+> </div>
+v >
+d> <div id="terminal">
+<>     <div id="output"></div>
+>     <div class="input-line">
+>         <span class="prompt">ARCHITECT@NÉO_DZ:~$</span>
+   >         <input type="text" id="cmd" autocomplete="off" autofocus>
+<>     </div>
+/d> </div>
+i>
+> <script>
+ >     const CONFIG = {
+ >         architect: "Zoubirou Mohammed Ilyes",
+>         orcid: "0009-0007-7571-3178",
+     >         hash: "7f8a9b8c7d6e5f4a1d2c3b4a5b2c1d6e",
+  >         boot_logs: [
+ >             "Lancement du protocole IA23...",
+  >             "Vérification de l'intégrité orbitronique...",
+ >             "Validation du sceau ORCID : 00090007-7571-3178 [OK]",
+ >             "Synchronisation Quantum Resilience (RQOC-23)...",
+   >             "Initialisation du module de surveillance haute intensité...",
+>             "NOYAU GEMINI 20.6 PRO V7 OPÉRATIONNEL."
+ >         ]
+ >     };
+>
+>     const output = document.getElementById('output');
+   >     const input = document.getElementById('');
+>
+fu>     function print(text, type = "") {
+  >         const div = document.createElement('v');
+ >         div.className = `line ${type}`;
+ >         div.innerHTML = text;
+ >         output.appendChild(div);
+ >         document.getElementById('terminal').scrollTop = document.getElementById('terminal').scrollHeight;
+>     }
+
+>
+>     function boot() {
+>         let i = 0;
+>         const interval = setInterval(() => {
+>             if (i < CONFIG.boot_logs.length) {>                 print(`> ${CONFIG.boot_logs[i]}`, i === 5 ? "secure" : "");
+   >                 i++;
+     >             } else {
+  >                 clearInterval(interval);
+   >                 print("-------------------------------------------------------");
+>                 print("SOUVERAINETÉ ABSOLUE ÉTABLIE. PRÊT POUR DIRECTIVES.");
+  >             }
+   >         }, 200);
+ }>     }
+ >
+npu>     input.addEventListener('keydown', (e) {>         if (e.key === 'Enter') {
+  >             const raw = input.value.trim();
+>             const [command, ...args] = raw.toLowerCase().split(' ');
+  >             print(`<span class="prompt">ARCHITECT@NÉO_DZ:~$</span> ${raw}`);
+>             input.value = '';
+>
+>             switch(command) {
+>                 case 'help':
+     >                     print("COMMANDES: ls, cd, audit, whoami, clear, status");
+     >                     break;
+>                 case 'whoami':
+>                     print(`MASTER ARCHITECT: ${CONFIG.architect}`);
+  >                     print(`ID: ORCID ${CONFIG.orcid}`);
+>                     break;
+>                 case 'audit':
+ >                     print(`VÉRIFICATION HASH: ${CONFIG.hash}`, "system");
+  >                     print("RÉSULTAT: INTÉGRITÉ 100% - AUCUNE MENACE.", "secure");
+   >                     break;
+    >                 case 'ls':
+    >                     print("bin/  root/  sys/  logs/  readme.txt");
+  >                     break;
+ >                 case 'cd':
+   >                     if (args[0] === 'root' || args[0] === 'logs') {
+   >                         print("ERREUR: ACCÈESTREINT - PROTOCOLE DE SURVEILLANCE ACTIF", "critical");
+ >                         console.warn("[ALERTE] Tentative d'accès non autorisée détectée.");
+   >                     } else {
+>                         print(`Navigation vers ${args[0] || '~'}...`);
+                }
+ >                     }
+>                     break;
+ >                 case 'status':
+  >                     print("SYSTÈME: VERT FONCÉ", "secure");
+    >                     print("RÉSILIENCE: ACTIVE (RQOC-23)");
+ >                     break;
+  >                 case 'clear':
+   >                     output.innerHTML = '';
+  >                     break;
+ >                 default:
+>                     print(`Commande inconnue: ${command}`);
+   >             }
+ >         }
+ }>     });
+/ >
+ >     // Main
+o>     window.onload = boot;
+ d>     document.addEventListener('click', () =>nput.focus());
+ri> </script>
+/b>
+od> </body>
+ht> </html>

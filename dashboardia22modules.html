@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>🧠 IA22 Modules – Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./modules/style_module.css" />
+</head>
+<body>
+  <header>
+    <h1>🧠 IA22 – Dashboard Multi-Modules</h1>
+    <p>Technologie hybride local + online – Zoubirou Ilyes</p>
+  </header>
+
+  <nav>
+    <button onclick="showModule('energy')">🔋 Énergie</button>
+    <button onclick="showModule('agro')">🌱 Agriculture</button>
+    <button onclick="showModule('art')">🎨 Art IA</button>
+    <button onclick="showModule('memo')">🧠 Mémoire</button>
+    <button onclick="showModule('neuro')">🧬 Neuro IA</button>
+  </nav>
+
+  <main>
+    <section id="energy" class="module">
+      <h2>🔋 IA22 Energy</h2>
+      <input type="number" id="watts" placeholder="Consommation en watts" />
+      <select id="batteryType">
+        <option value="sable">Sable</option>
+        <option value="lithium">Lithium</option>
+        <option value="solaire">Solaire</option>
+      </select>
+      <button onclick="runEnergy()">Simuler</button>
+      <div id="energyResult"></div>
+    </section>
+
+    <section id="agro" class="module">
+      <h2>🌱 IA22 Agro</h2>
+      <select id="agroType">
+        <option value="goutte-à-goutte">Goutte-à-goutte</option>
+      </select>
+      <select id="agroMeteo">
+        <option value="sécheresse">Sécheresse</option>
+        <option value="pluie">Pluie</option>
+      </select>
+      <button onclick="runAgro()">Analyser</button>
+      <div id="agroResult"></div>
+    </section>
+
+    <section id="art" class="module">
+      <h2>🎨 IA22 Art</h2>
+      <select id="artStyle">
+        <option value="classique">Classique</option>
+        <option value="numérique">Numérique</option>
+      </select>
+      <button onclick="runArt()">Restaurer</button>
+      <div id="artResult"></div>
+    </section>
+
+    <section id="memo" class="module">
+      <h2>🧠 IA22 Memo</h2>
+      <input type="text" id="memoQuestion" placeholder="Tape ta question..." />
+      <button onclick="runMemo()">Simuler</button>
+      <div id="memoResult"></div>
+    </section>
+
+    <section id="neuro" class="module">
+      <h2>🧬 IA22 Neuro</h2>
+      <input type="text" id="neuroInput" placeholder="Interaction cognitive..." />
+      <button onclick="runNeuro()">Adapter</button>
+      <div id="neuroResult"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 – IA22 Zoubirou Ilyes</p>
+  </footer>
+
+  <script type="module">
+    import { simulateEnergy } from './modules/ia22_energy.js';
+    import { simulateAgro } from './modules/ia22_agro.js';
+    import { restoreArt } from './modules/ia22_art.js';
+    import { simulateMemo } from './modules/ia22_memo.js';
+    import { neuroAdapt } from './modules/ia22_neuro.js';
+
+    function showModule(id) {
+      document.querySelectorAll(".module").forEach(m => m.style.display = "none");
+      document.getElementById(id).style.display = "block";
+    }
+
+    window.onload = () => showModule('energy');
+
+    window.runEnergy = () => {
+      const watts = parseInt(document.getElementById("watts").value);
+      const type = document.getElementById("batteryType").value;
+      document.getElementById("energyResult").innerText = simulateEnergy(watts, type);
+    };
+
+    window.runAgro = () => {
+      const type = document.getElementById("agroType").value;
+      const meteo = document.getElementById("agroMeteo").value;
+      document.getElementById("agroResult").innerText = simulateAgro(type, meteo);
+    };
+
+    window.runArt = () => {
+      const style = document.getElementById("artStyle").value;
+      document.getElementById("artResult").innerText = restoreArt(style);
+    };
+
+    window.runMemo = () => {
+      const q = document.getElementById("memoQuestion").value;
+      document.getElementById("memoResult").innerText = simulateMemo(q);
+    };
+
+    window.runNeuro = () => {
+      const q = document.getElementById("neuroInput").value;
+      document.getElementById("neuroResult").innerText = neuroAdapt(q);
+    };
+  </script>
+</body>
+</html>

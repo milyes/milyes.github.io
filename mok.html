@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA22 LOGIC Terminal</title>
+<style>
+    body {
+        font-family: monospace;
+        background-color: #1e1e1e;
+        color: #00ff99;
+        margin: 0;
+        padding: 0;
+    }
+    #terminal {
+        padding: 20px;
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+    .command-line {
+        display: flex;
+        align-items: center;
+    }
+    .prompt {
+        margin-right: 10px;
+    }
+    input {
+        background: none;
+        border: none;
+        color: #00ff99;
+        font-family: monospace;
+        font-size: 1em;
+        outline: none;
+        width: 100%;
+    }
+    .output {
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+    }
+</style>
+</head>
+<body>
+<div id="terminal">
+    <div class="output">Bienvenue dans IA22 LOGIC Terminal. Tapez 'help' pour la liste des commandes.</div>
+    <div class="command-line">
+        <span class="prompt">IA22&gt;</span>
+        <input id="commandInput" type="text" autofocus>
+    </div>
+</div>
+
+<script>
+// Historique des commandes
+let history = [];
+let historyIndex = -1;
+
+const terminal = document.getElementById('terminal');
+const input = document.getElementById('commandInput');
+
+// Commandes typiques IA22 LOGIC
+function executeCommand(command) {
+    let output = '';
+    const args = command.split(' ');
+
+    switch(args[0].toLowerCase()) {
+        case 'help':
+            output = `Commandes disponibles :
+- help : Affiche cette aide
+- run [script] : Exécute un script IA typique
+- list : Liste des scripts IA disponibles
+- info : Informations sur IA22 LOGIC
+- clear : Nettoie le terminal`;
+            break;
+
+        case 'run':
+            if(args[1]) {
+                output = runScript(args[1]);
+            } else {
+                output = "Usage : run [script]";
+            }
+            break;
+
+        case 'list':
+            output = "Scripts IA22 disponibles :\n- analysis\n- simulate\n- optimize\n- secure";
+            break;
+
+        case 'info':
+            output = "IA22 LOGIC Terminal v1.0\nAuteur : Zoubirou Mohammed Ilyes\nhttps://orcid.org/0009-0007-7571-3178";
+            break;
+
+        case 'clear':
+            terminal.innerHTML = '';
+            return '';
+
+        default:
+            output = `Commande inconnue : ${command}. Tapez 'help' pour la liste des commandes.`;
+    }
+
+    return output;
+}
+
+// Simulation de scripts IA typiques
+function runScript(scriptName) {
+    switch(scriptName.toLowerCase()) {
+        case 'analysis':
+            return "Analyse des données en cours...\nRésultat : Données optimisées, anomalies détectées.";
+        case 'simulate':
+            return "Simulation IA22 LOGIC en cours...\nRésultat : Scénarios calculés avec succès.";
+        case 'optimize':
+            return "Optimisation des paramètres IA22...\nRésultat : Performance maximale atteinte.";
+        case 'secure':
+            return "Activation du module de sécurité...\nRésultat : Système protégé et tunnel sécurisé activé.";
+        default:
+            return `Script inconnu : ${scriptName}. Tapez 'list' pour voir les scripts disponibles.`;
+    }
+}
+
+// Gestion de l'entrée utilisateur
+input.addEventListener('keydown', function(e) {
+    if(e.key === 'Enter') {
+        const command = input.value.trim();
+        if(command === '') return;
+
+        // Ajouter à l'historique
+        history.push(command);
+        historyIndex = history.length;
+
+        // Afficher la commande
+        const commandDiv = document.createElement('div');
+        commandDiv.classList.add('output');
+        commandDiv.textContent = `IA22> ${command}`;
+        terminal.appendChild(commandDiv);
+
+        // Exécuter la commande
+        const result = executeCommand(command);
+        if(result) {
+            const outputDiv = document.createElement('div');
+            outputDiv.classList.add('output');
+            outputDiv.textContent = result;
+            terminal.appendChild(outputDiv);
+        }
+
+        input.value = '';
+        terminal.scrollTop = terminal.scrollHeight;
+    } else if(e.key === 'ArrowUp') {
+        if(historyIndex > 0) {
+            historyIndex--;
+            input.value = history[historyIndex];
+        }
+    } else if(e.key === 'ArrowDown') {
+        if(historyIndex < history.length - 1) {
+            historyIndex++;
+            input.value = history[historyIndex];
+        } else {
+            historyIndex = history.length;
+            input.value = '';
+        }
+    }
+});
+</script>
+</body>
+</html>

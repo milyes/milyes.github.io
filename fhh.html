@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carte IA – NetSecurePro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    ul.tree, ul.tree ul {
+      list-style: none;
+      margin-left: 1em;
+      padding-left: 1em;
+      border-left: 2px solid #999;
+    }
+    ul.tree li {
+      margin: 0.5em 0;
+      position: relative;
+    }
+    ul.tree li::before {
+      content: "";
+      position: absolute;
+      top: 0.7em;
+      left: -1em;
+      width: 1em;
+      height: 0;
+      border-top: 2px solid #999;
+    }
+    .node {
+      cursor: pointer;
+      padding: 4px 8px;
+      background: #fff;
+      border-radius: 5px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    .node:hover {
+      background: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Carte IA – NetSecurePro</h1>
+
+  <ul class="tree">
+    <li><span class="node">Projet IA Principal</span>
+      <ul>
+        <li><span class="node">Module 1 : Analyse</span>
+          <ul>
+            <li><span class="node">Collecte de données</span></li>
+            <li><span class="node">Nettoyage IA</span></li>
+          </ul>
+        </li>
+        <li><span class="node">Module 2 : Déploiement</span>
+          <ul>
+            <li><span class="node">APK WebView</span></li>
+            <li><span class="node">Interface Termux</span></li>
+          </ul>
+        </li>
+        <li><span class="node">Module 3 : Publication</span>
+          <ul>
+            <li><span class="node">QR Code</span></li>
+            <li><span class="node">PDF de lancement</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    // (Optionnel) Ajout d’interactions futures
+    const nodes = document.querySelectorAll('.node');
+    nodes.forEach(node => {
+      node.addEventListener('click', () => {
+        alert(`Nœud : ${node.textContent}`);
+      });
+    });
+  </script>
+</body>
+</html>

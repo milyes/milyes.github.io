@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CoopKit IA22 – Assistant Médical NetSecurePro</title>
+  <style>
+    body { font-family: sans-serif; background: #f8f8f8; padding: 2rem; }
+    .container { background: #fff; padding: 2rem; border-radius: 1rem; box-shadow: 0 0 15px rgba(0,0,0,0.1);}
+    h1 { color: #006699; }
+    .footer { margin-top: 2rem; font-size: 0.8rem; text-align: center; color: #666; }
+    textarea, button { width: 100%; padding: 1rem; margin: 1rem 0; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 CoopKit IA22 – Assistant Médical</h1>
+    <p>Bienvenue dans la plateforme médicale IA22_LOGIC. Posez une question médicale ou décrivez vos symptômes :</p>
+    
+    <textarea id="userInput" placeholder="Ex : J’ai mal à la tête et des vertiges..."></textarea>
+    <button onclick="process()">🔍 Analyser avec IA</button>
+    
+    <h3>🩺 Réponse IA :</h3>
+    <div id="result" style="white-space: pre-wrap; border: 1px solid #ccc; padding: 1rem; border-radius: 0.5rem;"></div>
+    
+    <div class="footer">
+      Plateforme IA22_LOGIC – NetSecurePro | Zoubirou Mohammed Ilyes | ORCID : <a href="https://orcid.org/0009-0007-7571-3178">0009-0007-7571-3178</a>
+    </div>
+  </div>
+
+  <script>
+    async function process() {
+      const query = document.getElementById("userInput").value;
+      const result = document.getElementById("result");
+      result.innerText = "⏳ Analyse IA en cours...";
+      // Simule une réponse IA (version offline simplifiée)
+      setTimeout(() => {
+        result.innerText = "🔬 IA médicale :\n\nSelon vos symptômes, il est conseillé de consulter un professionnel de santé.\n\nAnalyse préliminaire IA (non-diagnostique).";
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

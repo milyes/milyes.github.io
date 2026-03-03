@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEXI-MIND — Résume intelligemment</title>
+  <meta name="description" content="LEXI-MIND transforme vos documents longs en résumés clairs et adaptés. Essayez la bêta." />
+  <style>
+    :root{
+      --brand:#0057b8;
+      --accent:#ffcc00;
+      --bg:#f4f6f8;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --ok:#10b981;
+      --err:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif}
+    a{color:inherit}
+    header{
+      background:linear-gradient(135deg,var(--brand) 0%,#0b6ed0 100%);
+      color:#fff;
+      padding:72px 20px 40px;
+      position:relative;
+      overflow:hidden;
+    }
+    .container{max-width:1040px;margin:0 auto;padding:0 16px}
+    .lang{
+      position:absolute;top:14px;right:14px;background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:6px 10px;color:#fff
+    }
+    .hero{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center
+    }
+    .hero h1{font-size: clamp(1.8rem,3.5vw,2.6rem);margin:.2rem 0 .6rem}
+    .hero p{font-size: clamp(1rem,2.1vw,1.2rem);opacity:.95;margin:0 0 1.2rem}
+    .cta{
+      display:inline-block;background:var(--accent);color:#000;font-weight:600;
+      padding:12px 18px;border-radius:10px;text-decoration:none;transition:transform .12s ease,box-shadow .12s ease
+    }
+    .cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.15)}
+    .illus{
+      background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+      border-radius:16px;min-height:220px;position:relative;padding:18px;color:#fff
+    }
+    .illus svg{width:100%;height:100%}
+    section{padding:42px 0}
+    h2{color:var(--brand);font-size: clamp(1.3rem,2.6vw,1.6rem);margin:0 0 14px}
+    .card{
+      background:var(--card);border:1px solid #e5e7eb;border-radius:14px;padding:18px
+    }
+    ul{padding-left:1.1rem;margin:.2rem 0}
+    ul li{margin:.35rem 0}
+    .features{width:100%;border-collapse:collapse}
+    .features th,.features td{border:1px solid #e5e7eb;padding:10px 12px;text-align:start}
+    .testi p{font-style:italic;margin:.4rem 0}
+    .grid{
+      display:grid;gap:18px
+    }
+    @media (min-width:860px){
+      .grid.cols-2{grid-template-columns:1fr 1fr}
+      .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    }
+    .form label{display:block;margin:.6rem 0 .3rem;font-weight:600}
+    .form input,.form select,.form button{
+      width:100%;padding:12px 12px;border-radius:10px;border:1px solid #e5e7eb;background:#fff
+    }
+    .form input:focus,.form select:focus{outline:2px solid #cfe6ff;border-color:#9ac8ff}
+    .form button{background:var(--brand);color:#fff;border:none;font-weight:700;cursor:pointer}
+    .muted{color:var(--muted);font-size:.95rem}
+    .ok{color:var(--ok);font-weight:600}
+    .err{color:var(--err);font-weight:600}
+    footer{background:#111827;color:#9ca3af;padding:28px 0;margin-top:18px}
+    .spacer{height:6px}
+    /* RTL tweaks */
+    [dir="rtl"] .features th,[dir="rtl"] .features td{text-align:end}
+    [dir="rtl"] ul{padding-left:0;padding-right:1.1rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="lang">
+        <label for="langSel" style="margin-right:6px">🌐</label>
+        <select id="langSel" aria-label="Language">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="dz">Darija</option>
+        </select>
+      </div>
+
+      <div class="hero">
+        <div>
+          <h1 id="t-title">Résume intelligemment. Gagne du temps.</h1>
+          <p id="t-sub">LEXI-MIND transforme vos documents longs en résumés clairs et adaptés à votre contexte.</p>
+          <a id="t-cta" class="cta" href="#" target="_blank" rel="noopener">Tester la version bêta</a>
+          <div class="spacer"></div>
+          <p class="muted" id="t-privacy">Nous respectons votre confidentialité. Vos informations restent privées.</p>
+        </div>
+        <div class="illus" aria-hidden="true">
+          <!-- Minimal inline SVG illustration: overwhelmed user + AI card -->
+          <svg viewBox="0 0 520 260" role="img" aria-label="">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="rgba(255,255,255,.8)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,.2)"/>
+              </linearGradient>
+            </defs>
+            <rect x="10" y="10" width="240" height="240" rx="14" fill="rgba(0,0,0,.15)" stroke="rgba(255,255,255,.35)"/>
+            <circle cx="70" cy="70" r="26" fill="url(#g)"/>
+            <rect x="120" y="52" width="100" height="14" rx="7" fill="rgba(255,255,255,.6)"/>
+            <rect x="40" y="110" width="190" height="10" rx="5" fill="rgba(255,255,255,.45)"/>
+            <rect x="40" y="132" width="170" height="10" rx="5" fill="rgba(255,255,255,.35)"/>
+            <rect x="40" y="154" width="200" height="10" rx="5" fill="rgba(255,255,255,.25)"/>
+            <rect x="270" y="20" width="240" height="120" rx="14" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.35)"/>
+            <rect x="285" y="35" width="210" height="14" rx="7" fill="rgba(255,255,255,.8)"/>
+            <rect x="285" y="60" width="190" height="10" rx="5" fill="rgba(255,255,255,.6)"/>
+            <rect x="285" y="80" width="170" height="10" rx="5" fill="rgba(255,255,255,.5)"/>
+            <rect x="285" y="100" width="120" height="10" rx="5" fill="rgba(255,255,255,.4)"/>
+            <rect x="320" y="160" width="160" height="40" rx="10" fill="#ffcc00"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2 id="t-why-title">Pourquoi LEXI-MIND ?</h2>
+      <div class="card">
+        <p id="t-why-text">Trop d’infos, pas assez de temps. Lire, comprendre, résumer… ça prend des heures. LEXI-MIND lit pour vous, comprend le contenu, et vous livre l’essentiel — en quelques secondes.</p>
+        <ul id="t-usecases">
+          <li>📚 Étudiants : résumés de cours et articles scientifiques</li>
+          <li>📰 Journalistes : synthèse de rapports et communiqués</li>
+          <li>💼 Pros : lecture rapide de documents internes</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="t-feat-title">Fonctionnalités clés</h2>
+      <div class="card">
+        <table class="features" id="feat-table" aria-describedby="t-feat-title">
+          <thead>
+            <tr>
+              <th id="t-feat-col1">Fonctionnalité</th>
+              <th id="t-feat-col2">Description</th>
+            </tr>
+          </thead>
+          <tbody id="feat-body">
+            <tr><td>🔍 Résumé intelligent</td><td>Comprend le contexte et extrait l’essentiel</td></tr>
+            <tr><td>🎯 Ton adapté</td><td>Formel, neutre ou vulgarisé selon besoin</td></tr>
+            <tr><td>📄 Multi-format</td><td>PDFs, Word, pages web, etc.</td></tr>
+            <tr><td>🌐 Multilingue</td><td>Français, anglais, arabe…</td></tr>
+            <tr><td>🔒 Sécurisé</td><td>Vos documents restent confidentiels</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid cols-2">
+      <div class="card">
+        <h2 id="t-testimonials-title">Ce qu’ils en pensent</h2>
+        <div class="testi" id="t-testimonials">
+          <p>“LEXI-MIND m’a permis de gagner 3h par semaine sur mes lectures académiques.” — Nadia, étudiante en droit</p>
+          <p>“Enfin un outil qui comprend vraiment le contenu, pas juste un résumé automatique.” — Karim, journaliste tech</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 id="t-form-title">Inscription bêta</h2>
+        <form id="betaForm" class="form" novalidate>
+          <label for="email" id="t-form-email-label">Email</label>
+          <input type="email" id="email" name="email" placeholder="vous@exemple.com" required />
+
+          <label for="role" id="t-form-role-label">Profil</label>
+          <select id="role" name="role" required>
+            <option value="" selected disabled>—</option>
+            <option value="student" data-i18n="opt-student">Étudiant(e)</option>
+            <option value="researcher" data-i18n="opt-researcher">Chercheur(euse)</option>
+            <option value="journalist" data-i18n="opt-journalist">Journaliste</option>
+            <option value="pro" data-i18n="opt-pro">Professionnel(le)</option>
+            <option value="other" data-i18n="opt-other">Autre</option>
+          </select>
+
+          <div style="margin:.6rem 0;">
+            <input type="checkbox" id="consent" required />
+            <label for="consent" id="t-form-consent" style="font-weight:400">J’accepte d’être contacté à propos de la bêta.</label>
+          </div>
+
+          <button type="submit" id="t-form-submit">S’inscrire</button>
+          <p id="formMsg" class="muted" aria-live="polite" style="margin-top:.6rem"></p>
+        </form>
+        <p class="muted" id="t-form-note" style="margin-top:.6rem">Aucune donnée n’est envoyée à un serveur par ce formulaire démo — elle est stockée localement dans votre navigateur.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="t-final-title">Prêt à essayer ?</h2>
+      <div class="card">
+        <p id="t-final-text">Participez à la version bêta et partagez vos retours pour améliorer l’outil.</p>
+        <a id="t-final-cta" class="cta" href="#" target="_blank" rel="noopener">Accéder au questionnaire</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="grid cols-3">
+        <div>
+          <strong>LEXI-MIND</strong>
+          <p class="muted">© <span id="year"></span> — Tous droits réservés.</p>
+        </div>
+        <div>
+          <p class="muted" id="t-footer-privacy">Confidentialité: vos informations restent privées.</p>
+        </div>
+        <div>
+          <p class="muted">contact@leximind.ai</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const links = {
+      beta: "https://forms.gle/ton-lien-beta",
+      survey: "https://forms.gle/ton-lien-questionnaire"
+    };
+
+    const t = {
+      fr: {
+        dir: "ltr", lang: "fr",
+        title: "Résume intelligemment. Gagne du temps.",
+        sub: "LEXI-MIND transforme vos documents longs en résumés clairs et adaptés à votre contexte.",
+        cta: "Tester la version bêta",
+        privacy: "Nous respectons votre confidentialité. Vos informations restent privées.",
+        whyTitle: "Pourquoi LEXI-MIND ?",
+        whyText: "Trop d’infos, pas assez de temps. Lire, comprendre, résumer… ça prend des heures. LEXI-MIND lit pour vous, comprend le contenu, et vous livre l’essentiel — en quelques secondes.",
+        use: [
+          "📚 Étudiants : résumés de cours et articles scientifiques",
+          "📰 Journalistes : synthèse de rapports et communiqués",
+          "💼 Pros : lecture rapide de documents internes"
+        ],
+        featTitle: "Fonctionnalités clés",
+        featCol1: "Fonctionnalité", featCol2: "Description",
+        feats: [
+          ["🔍 Résumé intelligent","Comprend le contexte et extrait l’essentiel"],
+          ["🎯 Ton adapté","Formel, neutre ou vulgarisé selon besoin"],
+          ["📄 Multi-format","PDFs, Word, pages web, etc."],
+          ["🌐 Multilingue","Français, anglais, arabe…"],
+          ["🔒 Sécurisé","Vos documents restent confidentiels"]
+        ],
+        testiTitle:"Ce qu’ils en pensent",
+        testis:[
+          "“LEXI-MIND m’a permis de gagner 3h par semaine sur mes lectures académiques.” — Nadia, étudiante en droit",
+          "“Enfin un outil qui comprend vraiment le contenu, pas juste un résumé automatique.” — Karim, journaliste tech"
+        ],
+        formTitle:"Inscription bêta",
+        formEmail:"Email",
+        formEmailPH:"vous@exemple.com",
+        formRole:"Profil",
+        formOpt:{student:"Étudiant(e)",researcher:"Chercheur(euse)",journalist:"Journaliste",pro:"Professionnel(le)",other:"Autre"},
+        formConsent:"J’accepte d’être contacté à propos de la bêta.",
+        formSubmit:"S’inscrire",
+        formOk:"Merci ! Nous vous contacterons pour la bêta.",
+        formErrEmail:"Veuillez saisir un email valide.",
+        formErrRole:"Veuillez choisir un profil.",
+        formNote:"Aucune donnée n’est envoyée à un serveur par ce formulaire démo — elle est stockée localement dans votre navigateur.",
+        finalTitle:"Prêt à essayer ?",
+        finalText:"Participez à la version bêta et partagez vos retours pour améliorer l’outil.",
+        finalCta:"Accéder au questionnaire",
+        footerPrivacy:"Confidentialité: vos informations restent privées."
+      },
+      en: {
+        dir:"ltr", lang:"en",
+        title:"Summarize smart. Save time.",
+        sub:"LEXI-MIND turns long documents into clear, context-aware summaries.",
+        cta:"Try the beta",
+        privacy:"We respect your privacy. Your information stays private.",
+        whyTitle:"Why LEXI-MIND?",
+        whyText:"Too much info, not enough time. Reading, understanding, summarizing… it takes hours. LEXI-MIND reads for you and delivers the essentials — in seconds.",
+        use:[
+          "📚 Students: summaries of courses and academic papers",
+          "📰 Journalists: synthesis of reports and press releases",
+          "💼 Professionals: fast reading of internal documents"
+        ],
+        featTitle:"Key features",
+        featCol1:"Feature", featCol2:"Description",
+        feats:[
+          ["🔍 Smart summary","Understands context and extracts key points"],
+          ["🎯 Adaptive tone","Formal, neutral, or simplified as needed"],
+          ["📄 Multi-format","PDFs, Word, web pages, etc."],
+          ["🌐 Multilingual","French, English, Arabic…"],
+          ["🔒 Secure","Your documents remain confidential"]
+        ],
+        testiTitle:"What people say",
+        testis:[
+          "“LEXI-MIND saved me 3 hours per week on academic reading.” — Nadia, law student",
+          "“Finally a tool that truly understands content, not just an auto-summary.” — Karim, tech journalist"
+        ],
+        formTitle:"Beta sign-up",
+        formEmail:"Email",
+        formEmailPH:"you@example.com",
+        formRole:"Role",
+        formOpt:{student:"Student",researcher:"Researcher",journalist:"Journalist",pro:"Professional",other:"Other"},
+        formConsent:"I agree to be contacted about the beta.",
+        formSubmit:"Sign up",
+        formOk:"Thanks! We’ll reach out with beta access.",
+        formErrEmail:"Please enter a valid email.",
+        formErrRole:"Please choose a role.",
+        formNote:"This demo form does not send data to a server — it is stored locally in your browser.",
+        finalTitle:"Ready to try?",
+        finalText:"Join the beta and share your feedback to improve the tool.",
+        finalCta:"Open the survey",
+        footerPrivacy:"Privacy: your information stays private."
+      },
+      dz: {
+        dir:"rtl", lang:"ar",
+        title:"لخّص بذكاء واربح الوقت",
+        sub:"LEXI-MIND يبدّل الدوكيمون الطويلين لخلاصات واضحة ومفهومة بالسياق.",
+        cta:"جرّب النسخة التجريبية",
+        privacy:"الخصوصية مهمّة عندنا. معلوماتك تبقى سرّية.",
+        whyTitle:"علاش LEXI-MIND؟",
+        whyText:"المعلومات بزاف والوقت ما يكفيش. القراية والفهم والتلخيص ياخذو وقت. LEXI-MIND يقرا عليك ويعطيك الزبدة في ثواني.",
+        use:[
+          "📚 الطلبة: تلخيص الدروس والمقالات العلمية",
+          "📰 الصحافيين: خلاصة التقارير والبلاغات",
+          "💼 المهنيين: قراءة سريعة للوثائق الداخلية"
+        ],
+        featTitle:"الخصائص الرئيسية",
+        featCol1:"الخاصية", featCol2:"الوصف",
+        feats:[
+          ["🔍 تلخيص ذكي","يفهم السياق ويستخرج المهم"],
+          ["🎯 نبرة مناسبة","رسمية أو محايدة أو مبسطة حسب الحاجة"],
+          ["📄 صيغ متعددة","PDF وWord وصفحات ويب..."],
+          ["🌐 متعدد اللغات","فرنسية، إنجليزية، عربية..."],
+          ["🔒 آمن","الوثائق تبقى سرّية"]
+        ],
+        testiTitle:"آراء المستخدمين",
+        testis:[
+          "“LEXI-MIND وفّرلي 3 ساعات في الأسبوع في القراية.” — نادية، طالبة قانون",
+          "“أخيراً أداة تفهم المحتوى بصح، ماشي غير تلخيص آلي.” — كريم، صحافي تقني"
+        ],
+        formTitle:"التسجيل في النسخة التجريبية",
+        formEmail:"الإيميل",
+        formEmailPH:"you@example.com",
+        formRole:"الصفة",
+        formOpt:{student:"طالب/طالبة",researcher:"باحث/باحثة",journalist:"صحافي/صحافية",pro:"مهني",other:"آخر"},
+        formConsent:"نوافق نتواصلو معاك بخصوص النسخة التجريبية.",
+        formSubmit:"تسجيل",
+        formOk:"شكراً! راح نتواصلو معاك للدخول للبيتا.",
+        formErrEmail:"من فضلك أدخل إيميل صحيح.",
+        formErrRole:"من فضلك اختر الصفة.",
+        formNote:"هذا فورم تجريبي ما يبعتش الداتا للسيرفر — تتحفظ محلياً في المتصفح.",
+        finalTitle:"جاهز تجرب؟",
+        finalText:"شارك في النسخة التجريبية و عطينا رأيك باش نحسّنو الأداة.",
+        finalCta:"افتح الاستبيان",
+        footerPrivacy:"الخصوصية: معلوماتك تبقى سرّية."
+      }
+    };
+
+    // DOM refs
+    const $ = (id)=>document.getElementById(id);
+    const nodes = {
+      title:$("t-title"), sub:$("t-sub"), cta:$("t-cta"), privacy:$("t-privacy"),
+      whyTitle:$("t-why-title"), whyText:$("t-why-text"), usecases:$("t-usecases"),
+      featTitle:$("t-feat-title"), featCol1:$("t-feat-col1"), featCol2:$("t-feat-col2"), featBody:$("feat-body"),
+      testiTitle:$("t-testimonials-title"), testis:$("t-testimonials"),
+      formTitle:$("t-form-title"), formEmailLabel:$("t-form-email-label"), formRoleLabel:$("t-form-role-label"),
+      formConsent:$("t-form-consent"), formSubmit:$("t-form-submit"), formMsg:$("formMsg"), formNote:$("t-form-note"),
+      finalTitle:$("t-final-title"), finalText:$("t-final-text"), finalCta:$("t-final-cta"),
+      footerPrivacy:$("t-footer-privacy")
+    };
+
+    function renderLang(key){
+      const L = t[key] || t.fr;
+      document.documentElement.lang = L.lang;
+      document.documentElement.dir = L.dir;
+
+      // Header
+      nodes.title.textContent = L.title;
+      nodes.sub.textContent = L.sub;
+      nodes.cta.textContent = L.cta;
+      nodes.cta.href = links.beta;
+      nodes.privacy.textContent = L.privacy;
+
+      // Why / use cases
+      nodes.whyTitle.textContent = L.whyTitle;
+      nodes.whyText.textContent = L.whyText;
+      nodes.usecases.innerHTML = "";
+      L.use.forEach(item=>{
+        const li = document.createElement("li"); li.textContent = item; nodes.usecases.appendChild(li);
+      });
+
+      // Features
+      nodes.featTitle.textContent = L.featTitle;
+      nodes.featCol1.textContent = L.featCol1;
+      nodes.featCol2.textContent = L.featCol2;
+      nodes.featBody.innerHTML = "";
+      L.feats.forEach(([a,b])=>{
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td"); td1.textContent = a;
+        const td2 = document.createElement("td"); td2.textContent = b;
+        tr.appendChild(td1); tr.appendChild(td2);
+        nodes.featBody.appendChild(tr);
+      });
+
+      // Testimonials
+      nodes.testiTitle.textContent = L.testiTitle;
+      nodes.testis.innerHTML = "";
+      L.testis.forEach(p=>{
+        const el = document.createElement("p"); el.textContent = p; nodes.testis.appendChild(el);
+      });
+
+      // Form labels and options
+      nodes.formTitle.textContent = L.formTitle;
+      nodes.formEmailLabel.textContent = L.formEmail;
+      $("email").placeholder = L.formEmailPH;
+      nodes.formRoleLabel.textContent = L.formRole;
+      const role = $("role");
+      [...role.options].forEach(opt=>{
+        const k = opt.getAttribute("data-i18n");
+        if(!k) return;
+        const map = L.formOpt || {};
+        if(k==="opt-student") opt.textContent = map.student;
+        if(k==="opt-researcher") opt.textContent = map.researcher;
+        if(k==="opt-journalist") opt.textContent = map.journalist;
+        if(k==="opt-pro") opt.textContent = map.pro;
+        if(k==="opt-other") opt.textContent = map.other;
+      });
+      nodes.formConsent.textContent = L.formConsent;
+      nodes.formSubmit.textContent = L.formSubmit;
+      nodes.formMsg.textContent = "";
+      nodes.formNote.textContent = L.formNote;
+
+      // Final
+      nodes.finalTitle.textContent = L.finalTitle;
+      nodes.finalText.textContent = L.finalText;
+      nodes.finalCta.textContent = L.finalCta;
+      nodes.finalCta.href = links.survey;
+
+      // Footer
+      nodes.footerPrivacy.textContent = L.footerPrivacy;
+    }
+
+    // Form handling (local storage demo)
+    function validEmail(v){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+    $("betaForm").addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const langKey = $("langSel").value || "fr";
+      const L = t[langKey];
+      const email = $("email").value.trim();
+      const role = $("role").value;
+      const consent = $("consent").checked;
+
+      // Reset msg
+      nodes.formMsg.classList.remove("ok","err");
+      nodes.formMsg.textContent = "";
+
+      if(!validEmail(email)){
+        nodes.formMsg.classList.add("err");
+        nodes.formMsg.textContent = L.formErrEmail;
+        return;
+      }
+      if(!role){
+        nodes.formMsg.classList.add("err");
+        nodes.formMsg.textContent = L.formErrRole;
+        return;
+      }
+      if(!consent){
+        nodes.formMsg.classList.add("err");
+        nodes.formMsg.textContent = L.formConsent;
+        return;
+      }
+
+      const entry = {email, role, ts:new Date().toISOString(), lang: langKey};
+      const key = "leximind_beta_signups";
+      const arr = JSON.parse(localStorage.getItem(key) || "[]");
+      arr.push(entry);
+      localStorage.setItem(key, JSON.stringify(arr));
+
+      $("betaForm").reset();
+      nodes.formMsg.classList.add("ok");
+      nodes.formMsg.textContent = L.formOk;
+    });
+
+    // Init
+    $("year").textContent = new Date().getFullYear();
+    $("langSel").addEventListener("change", (e)=>renderLang(e.target.value));
+    renderLang("fr");
+  </script>
+</body>
+</html>
+```[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/Drupalito/guidelines/tree/3edb76300a04da9d25b51fdc7ea13953930ead64/_docs%2F3_html-structure-document.md?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1")

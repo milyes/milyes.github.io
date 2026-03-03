@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IA22_LOGIC Médicale Online – NetSecurePro IA</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f9ff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #004d66;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      flex-grow: 1;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+      width: 100%;
+    }
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      resize: vertical;
+      min-height: 120px;
+    }
+    button {
+      margin-top: 1rem;
+      background: #0074a3;
+      color: white;
+      border: none;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #005f87;
+    }
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #e6f4f1;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      min-height: 150px;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+      background: #ddd;
+    }
+    a {
+      color: #004d66;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 IA22_LOGIC Médicale Visionnaire (Online)</h1>
+    <p>Écosystème Intégré – NetSecurePro IA</p>
+  </header>
+
+  <main>
+    <label for="symptoms">Décrivez vos symptômes ou questions médicales :</label>
+    <textarea id="symptoms" placeholder="Ex : fièvre, toux, fatigue..."></textarea>
+    <button id="analyzeBtn" onclick="lancerAnalyse()">Lancer l’analyse IA</button>
+    <div id="result">Résultat IA ici...</div>
+  </main>
+
+  <footer>
+    Plateforme IA22_LOGIC – par Zoubirou Mohammed Ilyes | ORCID: 
+    <a href="https://orcid.org/0009-0007-7571-3178" target="_blank" rel="noopener noreferrer">
+      0009-0007-7571-3178
+    </a>
+  </footer>
+
+  <script>
+    async function lancerAnalyse() {
+      const input = document.getElementById('symptoms').value.trim();
+      const resultDiv = document.getElementById('result');
+      const btn = document.getElementById('analyzeBtn');
+
+      if (!input) {
+        resultDiv.textContent = "⚠️ Veuillez entrer une description des symptômes.";
+        return;
+      }
+
+      btn.disabled = true;
+      resultDiv.textContent = "🔍 Analyse IA22_LOGIC en cours (serveur)...";
+
+      try {
+        // Simulation d'une requête POST vers une API IA distante (exemple)
+        // Remplace l'URL par ton endpoint réel si disponible.
+        const response = await fetch('https://api.example.com/ia22_logic_analyze', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ symptoms: input })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erreur serveur : ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Affiche la réponse IA reçue
+        resultDiv.textContent = `✅ Analyse terminée :\n\n${data.result}`;
+      } catch (error) {
+        // En cas d'erreur ou API non disponible, message par défaut
+        resultDiv.textContent = "❌ Erreur lors de l’analyse en ligne.\n" +
+          "Veuillez vérifier votre connexion ou réessayer plus tard.\n\n" +
+          "Message système : " + error.message;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

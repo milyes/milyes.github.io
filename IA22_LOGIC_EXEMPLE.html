@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemple IA22_LOGIC – Analyse IA autonome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f8fb; margin: 0; padding: 0; color: #222; }
+    header { background: #002c4d; color: white; padding: 20px; text-align: center; }
+    main { padding: 20px; }
+    .module { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+    input, button { font-size: 16px; border-radius: 6px; margin-top: 10px; }
+    input { padding: 10px; width: 100%; }
+    button { background: #0078d4; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    #result { margin-top: 20px; background: #e0f3ff; padding: 15px; border-left: 4px solid #0078d4; font-family: monospace; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎓 IA22_LOGIC – Exemple</h1>
+    <h2>Test autonome d’analyse logique IA</h2>
+  </header>
+  <main>
+    <div class="module">
+      <label for="inputIA">Instruction IA :</label>
+      <input type="text" id="inputIA" value="détection de boucle récursive IA22">
+      <button onclick="startVisionnerIA()">Analyser</button>
+      <div id="result">📥 Cliquez sur Analyser pour obtenir le résultat IA22.</div>
+    </div>
+  </main>
+  <script>
+    function startVisionnerIA() {
+      const input = document.getElementById('inputIA').value.trim();
+      const result = document.getElementById('result');
+
+      if (!input) {
+        result.innerText = "⚠️ Aucune instruction détectée. Entrez une logique IA à analyser.";
+        return;
+      }
+
+      const response = `
+🔍 Analyse IA22_LOGIC :
+
+📌 Instruction : "${input}"
+
+🧠 Interprétation :
+- Type détecté : instruction pseudo-algorithmique IA
+- Syntaxe logique : conforme
+- Complexité estimée : moyenne
+- Pertinence pédagogique : ✔️ Valide
+
+📊 Résultat : cette logique peut être intégrée dans un module IA éducatif.
+
+✅ IA22_LOGIC : Analyse terminée avec succès.
+`;
+      result.innerText = response;
+    }
+
+    // Simulation automatique à l’ouverture
+    window.onload = () => startVisionnerIA();
+  </script>
+</body>
+</html>

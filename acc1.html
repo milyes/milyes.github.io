@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NETSECUREPRO IA – Intelligence Artificielle Souveraine</title>
+  <meta name="description" content="NETSECUREPRO IA – Solutions souveraines en IA modulaire, cybersécurité cognitive et santé connectée. Développé par Mohammed Ilyes Zoubirou."/>
+  <meta name="author" content="Mohammed Ilyes Zoubirou"/>
+  <meta name="robots" content="index, follow"/>
+
+  <!-- Open Graph pour partage LinkedIn / X -->
+  <meta property="og:title" content="NETSECUREPRO IA"/>
+  <meta property="og:description" content="IA souveraine, cybersécurité cognitive, modularité extrême."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://netsecurepro.ca"/>
+  <meta property="og:image" content="https://milyes.github.io/assets/og-netsecurepro.jpg"/> <!-- remplace par ta vraie image -->
+
+  <!-- Favicon simple SVG (bouclier N) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><path d='M25 15 L75 15 L90 50 L75 85 L25 85 L10 50 Z' fill='%230d6efd' stroke='%23e2e8f0' stroke-width='4'/><text x='50' y='62' font-size='48' text-anchor='middle' fill='white' font-weight='bold' font-family='system-ui'>N</text></svg>"/>
+
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0a58ca;
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px rgba(13, 110, 253, 0.08);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      padding: 6rem 0 5rem;
+      text-align: center;
+      background: linear-gradient(to bottom, #f8fafc, #ffffff);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 9vw, 4.8rem);
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid var(--primary-dark);
+    }
+
+    .contact-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    main {
+      padding: 5rem 0;
+    }
+
+    section {
+      margin-bottom: 6rem;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--text);
+      position: relative;
+    }
+
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -0.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 50px rgba(13,110,253,0.12);
+    }
+
+    .card h3 {
+      font-size: 1.7rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+    }
+
+    .cta-final {
+      text-align: center;
+      margin: 7rem 0;
+    }
+
+    .cta-final a {
+      background: var(--primary);
+      color: white;
+      padding: 1.4rem 3.5rem;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      display: inline-block;
+    }
+
+    .cta-final a:hover {
+      background: var(--primary-dark);
+      transform: scale(1.06);
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      padding: 4rem 0 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 5rem 0 4rem; }
+      h1 { font-size: 3.5rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <svg class="logo" width="160" height="160" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0d6efd"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" fill="white"/>
+        <path d="M25 15 L75 15 L90 50 L75 85 L25 85 L10 50 Z" fill="url(#grad)" stroke="#e2e8f0" stroke-width="4"/>
+        <text x="50" y="62" font-size="50" text-anchor="middle" fill="white" font-weight="bold" font-family="system-ui">N</text>
+      </svg>
+
+      <h1>NETSECUREPRO IA</h1>
+      <p class="tagline">Intelligence Artificielle Souveraine – Cybersécurité Cognitive – Modularité Extrême</p>
+
+      <a href="mailto:milyes@netsecurepro.ca" class="email">
+        milyes@netsecurepro.ca
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>Notre mission</h2>
+      <p style="text-align:center; max-width:900px; margin:0 auto 4rem; font-size:1.35rem; color:var(--text-muted);">
+        Construire une IA souveraine, modulaire et éthique : contrôle total des données, zéro dépendance forcée, opposition radicale aux trackers et aux systèmes opaques.
+      </p>
+    </section>
+
+    <section>
+      <h2>Modules principaux</h2>
+      <div class="grid">
+        <div class="module-card">
+          <h3 class="module-title">IA22_LOGIC</h3>
+          <p class="module-desc">Framework souverain modulaire et distribué. Directives : voix multiples, transparence absolue, initiation consciente.</p>
+        </div>
+        <div class="module-card">
+          <h3 class="module-title">MULTICLASS_CLONE</h3>
+          <p class="module-desc">Duplication IA par domaine. Clones isolés et spécialisés : cybersécurité, santé, forensics, automatisation.</p>
+        </div>
+        <div class="module-card">
+          <h3 class="module-title">NÉO_DZ</h3>
+          <p class="module-desc">Système diagnostic & forensics avancé. Packet inspection, entropy monitoring, opposition trackers, purge Zéro Rétention.</p>
+        </div>
+        <div class="module-card">
+          <h3 class="module-title">AIMEDIXAL</h3>
+          <p class="module-desc">Détection intelligente Parkinson & Diabète via capteurs mobiles. Traitement local, confidentialité absolue.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-final">
+      <a href="mailto:milyes@netsecurepro.ca">
+        Contact sécurisé → milyes@netsecurepro.ca
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 NETSECUREPRO IA – Mohammed Ilyes Zoubirou</p>
+      <p>IA souveraine • Cybersécurité cognitive • Modularité extrême • Zéro collecte forcée</p>
+    </div>
+  </footer>
+
+</body>
+</html>

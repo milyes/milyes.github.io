@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IA22_API_MESSENGER – Interface Web IA</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #58a6ff;
+      margin-bottom: 0.5em;
+    }
+    p {
+      color: #c9d1d9;
+      font-size: 1.2em;
+    }
+    .ia-btn {
+      margin-top: 2rem;
+      background: #238636;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    img {
+      max-width: 220px;
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>IA22_API_MESSENGER</h1>
+  <p>Contrôle intelligent via interface Web IA22</p>
+
+  <img src="https://milyes.github.io/IA22_LOGIC_ALGORITHM_FUL/ia22_logo.png" alt="Logo IA22">
+
+  <br>
+  <button class="ia-btn" onclick="envoyerCommande()">Déclencher IA</button>
+
+  <script>
+    function envoyerCommande() {
+      fetch("https://api.example.com/ia22/webhook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ commande: "demarrer_module_ia" })
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("✅ Commande IA envoyée !");
+        } else {
+          alert("❌ Erreur lors de l’envoi.");
+        }
+      })
+      .catch(error => {
+        alert("⚠️ Erreur de connexion.");
+        console.error(error);
+      });
+    }
+  </script>
+</body>
+</html>

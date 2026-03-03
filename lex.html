@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>LEXI-MIND Résumeur IA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      background: #0078D7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .output {
+      margin-top: 20px;
+      background: #eef;
+      padding: 15px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>LEXI-MIND Résumeur IA</h2>
+    <textarea id="inputText" placeholder="Collez votre texte ici..."></textarea>
+    <br>
+    <button onclick="generateSummary()">Générer</button>
+    <button onclick="saveSummary()">Sauvegarder</button>
+    <button onclick="loadSummary()">Charger</button>
+
+    <div class="output" id="summaryOutput">Résumé affiché ici...</div>
+  </div>
+
+  <script>
+    let currentSummary = "";
+    let summaryCache = {};
+
+    function generateSummary() {
+      const text = document.getElementById("inputText").value;
+      if (!text.trim()) {
+        alert("Veuillez entrer un texte.");
+        return;
+      }
+      currentSummary = "Résumé généré : " + text.slice(0, 50) + "...";
+      document.getElementById("summaryOutput").innerText = currentSummary;
+    }
+
+    function saveSummary() {
+      const title = prompt("Titre du document ?");
+      if (title) {
+        summaryCache[title] = currentSummary;
+        alert("Résumé sauvegardé !");
+      }
+    }
+
+    function loadSummary() {
+      const title = prompt("Titre à rechercher ?");
+      if (summaryCache[title]) {
+        document.getElementById("summaryOutput").innerText = summaryCache[title];
+      } else {
+        alert("Aucun résumé trouvé pour ce titre.");
+      }
+    }
+  </script>
+</body>
+</html>

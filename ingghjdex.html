@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetSecurePro IA22 - Multilingue</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #003366;
+    }
+    select {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    .lang {
+      display: none;
+    }
+    .show {
+      display: block;
+    }
+    [dir="rtl"] {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌐 NetSecurePro IA22</h1>
+  <p>Sélecteur de langue / Language Selector / اختيار اللغة</p>
+  <select id="langSelect">
+    <option value="fr">Français</option>
+    <option value="ar">العربية</option>
+    <option value="en">English</option>
+  </select>
+</header>
+
+<main>
+  <!-- Français -->
+  <div id="fr" class="lang show">
+    <h2>Vision du projet</h2>
+    <p>IA22_LOGIC est un moteur d’évaluation intelligent conçu pour aider les professionnels à mesurer la posture de sécurité d’une organisation selon trois piliers fondamentaux : réactivité, résilience et adaptabilité.</p>
+    <h3>Les trois piliers</h3>
+    <ul>
+      <li>Détecter et réagir rapidement aux menaces pour minimiser les impacts.</li>
+      <li>Maintenir les opérations critiques même en cas d’attaque ou de défaillance.</li>
+      <li>Évoluer face aux menaces émergentes grâce à l’intelligence artificielle et à la veille continue.</li>
+    </ul>
+  </div>
+
+  <!-- Arabe -->
+  <div id="ar" class="lang" dir="rtl">
+    <h2>رؤية المشروع</h2>
+    <p>IA22_LOGIC هو محرك تقييم ذكي مصمم لمساعدة المهنيين على قياس وضعية الأمن السيبراني في المؤسسة وفقًا لثلاث ركائز أساسية: الاستجابة، الصمود، والتكيف.</p>
+    <h3>الركائز الثلاثة</h3>
+    <ul>
+      <li>الكشف السريع والاستجابة للتهديدات لتقليل التأثيرات.</li>
+      <li>الحفاظ على العمليات الحيوية حتى في حالة الهجوم أو الفشل.</li>
+      <li>التطور في مواجهة التهديدات الناشئة بفضل الذكاء الاصطناعي والمراقبة المستمرة.</li>
+    </ul>
+  </div>
+
+  <!-- Anglais -->
+  <div id="en" class="lang">
+    <h2>Project Vision</h2>
+    <p>IA22_LOGIC is an intelligent evaluation engine designed to help professionals assess an organization's security posture based on three core pillars: reactivity, resilience, and adaptability.</p>
+    <h3>The Three Pillars</h3>
+    <ul>
+      <li>Detect and respond quickly to threats to minimize impact.</li>
+      <li>Maintain critical operations even during attacks or failures.</li>
+      <li>Evolve in the face of emerging threats through artificial intelligence and continuous monitoring.</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+  const select = document.getElementById('langSelect');
+  const sections = document.querySelectorAll('.lang');
+
+  select.addEventListener('change', () => {
+    sections.forEach(sec => sec.classList.remove('show'));
+    document.getElementById(select.value).classList.add('show');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Coopkit IA22_LOGIC + GPT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; background: #eef5ff; padding: 20px; }
+    h1 { color: #003366; }
+    textarea, button, input { width: 100%; font-size: 16px; margin-top: 10px; padding: 10px; }
+    .output { margin-top: 20px; background: #fff; padding: 15px; border-left: 5px solid #0077cc; white-space: pre-wrap; }
+    footer { text-align: center; margin-top: 30px; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+
+  <h1>🤖 Coopkit IA22_LOGIC + GPT Personnel</h1>
+  <p>Exemples : <i>"Je veux emprunter un tensiomètre"</i>, <i>"fièvre depuis 2 jours"</i></p>
+
+  <textarea id="input" placeholder="Décris ton besoin médical ou symptôme ici..."></textarea>
+  <input type="text" id="api" placeholder="https://ton-api-gpt.exemple.com/v1/chat/completions (optionnel)">
+  <button onclick="analyser()">Lancer IA22_LOGIC</button>
+
+  <div class="output" id="output" style="display:none;"></div>
+
+  <footer>
+    NetSecurePro | Zoubirou Mohammed Ilyes – Coopkit IA22_LOGIC GPT © 2025
+  </footer>
+
+  <script>
+    async function analyser() {
+      const input = document.getElementById('input').value.trim();
+      const output = document.getElementById('output');
+      const apiUrl = document.getElementById('api').value.trim();
+      output.style.display = 'block';
+
+      // Bloc IA22_LOGIC embarqué simple
+      if (!apiUrl) {
+        let result = {};
+        if (input.includes("tensiomètre") || input.includes("glucomètre")) {
+          result = {
+            module: "IA22_LOGIC",
+            action: "Demande d'emprunt",
+            objet: input.includes("glucomètre") ? "Glucomètre" : "Tensiomètre",
+            durée: input.match(/\d+\s*(jours|semaines|mois)/)?.[0] || "Non précisée",
+            statut: "En attente de traitement IA"
+          };
+        } else if (input.includes("fièvre") || input.includes("toux")) {
+          result = {
+            module: "IA22_LOGIC",
+            symptôme: "Détection d’un épisode infectieux",
+            recommandation: "Hydratation, consultation si fièvre persistante"
+          };
+        } else {
+          result = {
+            module: "IA22_LOGIC",
+            résultat: "Entrée non reconnue",
+            astuce: "Essayez 'Je veux emprunter un oxymètre' ou 'fatigue chronique'"
+          };
+        }
+        output.textContent = JSON.stringify(result, null, 2);
+        return;
+      }
+
+      // Si URL GPT est renseignée
+      try {
+        const res = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer TON_CLE_API" // Personnaliser
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo", // ou gpt-4/gpt-4o
+            messages: [{ role: "user", content: input }],
+            temperature: 0.6
+          })
+        });
+
+        const data = await res.json();
+        const msg = data.choices?.[0]?.message?.content || "Pas de réponse GPT.";
+        output.textContent = "Réponse GPT IA :\n\n" + msg;
+      } catch (err) {
+        output.textContent = "Erreur lors de l’appel GPT IA : " + err;
+      }
+    }
+  </script>
+
+</body>
+</html>

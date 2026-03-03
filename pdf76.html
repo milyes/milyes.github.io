@@ -1,0 +1,84 @@
+/**
+ * COMPOSANT : NETSECUREPRO_LAUNCHPAD_V7
+ * Interface de Contrôle pour Export SOUVERAIN
+ */
+import React, { useState } from 'react';
+import { exportSovereignPDF } from './sovereignExportEngine';
+
+const NeoTerminalLaunchpad = () => {
+  const [status, setStatus] = useState('IDLE');
+  
+  const dummyPatient = {
+    id: "DZ-99-X1",
+    firstName: "Ilyes",
+    lastName: "Zoubirou",
+    diagnostic: "Souveraineté Digitale Établie - Système V7 Intègre",
+    date: "2026-01-26"
+  };
+
+  const handleLaunchExport = async () => {
+    setStatus('PROCESSING');
+    console.log("[NÉO IA22] Initialisation du flux de données DZROUGE...");
+    
+    try {
+      await exportSovereignPDF(dummyPatient, "capture-zone");
+      setStatus('COMPLETED');
+    } catch (err) {
+      console.error("[ERREUR SYSTÈME] Échec de l'exportation souveraine", err);
+      setStatus('IDLE');
+    }
+  };
+
+  return (
+    
+      {/* HEADER SOUVERAIN */}
+      
+        
+          NETSECUREPRO – NÉO_DZ
+          PILOTÉ PAR GEMINI CORE 20.6 PRO V7
+        
+        
+          ID_SOUVERAIN: 0009-0007-7571-3178
+          SÉCURITÉ: DZROUGE ACTIVE
+        
+      
+
+      {/* ZONE D'AFFICHAGE DONNÉES */}
+      
+        
+          NETSECUREPRO V7 NETSECUREPRO V7
+        
+        DOSSIER CLINIQUE SÉCURISÉ
+        
+          PATIENT: {dummyPatient.lastName} {dummyPatient.firstName}
+          ID_DZ: {dummyPatient.id}
+          ANALYSE: {dummyPatient.diagnostic}
+        
+      
+
+      {/* CONSOLE DE COMMANDE */}
+      
+         >> EXÉCUTION_COMMANDES_SHELL
+        
+          
+            {status === 'PROCESSING' ? 'GÉNÉRATION EN COURS...' : 'EXEC_LANCER.PDF (DZROUGE)'}
+          
+          
+          {status === 'COMPLETED' && (
+            
+              ✔ EXPORT RÉUSSI : HASH V7 VÉRIFIÉ
+            
+          )}
+        
+      
+
+      {/* FOOTER TERMINAL */}
+      
+        © 2026 NetSecurePro - Fondateur M.I. Zoubirou
+        NOYAU: V20.6.PRO.V7
+      
+    
+  );
+};
+
+export default NeoTerminalLaunchpad;

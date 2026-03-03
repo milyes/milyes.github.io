@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interface IA – Commandes & GPT</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #ecf0f1;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 6px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    textarea {
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+    button {
+      padding: 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    #responseBox {
+      margin-top: 20px;
+      background: #eaf2f8;
+      padding: 15px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #2c3e50;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 Commandes IA disponibles</h1>
+    <p>Interface interactive pour explorer et tester les fonctions IA</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>📦 Liste des commandes</h2>
+      <ul>
+        <li>generate_qr_code</li>
+        <li>start_server_tunnel</li>
+        <li>map_idea_to_IA22</li>
+        <li>request_gpt</li>
+        <li>analyze_input_stream</li>
+        <li>build_cognitive_graph</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>💬 Envoyer une requête à GPT</h2>
+      <form id="gptForm">
+        <textarea id="prompt" placeholder="Tape ta requête ici..." required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+      <div id="responseBox"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Milyes | IA22 Interface</p>
+  </footer>
+
+  <script>
+    document.getElementById('gptForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const prompt = document.getElementById('prompt').value;
+      const responseBox = document.getElementById('responseBox');
+      responseBox.textContent = "⏳ Chargement...";
+
+      try {
+        const res = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer YOUR_API_KEY' // Remplace par ta clé API
+          },
+          body: JSON.stringify({
+            model: 'gpt-4',
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+
+        const data = await res.json();
+        const reply = data.choices?.[0]?.message?.content || "Aucune réponse.";
+        responseBox.textContent = reply;
+      } catch (error) {
+        responseBox.textContent = "❌ Erreur : " + error.message;
+      }
+    });
+  </script>
+</body>
+</html>

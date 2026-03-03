@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commandes IA22 – NetSecurePro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 Commandes IA22 – NetSecurePro</h2>
+  <input type="text" id="search" placeholder="🔍 Rechercher une commande..." onkeyup="filterTable()">
+
+  <table id="commandTable">
+    <thead>
+      <tr>
+        <th>Section</th>
+        <th>Nom</th>
+        <th>Commande</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sécurité</td>
+        <td>FirewallStatus</td>
+        <td>ufw status</td>
+        <td>Affiche l’état du pare-feu UFW</td>
+      </tr>
+      <tr>
+        <td>Sécurité</td>
+        <td>Fail2BanCheck</td>
+        <td>fail2ban-client status</td>
+        <td>Vérifie les services protégés par Fail2Ban</td>
+      </tr>
+      <tr>
+        <td>Réseau</td>
+        <td>CheckIP</td>
+        <td>ip a</td>
+        <td>Affiche les adresses IP des interfaces réseau</td>
+      </tr>
+      <tr>
+        <td>Réseau</td>
+        <td>PingTest</td>
+        <td>ping 8.8.8.8</td>
+        <td>Teste la connectivité avec un serveur externe</td>
+      </tr>
+      <!-- Tu peux ajouter ici toutes les autres commandes du fichier -->
+    </tbody>
+  </table>
+
+  <script>
+    function filterTable() {
+      const input = document.getElementById("search").value.toLowerCase();
+      const rows = document.querySelectorAll("#commandTable tbody tr");
+      rows.forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(input) ? "" : "none";
+      });
+    }
+  </script>
+
+</body>
+</html>

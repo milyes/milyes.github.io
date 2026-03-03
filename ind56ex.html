@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NetSecurePro Network Guard - Appareils Réseau</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0; padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+  table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #00ff88a0;
+  }
+  th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #333;
+  }
+  th {
+    background-color: #00ff88;
+    color: #121212;
+    font-weight: 700;
+  }
+  tr:nth-child(even) {
+    background-color: #292929;
+  }
+  tr:hover {
+    background-color: #00ff8866;
+    cursor: pointer;
+  }
+  #refresh {
+    background-color: #00ff88;
+    color: #121212;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+  }
+  #refresh:hover {
+    background-color: #00cc6a;
+  }
+  #status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+</style>
+</head>
+<body>
+
+<h1>NetSecurePro Network Guard</h1>
+<p>Appareils connectés à votre réseau local</p>
+<button id="refresh">🔄 Actualiser</button>
+<div id="status">Chargement des appareils...</div>
+
+<table aria-label="Liste des appareils connectés">
+  <thead>
+    <tr>
+      <th>IP</th>
+      <th>MAC</th>
+      <th>Fabricant</th>
+    </tr>
+  </thead>
+  <tbody id="deviceTable">
+    <tr><td colspan="3">Aucun appareil détecté.</td></tr>
+  </tbody>
+</table>
+
+<script>
+async function loadDevices() {
+  const status = document.getElementById('status');
+  status.textContent = 'Chargement des appareils...';
+
+  try {
+    const resp = await fetch('devices.json?_=' + Date.now());
+    if (!resp.ok) throw new Error('Impossible de charger devices.json');
+    const data = await resp.json();
+
+    const table = document.getElementById('deviceTable');
+    table.innerHTML = '';
+
+    if (data.length === 0) {
+      table.innerHTML = '<tr><td colspan="3">Aucun appareil détecté.</td></tr>';
+      status.textContent = 'Aucun appareil connecté trouvé.';
+      return;
+    }
+
+    data.forEach(device => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${device.ip}</td>
+        <td>${device.mac}</td>
+        <td>${device.vendor}</td>
+      `;
+      table.appendChild(row);
+    });
+
+    status.textContent = `Dernière mise à jour : ${new Date().toLocaleTimeString()}`;
+  } catch (error) {
+    status.textContent = 'Erreur : ' + error.message;
+  }
+}
+
+document.getElementById('refresh').addEventListener('click', loadDevices);
+
+// Chargement initial + refresh automatique toutes les 10s
+loadDevices();
+setInterval(loadDevices, 10000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+__pycache__/
+*.log
+*.zip
+*.png
+*.pdf
+*.deb
+*.iso
+*.deb
+coopkokit_ia/
+fusion_modules.txt
+generate*

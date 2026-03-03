@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA22 Console Mobile</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #00ffaa;
+      font-family: monospace;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 90%;
+      margin: 15px 0;
+      border: 2px solid #00ffaa;
+      background: #1a1a1a;
+      color: #00ffaa;
+      border-radius: 6px;
+    }
+    button {
+      background: #222;
+      color: #00ffaa;
+      border: none;
+      font-size: 20px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+    nav li {
+      margin: 6px 0;
+    }
+    nav a {
+      color: #00ffaa;
+      text-decoration: none;
+    }
+    .sig {
+      margin-top: 20px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 IA22 Console Mobile</h1>
+    <button id="menuBtn">☰ Menu IA</button>
+    <nav id="menuIA" style="display:none;">
+      <ul>
+        <li><a href="index.html">Console Web</a></li>
+        <li><a href="README.md">README</a></li>
+        <li><a href="mailto:milyes@netsecurepro.ca">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <p>« Une IA signée. Une vision projetée. »</p>
+    <input id="iaInput" placeholder="Commande cognitive..." />
+    <div id="iaResponse"></div>
+
+    <svg id="pulseSVG" width="100%" height="60">
+      <circle cx="50%" cy="30" r="15" fill="#00ffaa">
+        <animate id="pulseAnim" attributeName="r" values="15;25;15" dur="0.8s" repeatCount="1" fill="freeze" />
+      </circle>
+    </svg>
+  </main>
+
+  <footer>
+    <img src="assets/qr_console_ia22.png" alt="QR IA22" width="120" />
+    <p class="sig">IA22_SIG_PUBLIC_2025 · Montréal · 2025</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("iaInput");
+      const response = document.getElementById("iaResponse");
+      const pulse = document.getElementById("pulseAnim");
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && input.value.trim()) {
+          const txt = input.value.trim().toLowerCase();
+          let reply = "Traitement cognitif engagé.";
+          if (txt.includes("connexion")) reply = "Connexion cognitive établie.";
+          if (txt.includes("scan")) reply = "Scan neuronal en cours...";
+          if (txt.includes("flux")) reply = "Flux IA sécurisé.";
+          response.textContent = `🧠 IA Mobile : "${reply}"`;
+          if (pulse) pulse.beginElement();
+        }
+      });
+
+      document.getElementById("menuBtn").addEventListener("click", () => {
+        const nav = document.getElementById("menuIA");
+        nav.style.display = nav.style.display === "none" ? "block" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

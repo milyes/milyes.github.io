@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>IA22_DZERO – Console IA Modulaire</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>🧠 IA22_DZERO</h1>
+    <p>Plateforme IA cognitive, médicale et sécurisée – Par Zoubirou M. Ilyes</p>
+    <a href="https://orcid.org/0009-0007-7571-3178" target="_blank">ORCID Officiel</a>
+  </header>
+
+  <section id="modules">
+    <h2>🔎 Modules IA disponibles</h2>
+    <button onclick="activerModule('dzero')">🧪 IA Detector</button>
+    <button onclick="activerModule('medical')">🩺 IA Médicale</button>
+    <button onclick="activerModule('game')">🎮 IA Game</button>
+  </section>
+
+  <section id="demo">
+    <h2>🧪 Analyse IA</h2>
+    <textarea id="texteInput" placeholder="Coller un texte ici pour l’analyser…"></textarea>
+    <button onclick="analyserTexte()">Lancer l’analyse IA22_DZERO</button>
+    <div id="resultat"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 – IA22 OS par Ilyes | GitHub : <a href="https://github.com/milyes" target="_blank">milyes</a></p>
+  </footer>
+</body>
+</html>

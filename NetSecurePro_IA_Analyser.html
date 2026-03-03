@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Analyse IA – NetSecurePro</title>
+    <style>
+        body {
+            background-color: #12141b;
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 30px;
+        }
+        h1 {
+            color: #00ffe0;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #1e2128;
+            color: #ffffff;
+            resize: none;
+        }
+        button {
+            margin-top: 10px;
+            background-color: #00b894;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00ffe0;
+            color: #000;
+        }
+        pre {
+            background-color: #1c1f26;
+            padding: 15px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Analyseur IA – NetSecurePro</h1>
+    <p>Collez ici un code ou un nom de fichier (ex : script.sh, data.json, fichier.deb) :</p>
+    <textarea id="codeInput" placeholder="Entrer votre code ou commande ici..."></textarea><br>
+    <button onclick="lancerAnalyseIA()">Analyser avec IA</button>
+    <pre id="result">Résultat IA en attente...</pre>
+
+    <script>
+        function lancerAnalyseIA() {
+            const code = document.getElementById("codeInput").value.toLowerCase();
+            const resultBox = document.getElementById("result");
+            let result = [];
+
+            if (code.includes(".json")) {
+                result.push("🔍 Type détecté : JSON");
+                result.push("🧠 Analyse IA : JSON probablement bien formé.");
+                result.push("💡 Suggestion : Utilise `jq . fichier.json` pour vérifier.");
+            }
+
+            if (code.includes(".deb")) {
+                result.push("🔍 Type détecté : Fichier Debian (.deb)");
+                result.push("🧠 Analyse IA : Fichier installable via dpkg.");
+                result.push("💡 Suggestion : `dpkg -i fichier.deb` ou `apt install`.");
+            }
+
+            if (code.includes("echo") || code.includes("bash") || code.includes("#!/bin/bash")) {
+                result.push("🔍 Type détecté : Script Bash");
+                result.push("🧠 Analyse IA : Script shell détecté.");
+                result.push("💡 Suggestion : Exécuter avec `bash script.sh`.");
+            }
+
+            if (result.length === 0) {
+                result.push("❗ Aucun format reconnu. Veuillez entrer un code plus précis.");
+            }
+
+            resultBox.innerText = result.join("\n");
+        }
+    </script>
+</body>
+</html>

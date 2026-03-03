@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>IA22 Web Console</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f7f7f7;
+        }
+        h1 {
+            color: #007bff;
+        }
+        textarea {
+            width: 80%;
+            font-family: monospace;
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        pre {
+            background: #111;
+            color: #0f0;
+            padding: 15px;
+            margin-top: 15px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        footer {
+            margin-top: 30px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>IA22 Web Console</h1>
+    <p>Analyse logique IA – HTML, JSON, Bash, Python</p>
+    <textarea id="codeInput" rows="6">#!/bin/bash
+echo "Analyse IA22 Web prête."</textarea>
+    <br>
+    <button onclick="lancerAnalyseIA()">Lancer IA</button>
+    <pre id="result"></pre>
+    <footer>
+        <p>© 2025 – NetSecurePro IA | Zoubirou Mohammed Ilyes</p>
+    </footer>
+    <script>
+        function lancerAnalyseIA() {
+            const code = document.getElementById("codeInput").value;
+            let result = "";
+
+            if (code.includes(".json")) {
+                result = "🔍 Type détecté : JSON\n🧠 Analyse IA : JSON valide.\n💡 Suggestion : utilise 'jq' pour vérifier.";
+            } else if (code.includes(".deb")) {
+                result = "🔍 Type détecté : Fichier Debian\n🧠 Analyse IA : Paquet détecté.\n💡 Suggestion : dpkg -i.";
+            } else if (code.includes("echo")) {
+                result = "🔍 Type détecté : Bash / Shell\n🧠 Analyse IA : Script basique reconnu.\n💡 Suggestion : exécute sous bash.";
+            } else if (code.includes("import")) {
+                result = "🔍 Type détecté : Python probable\n🧠 Analyse IA : Code Python détecté.\n💡 Suggestion : vérifier syntaxe Python.";
+            } else {
+                result = "❗ Format non reconnu ou vide. Essaie un autre code.";
+            }
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+</body>
+</html>

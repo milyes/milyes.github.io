@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IACTIVEX — Terminal & Dashboard</title>
+  <style>
+    :root{--bg:#071025;--card:#0e1a2b;--accent:#2ea3ff;--muted:#9fb7d6;--glass: rgba(255,255,255,0.03);--radius:14px;--mono: "Courier New", monospace;}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:linear-gradient(180deg,#030616 0%, #071025 100%);color:#e6f2ff;min-height:100vh;}
+    .container{display:grid;grid-template-columns:260px 1fr 420px;gap:20px;padding:24px;max-width:1400px;margin:24px auto;}
+    @media (max-width:1100px){.container{grid-template-columns:1fr; padding:16px}}
+    .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px;height:calc(100vh - 96px);position:sticky;top:24px;overflow:auto}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+    .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#1f6ce7);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021225}
+    .nav{margin-top:12px}
+    .nav button{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:10px;border:0;background:transparent;color:var(--muted);cursor:pointer;margin-bottom:8px}
+    .nav button.active{background:linear-gradient(90deg, rgba(46,163,255,0.12), rgba(31,108,231,0.06));color:var(--accent)}
+    .small{font-size:12px;color:var(--muted)}
+    .main{display:flex;flex-direction:column;gap:18px}
+    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    @media (max-width:900px){.cards{grid-template-columns:1fr}}
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,0.3)}
+    .card h2{margin:0 0 8px 0;font-size:15px;color:#dff2ff}
+    .btn{display:inline-block;padding:9px 12px;border-radius:10px;background:var(--accent);color:#012034;text-decoration:none;font-weight:600;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .terminal{background:#021026;border-radius:12px;padding:12px;font-family:var(--mono);font-size:13px;color:#cfefff;min-height:170px;display:flex;flex-direction:column;gap:8px}
+    .term-output{flex:1;overflow:auto;padding:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-radius:8px}
+    .term-line{white-space:pre-wrap}
+    .term-input{display:flex;gap:8px;margin-top:8px}
+    .term-input input{flex:1;padding:8px;border-radius:8px;border:0;background:transparent;color:var(--muted);outline:1px solid rgba(255,255,255,0.02)}
+    .term-input button{padding:8px 10px;border-radius:8px;border:0;background:var(--accent);color:#012034}
+    .right{display:flex;flex-direction:column;gap:16px;position:sticky;top:24px;height:calc(100vh - 96px);overflow:auto}
+    .assistant{background:linear-gradient(180deg, rgba(46,163,255,0.08), rgba(31,108,231,0.02));padding:14px;border-radius:12px}
+    .preview img{width:100%;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+    footer{max-width:1400px;margin:16px auto;text-align:center;color:var(--muted);font-size:13px}
+    .mobile-frame{width:260px;max-width:100%;height:520px;border-radius:28px;padding:16px;background:linear-gradient(180deg,#021027,#041226);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;border:6px solid rgba(255,255,255,0.03)}
+    .mobile-screen{background:#031428;border-radius:14px;padding:12px;width:100%;height:420px;overflow:auto}
+    .typing-cursor{display:inline-block;width:8px;height:14px;background:var(--accent);margin-left:6px;vertical-align:bottom;border-radius:2px;animation:blink 1s steps(2) infinite}
+    @keyframes blink{50%{opacity:0}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar" aria-label="navigation">
+      <div class="brand">
+        <div class="logo">IA</div>
+        <div><h1>IACTIVEX</h1><div class="small">Centre de Contrôle</div></div>
+      </div>
+      <nav class="nav" role="navigation">
+        <button class="active" data-section="dashboard">📊 Dashboard</button>
+        <button data-section="mobile">📱 Mobile</button>
+        <button data-section="terminal">💻 Terminal</button>
+        <button data-section="certificate">📜 Certificat</button>
+        <button data-section="marketing">📣 Marketing</button>
+      </nav>
+      <div style="margin-top:16px">
+        <div class="small">Statut</div>
+        <div style="display:flex;gap:8px;margin-top:8px"><div class="card chip" style="padding:6px 8px;border-radius:8px;background:var(--glass);">CPU 24%</div><div class="card chip" style="padding:6px 8px;border-radius:8px;background:var(--glass);">RAM 58%</div></div>
+      </div>
+    </aside>
+
+    <main class="main" id="main-area">
+      <section class="cards" id="dashboard">
+        <div class="card">
+          <h2>Analyse de texte</h2>
+          <p>Analyse d'intention & sentiment (démo locale).</p>
+          <button class="btn" onclick="openModal('analyze')">Lancer</button>
+          <div style="margin-top:12px;font-size:13px;color:var(--muted)" id="analyze-output">Résultats : —</div>
+        </div>
+        <div class="card">
+          <h2>Prédiction</h2>
+          <p>Test d'accès (demo).</p>
+          <button class="btn" onclick="openModal('auth')">Tester</button>
+          <div id="auth-output" class="small" style="margin-top:12px">Statut: —</div>
+        </div>
+        <div class="card">
+          <h2>Assistant vocal</h2><p>STT / TTS (navigateur).</p><button class="btn" onclick="openModal('voice')">Assistant vocal</button>
+        </div>
+        <div class="card">
+          <h2>Exporter rapport</h2><p>Génère un PDF simple via fenêtre d'impression.</p><button class="btn" onclick="generatePdf()">Exporter PDF</button><div id="pdf-output" style="margin-top:10px;color:var(--muted);font-size:13px"></div>
+        </div>
+      </section>
+
+      <section class="card" id="terminal" style="margin-top:0">
+        <h2>Terminal IA</h2>
+        <p>Prompt simulé avec animation de saisie automatique.</p>
+        <div class="terminal" aria-live="polite">
+          <div class="term-output" id="termOutput" role="log" aria-atomic="false"></div>
+          <div class="term-input">
+            <input id="termInput" placeholder="Tape une commande..." autocomplete="off" />
+            <button onclick="processTerm()">Exécuter</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="mobile" style="display:flex;gap:12px;align-items:flex-start">
+        <div style="flex:1">
+          <h2>Aperçu Mobile</h2>
+          <p>Version mobile de détection d'intention.</p>
+          <div class="mobile-frame" aria-hidden="false">
+            <div style="color:var(--muted);font-size:13px;margin-bottom:6px">IActviex Mobile — Demo</div>
+            <div class="mobile-screen">
+              <h4>Détection d'intention</h4>
+              <textarea id="mobileInput" style="width:100%;height:110px;border-radius:8px;padding:8px;background:#021726;color:var(--muted);border:1px solid rgba(255,255,255,0.03)"></textarea>
+              <div style="margin-top:8px;display:flex;gap:8px">
+                <button class="btn" onclick="mobileAnalyze()">Analyser</button>
+                <button class="btn ghost" onclick="document.getElementById('mobileInput').value='Bonjour, je souhaite annuler ma commande.'">Preset</button>
+              </div>
+              <div id="mobileResult" style="margin-top:10px;color:var(--muted);font-size:13px"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:300px">
+          <h2>Certificat</h2>
+          <p>Aperçu certificat</p>
+          <div class="preview">
+            <img id="cert-preview" src="" alt="Certificat IA" />
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <a class="btn" id="open-cert" href="#" target="_blank">Ouvrir</a>
+              <a class="btn ghost" id="dl-cert" href="#">Télécharger</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="right">
+      <div class="assistant card">
+        <h3>Assistant</h3>
+        <div class="small">Demande rapide</div>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <input id="assistantInput" placeholder="Que veux-tu faire ?" style="flex:1;padding:8px;border-radius:8px;border:0;background:transparent;color:var(--muted);outline:1px solid rgba(255,255,255,0.02)">
+          <button class="btn" onclick="assistantAction()">Envoyer</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Marketing</h2>
+        <p>Aperçu visuel marketing</p>
+        <div class="preview">
+          <img id="marketing-preview" src="" alt="Marketing" />
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <a class="btn" id="open-mkt" href="#" target="_blank">Ouvrir</a>
+            <a class="btn ghost" id="dl-mkt" href="#">Télécharger</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Ressources</h2>
+        <p class="small">Scripts & ZIP</p>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <a class="btn" id="curl-script" href="#" target="_blank">Script CURL+ZIP</a>
+          <a class="btn ghost" id="download-zip" href="#">Télécharger ZIP</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal-back" id="modalBack" onclick="closeModal(event)"><div class="modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()"><h4 id="modalTitle">Modal</h4><div id="modalBody" style="margin-top:8px;color:var(--muted)"></div><div style="margin-top:12px;text-align:right"><button class="btn ghost" onclick="closeModal()">Fermer</button></div></div></div>
+  <footer>IACTIVEX — Prototype local • Ouvre index.html dans ton navigateur.</footer>
+
+  <script>
+    const assets = {
+      interface_web: 'https://chat.openai.com/mnt/data/file_00000000ed8061f7b53e7f2dd1711551',
+      interface_mobile: 'https://chat.openai.com/mnt/data/file_00000000e81061f7b0d13d228b9976d2',
+      interface_terminal: 'https://chat.openai.com/mnt/data/file_000000009e8461f7b4a6de0f5350fe96',
+      certificat_ia: 'https://chat.openai.com/mnt/data/file_000000005c0c61f78c588975c5fdaebc',
+      marketing_ia: 'https://chat.openai.com/mnt/data/file_000000006e4861f78efde8e9d8383300',
+      zip: 'https://gist.githubusercontent.com/milyes/72a9a5b57f8e1db55ff871f713dc8b4d/raw/netsecurepro_visuals.zip',
+      curl_script: 'https://gist.githubusercontent.com/milyes/72a9a5b57f8e1db55ff871f713dc8b4d/raw/netsecurepro_curl_zip.sh'
+    };
+
+    function openModal(name){ const back=document.getElementById('modalBack'); const body=document.getElementById('modalBody'); const title=document.getElementById('modalTitle'); back.style.display='flex';
+      if(name==='voice'){ title.textContent='Assistant vocal'; body.innerHTML='<div class="small">STT/TTS demo (navigateur)</div><div style="margin-top:10px"><button class="btn" onclick="simulateRecord()">Simuler enregistrement</button></div>' }
+      else if(name==='analyze'){ title.textContent='Analyse de texte'; body.innerHTML='<textarea id="txtAnalyze" style="width:100%;height:120px;border-radius:8px;padding:8px;background:#021726;color:var(--muted);border:1px solid rgba(255,255,255,0.03)"></textarea><div style="text-align:right;margin-top:10px"><button class="btn" onclick="doAnalyze()">Analyser</button></div>'}
+      else if(name==='auth'){ title.textContent='Test auth'; body.innerHTML='<input id="authVal" placeholder="AUTHORIZED_HASH" style="width:100%;padding:8px;border-radius:8px;background:#021726;color:var(--muted)"><div style="text-align:right;margin-top:10px"><button class="btn" onclick="doAuth()">Tester</button></div>' }
+      else if(name==='report'){ title.textContent='Générer rapport'; body.innerHTML='<div class="small">Génère un PDF simple</div><div style="text-align:right;margin-top:10px"><button class="btn" onclick="generatePdf()">Générer</button></div>' }
+    }
+    function closeModal(e){ if(e && e.target && e.target.id !== 'modalBack') return; document.getElementById('modalBack').style.display='none' }
+
+    function doAnalyze(){ const txt=document.getElementById('txtAnalyze').value || 'Texte de test'; const res={intention: txt.toLowerCase().includes('annul')?'Annulation': txt.toLowerCase().includes('rembours')?'Remboursement':'Info', sentiment: txt.toLowerCase().includes('pas')||txt.toLowerCase().includes('retard')?'négatif':'neutre', mots_clefs: txt.split(' ').slice(0,6), score: (Math.random()*0.2+0.8).toFixed(2)}; document.getElementById('analyze-output').textContent='Résultats : '+JSON.stringify(res); closeModal(); }
+
+    function doAuth(){ const val=document.getElementById('authVal').value||''; const ok = val.trim()==='AUTHORIZED_HASH'; document.getElementById('auth-output').textContent = ok ? 'Accès : Autorisé (0.97)' : 'Accès : Refusé (0.32)'; closeModal(); }
+
+    function appendTerm(text, cls){ const el=document.getElementById('termOutput'); const d=document.createElement('div'); d.className='term-line '+(cls||''); d.textContent=text; el.appendChild(d); el.scrollTop = el.scrollHeight; }
+
+    function processTerm(){ const input=document.getElementById('termInput'); const cmd=input.value.trim(); if(!cmd) return; appendTerm('> '+cmd); input.value=''; if(cmd==='help'){ appendTerm('Commandes: help, ai-status, scan network, predict-access, export-report'); } else if(cmd==='ai-status'){ appendTerm('AI Status: ready • latency 48ms • models:4'); } else if(cmd.startsWith('scan')){ appendTerm('Scan... 3 appareils suspects détectés'); } else if(cmd==='predict-access'){ appendTerm('Prediction: ACCESS_DENIED (0.31)'); } else if(cmd==='export-report'){ appendTerm('Génération rapport...'); generatePdf(); } else { appendTerm('Commande non reconnue. Tape help.'); } }
+
+    function mobileAnalyze(){ const t=document.getElementById('mobileInput').value; if(!t){ document.getElementById('mobileResult').textContent='Écris un message.'; return;} const res = t.toLowerCase().includes('annul') ? 'Annulation' : t.toLowerCase().includes('rembours') ? 'Remboursement' : 'Info'; document.getElementById('mobileResult').textContent='Intention: '+res; }
+
+    function simulateRecord(){ document.getElementById('modalBody').innerHTML='<div class="small">Transcription simulée: \"Bonjour, je veux annuler ma commande.\"</div><div style="text-align:right;margin-top:10px"><button class="btn" onclick="closeModal()">Fermer</button></div>'; }
+
+    function speakSample(){ const msg=new SpeechSynthesisUtterance('Bonjour, ceci est un exemple vocal de I A C T I V E X'); msg.lang='fr-FR'; window.speechSynthesis.speak(msg); }
+
+    function generatePdf(){ const content = `<html><head><meta charset="utf-8"><title>Rapport IA</title><style>body{font-family:Arial;padding:24px;color:#012034}h1{color:#0a4b6e}</style></head><body><h1>Rapport IA - IACTIVEX</h1><p>Date: ${new Date().toLocaleString()}</p><h3>Résumé</h3><p>${document.getElementById('analyze-output').textContent || 'Aucun résultat'}</p></body></html>`; const w=window.open(''); w.document.write(content); w.document.close(); w.focus(); document.getElementById('pdf-output').textContent='Fenêtre rapport ouverte'; }
+
+    function assistantAction(){ const q=document.getElementById('assistantInput').value||''; if(!q) return alert('Écris une question.'); alert('Assistant simulé: requête reçue.'); }
+
+    function downloadAsset(url){ const a=document.createElement('a'); a.href=url; a.download = url.split('/').pop(); a.target='_blank'; document.body.appendChild(a); a.click(); a.remove(); }
+
+    document.getElementById('download-zip').addEventListener('click', (e)=>{ e.preventDefault(); downloadAsset(assets.zip); });
+    document.getElementById('curl-script').href = assets.curl_script;
+    document.getElementById('open-cert').href = assets.certificat_ia;
+    document.getElementById('dl-cert').addEventListener('click', (e)=>{ e.preventDefault(); downloadAsset(assets.certificat_ia); });
+    document.getElementById('open-mkt').href = assets.marketing_ia;
+    document.getElementById('dl-mkt').addEventListener('click', (e)=>{ e.preventDefault(); downloadAsset(assets.marketing_ia); });
+    document.getElementById('cert-preview').src = assets.certificat_ia;
+    document.getElementById('marketing-preview').src = assets.marketing_ia;
+    document.getElementById('curl-script').target = '_blank';
+
+    // --- Typing animation: prints initial terminal lines ---
+    const typingLines = [
+      'Bienvenue dans IACTIVEX Terminal...',
+      'Chargement modules IA: [OK]',
+      'Modèles chargés: 4 • Latence: 48ms',
+      'Tape "help" pour la liste des commandes.'
+    ];
+    function typeLine(line, el, delay=30){ return new Promise(resolve=>{
+      let i=0; const span=document.createElement('span'); el.appendChild(span);
+      const cursor=document.createElement('span'); cursor.className='typing-cursor'; span.after(cursor);
+      function step(){ if(i<line.length){ span.textContent += line[i++]; setTimeout(step, delay); } else { cursor.remove(); span.after(document.createElement('br')); resolve(); } }
+      step();
+    }); }
+
+    async function runTyping(){
+      const out=document.getElementById('termOutput');
+      out.innerHTML='';
+      for(const l of typingLines){ await typeLine(l, out, 28); }
+    }
+    // start animation on load
+    window.addEventListener('load', ()=>{ runTyping(); });
+  </script>
+</body>
+</html>

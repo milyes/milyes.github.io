@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IA22_LOGIC Médicale – NetSecurePro IA</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f9ff;
+      color: #222;
+    }
+    header {
+      background-color: #004d66;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      resize: vertical;
+      font-size: 1rem;
+    }
+    button {
+      background: #0074a3;
+      color: white;
+      border: none;
+      padding: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005f87;
+    }
+    #result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #e6f4f1;
+      border-radius: 8px;
+      white-space: pre-wrap;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 IA22_LOGIC Médicale Visionnaire</h1>
+    <p>Écosystème Intégré – NetSecurePro IA</p>
+  </header>
+
+  <main>
+    <p>Entrez vos symptômes ou questions médicales :</p>
+    <textarea id="input" rows="6" placeholder="Ex : toux, fièvre, fatigue chronique..."></textarea>
+    <button onclick="analyser()">Lancer l’analyse IA</button>
+    <div id="result">Résultat IA ici...</div>
+  </main>
+
+  <footer>
+    Plateforme IA22_LOGIC – par Zoubirou Mohammed Ilyes<br>
+    ORCID: <a href="https://orcid.org/0009-0007-7571-3178" target="_blank">0009-0007-7571-3178</a>
+  </footer>
+
+  <script>
+    function analyser() {
+      const input = document.getElementById("input").value.trim();
+      const result = document.getElementById("result");
+
+      if (!input) {
+        result.textContent = "⚠️ Veuillez décrire les symptômes.";
+        return;
+      }
+
+      result.textContent = "🔍 Analyse IA22_LOGIC en cours...";
+      const réponseLocale = "🔬 Analyse préliminaire IA (offline)\n\n" +
+        "Les symptômes décrits peuvent indiquer une condition nécessitant un avis médical.\n" +
+        "Ce système IA ne remplace pas un médecin. Consultez un professionnel si nécessaire.\n\n" +
+        "✔️ IA22_LOGIC a bien enregistré l'entrée pour apprentissage.";
+
+      setTimeout(() => {
+        result.textContent = réponseLocale;
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

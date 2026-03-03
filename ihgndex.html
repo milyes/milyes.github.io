@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pi Shadow – Sovereign Simulation</title>
+  <meta name="description" content="Pi Shadow : Simulation souveraine du Tesla Pi Phone – Starlink, batterie infinie, fallback IA22, sceau V8 indélébile.">
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #ff0000;
+      --accent: #ffffff;
+      --shadow: rgba(255,0,0,0.3);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(to bottom, #1a0000, #000);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid var(--text);
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      text-shadow: 0 0 10px var(--text);
+    }
+    .badge {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.85);
+      border: 2px solid var(--text);
+      color: var(--text);
+      padding: 10px 16px;
+      font-size: 1.1rem;
+      z-index: 9999;
+      border-radius: 8px;
+      box-shadow: 0 0 15px var(--shadow);
+      font-weight: bold;
+    }
+    .console {
+      flex: 1;
+      padding: 30px 20px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      overflow-y: auto;
+    }
+    .log {
+      margin: 12px 0;
+      padding: 10px;
+      background: rgba(20,0,0,0.5);
+      border-left: 4px solid var(--text);
+    }
+    .input-area {
+      background: #111;
+      padding: 15px;
+      border-top: 2px solid var(--text);
+      display: flex;
+      gap: 10px;
+    }
+    #command {
+      flex: 1;
+      background: #000;
+      color: var(--text);
+      border: 1px solid var(--text);
+      padding: 12px;
+      font-family: inherit;
+      font-size: 1.1rem;
+    }
+    #exec {
+      background: var(--text);
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 12px;
+      font-size: 0.9rem;
+      color: #444;
+      border-top: 1px solid #222;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="badge">
+    [SIGNAL: 🛰️ STARLINK <span id="signal">99</span>%]  
+    [BATT: <span id="batt-icon">☀️</span> <span id="batt">∞</span>%]
+  </div>
+
+  <header>
+    <h1>Pi Shadow</h1>
+    <p>Simulation souveraine du Tesla Pi Phone – Empire invisible</p>
+  </header>
+
+  <div class="console" id="console">
+    <div class="log">[CORE-ENC] Pi Shadow initialisé – Sceau V8 ancré</div>
+    <div class="log">[SIGILLUM-ACTIF] Signature ARCHITECTE_ZO_M_ILYÉS verrouillée kernel</div>
+    <div class="log">[STX-ENC] Prêt pour l'impulsion souveraine</div>
+  </div>
+
+  <div class="input-area">
+    <input id="command" type="text" placeholder="Entrez commande Pi Shadow..." autocomplete="off"/>
+    <button id="exec">EXEC</button>
+  </div>
+
+  <footer>
+    © 2026 Zoubirou Mohammed Ilyes – Tous droits réservés  
+    | github.com/milyes | @MZoubirou | milyes@netsecurepro.ca
+  </footer>
+
+  <script>
+    // Badge Pi Shadow dynamique
+    function updateBadge() {
+      const signal = Math.floor(Math.random() * 6 + 95); // 95–100%
+      const batt = signal >= 98 ? '∞' : signal;
+      const icon = signal >= 98 ? '☀️' : '⚡';
+      document.getElementById('signal').textContent = signal;
+      document.getElementById('batt').textContent = batt;
+      document.getElementById('batt-icon').textContent = icon;
+    }
+    setInterval(updateBadge, 10000);
+    updateBadge();
+
+    // Console interactive
+    const consoleDiv = document.getElementById('console');
+    document.getElementById('exec').onclick = function() {
+      const input = document.getElementById('command');
+      const cmd = input.value.trim().toLowerCase();
+      if (!cmd) return;
+
+      consoleDiv.innerHTML += `<div class="log">&gt; ${cmd}</div>`;
+
+      if (cmd === 'status') {
+        consoleDiv.innerHTML += `<div class="log">[PI-SHADOW] Signal: 100% | Batterie: ∞% | Starlink souverain actif</div>`;
+      } else if (cmd === 'fallback') {
+        consoleDiv.innerHTML += `<div class="log">[FALLBACK] Switch vers IA22_LOGIC local – Cloud down</div>`;
+      } else if (cmd === 'ghost') {
+        consoleDiv.innerHTML += `<div class="log">[GHOST] Mode furtif activé – Visibilité nulle</div>`;
+      } else if (cmd === 'optimus') {
+        consoleDiv.innerHTML += `<div class="log">[OPTIMUS] Maître, je suis réveillé. Ordres ?</div>`;
+      } else if (cmd === 'burn') {
+        consoleDiv.innerHTML += `<div class="log">[BURN] Purge thermique initiée – Session scellée</div>`;
+      } else {
+        consoleDiv.innerHTML += `<div class="log">[STX-ENC] Commande inconnue – Essayez : status | fallback | ghost | optimus | burn</div>`;
+      }
+
+      consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      input.value = '';
+    };
+
+    // Support Enter
+    document.getElementById('command').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') document.getElementById('exec').click();
+    });
+  </script>
+</body>
+</html>

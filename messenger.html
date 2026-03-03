@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetMsg | IA22 Secure</title>
+    <style>
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; display: flex; flex-direction: column; height: 90vh; margin: 0; padding: 20px; }
+        #display { border: 1px solid #00ff41; flex-grow: 1; overflow-y: auto; padding: 15px; margin-bottom: 10px; background: rgba(0, 255, 65, 0.05); box-shadow: inset 0 0 10px #000; }
+        input { background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 10px; outline: none; }
+        .msg-line { margin-bottom: 5px; border-bottom: 1px solid rgba(0,255,65,0.1); padding-bottom: 2px; }
+    </style>
+</head>
+<body>
+    <h3>[TERMINAL SÉCURISÉ : NETMSG.COM]</h3>
+    <div id="display">>> SYSTÈME IA22 PRÊT...<br>>> CANAL CHIFFRÉ ACTIVÉ.</div>
+    <input type="text" id="cmd" placeholder="Message..." onkeydown="if(event.key==='Enter') sendMsg()">
+    <script>
+        function sendMsg() {
+            const i = document.getElementById('cmd');
+            const d = document.getElementById('display');
+            if(i.value) {
+                d.innerHTML += "<div class='msg-line'>[ENCRYPTED]: " + btoa(i.value) + "</div>";
+                i.value = "";
+                d.scrollTop = d.scrollHeight;
+            }
+        }
+    </script>
+<script>
+window.onload = function() {
+    if (window.location.hostname === "dzrouge.com") {
+        alert("Bienvenue sur votre Canal Souverain, Monsieur Zoubirou.");
+        document.body.style.border = "2px solid #f00";
+    }
+};
+</script>
+</body>
+</html>

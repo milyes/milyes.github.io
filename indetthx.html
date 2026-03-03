@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Command Execution Process — NetSecurePro</title>
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; padding:20px; background:#f6f8fb; color:#111; }
+    .container{max-width:900px;margin:0 auto;}
+    header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+    h1{font-size:1.2rem;margin:0;}
+    .card{background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(20,20,40,0.06);padding:16px;margin-bottom:12px}
+    label{display:block;margin-bottom:6px;font-weight:600}
+    select,input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e3e7ee;font-size:0.95rem;box-sizing:border-box}
+    .row{display:flex;gap:12px}
+    .row > *{flex:1}
+    button{background:#0b5cff;color:white;border:none;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
+    pre{white-space:pre-wrap;word-wrap:break-word;background:#0f1724;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto;min-height:120px}
+    .muted{color:#6b7280;font-size:0.9rem}
+    footer{margin-top:12px;font-size:0.85rem;color:#6b7280}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36'><rect rx='6' width='36' height='36' fill='%230B5CFF'/><text x='50%' y='55%' font-size='18' text-anchor='middle' fill='white' font-family='Arial'>NS</text></svg>" alt="logo" />
+      <div>
+        <h1>Command Execution Process — NetSecurePro</h1>
+        <div class="muted">Interface locale sécurisée pour commandes en liste blanche (exécution serveur)</div>
+      </div>
+    </header>
+
+    <div class="card">
+      <label for="cmd-select">Choisir la commande (liste blanche)</label>
+      <select id="cmd-select">
+        <option value="whoami">whoami</option>
+        <option value="pwd">pwd</option>
+        <option value="ls">ls</option>
+        <option value="uptime">uptime</option>
+        <option value="date">date</option>
+      </select>
+
+      <div style="height:12px"></div>
+
+      <label for="args">Arguments (facultatif)</label>
+      <input id="args" placeholder="ex : -la /home/user  (séparer les arguments par des espaces)" />
+
+      <div style="height:12px"></div>
+
+      <div class="row">
+        <button id="runBtn">Exécuter</button>
+        <button id="clearBtn" style="background:#e6eaf8;color:#0b5cff">Effacer sortie</button>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <label>Sortie</label>
+      <pre id="output">— Aucune exécution —</pre>
+
+      <div style="height:8px"></div>
+      <div class="muted">Exécutions locales seulement. Cette interface envoie une requête POST JSON vers <code>/api/exec</code>.</div>
+    </div>
+
+    <div class="card">
+      <label>Journal d'activité (local)</label>
+      <pre id="log">Aucun journal</pre>
+      <div style="height:8px"></div>
+      <div class="muted">Le serveur journalise chaque requête (timestamp, commande, status).</div>
+    </div>
+
+    <footer>
+      Déployé localement — NetSecurePro_IA. Ne pas exposer sans contrôles d'accès. Auteur: Zoubirou Mohammed Ilyes.
+    </footer>
+  </div>
+
+<script>
+const runBtn = document.getElementById('runBtn');
+const clearBtn = document.getElementById('clearBtn');
+const output = document.getElementById('output');
+const log = document.getElementById('log');
+
+async function postCommand(cmd, args) {
+  // build payload
+  const payload = { command: cmd, args: args ? args.split(' ').filter(Boolean) : [] };
+  // you can add an API key header for light auth if you configured server
+  const headers = { 'Content-Type': 'application/json' };
+  try {
+    const resp = await fetch('/api/exec', { method: 'POST', headers, body: JSON.stringify(payload) });
+    if (!resp.ok) {
+      const t = await resp.text();
+      output.textContent = `ERREUR (${resp.status}): ${t}`;
+      return;
+    }
+    const data = await resp.json();
+    output.textContent = data.stdout || data.stderr || '(aucune sortie)';
+    // Update log
+    const now = new Date().toLocaleString();
+    log.textContent = `[${now}] ${cmd} ${payload.args.join(' ')} → code:${data.returncode}\n` + (log.textContent === 'Aucun journal' ? '' : log.textContent);
+  } catch (e) {
+    output.textContent = 'Exception: ' + e.message;
+  }
+}
+
+runBtn.addEventListener('click', () => {
+  const cmd = document.getElementById('cmd-select').value;
+  const args = document.getElementById('args').value.trim();
+  output.textContent = 'En attente...';
+  postCommand(cmd, args);
+});
+
+clearBtn.addEventListener('click', () => { output.textContent = ''; });
+</script>
+</body>
+</html>
