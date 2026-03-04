@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1A22_Project | V2.0 Nouvelle Ère</title>
+    <style>
+        :root {
+            --bg-color: #0b0e14;
+            --panel-color: #161b22;
+            --accent-color: #e67e22; /* Orange Ambre */
+            --text-color: #c9d1d9;
+            --glow: 0 0 10px rgba(230, 126, 34, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar - Rapport d'Injections */
+        #sidebar {
+            width: 300px;
+            background-color: var(--panel-color);
+            border-right: 1px solid #30363d;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hexagon {
+            width: 60px;
+            height: 35px;
+            background-color: var(--accent-color);
+            margin: 20px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: var(--glow);
+        }
+
+        .hexagon:before, .hexagon:after {
+            content: "";
+            position: absolute;
+            top: -17px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 17px solid var(--accent-color);
+        }
+
+        .hexagon:after {
+            top: 35px;
+            border-bottom: none;
+            border-top: 17px solid var(--accent-color);
+        }
+
+        /* Chat Area */
+        #main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        #chat-window {
+            flex-grow: 1;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 1px solid #30363d;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+
+        .system { background: #21262d; border-left: 4px solid var(--accent-color); }
+        .user { background: #1f6feb; align-self: flex-end; margin-left: auto; }
+
+        /* Controls */
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex-grow: 1;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-send { background: var(--accent-color); color: white; }
+        .btn-purge { background: #8e2121; color: white; margin-top: auto; }
+        button:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        .log-item { font-size: 0.8em; color: #8b949e; margin-bottom: 5px; border-bottom: 1px solid #30363d; padding-bottom: 5px;}
+    </style>
+</head>
+<body>
+
+    <div id="sidebar">
+        <div class="logo-container">
+            <div class="hexagon">1A22</div>
+            <h3>NOUVELLE ÈRE</h3>
+            <p style="font-size: 0.7em; opacity: 0.6;">ALGUMAPTIQUE V2.0</p>
+        </div>
+        
+        <h4>RAPPORT D'INJECTIONS</h4>
+        <div id="logs" style="overflow-y: auto; flex-grow: 1;">
+            <div class="log-item">[SYS] Initialisation 1A22... OK</div>
+        </div>
+
+        <button class="btn-purge" onclick="purgeDonnees()">⚠️ EFFACEMENT FLASH</button>
+    </div>
+
+    <div id="main-content">
+        <div id="chat-window">
+            <div class="message system">Système 1A22 prêt. Prêt pour l'injection de données.</div>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="Entrez votre commande ou prompt..." onkeypress="handleKey(event)">
+            <button class="btn-send" onclick="sendInjection()">INJECTER</button>
+        </div>
+    </div>
+
+    <script>
+        const chatWindow = document.getElementById('chat-window');
+        const logsContainer = document.getElementById('logs');
+
+        function addLog(msg) {
+            const time = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-item';
+            logEntry.innerText = `[${time}] ${msg}`;
+            logsContainer.prepend(logEntry);
+        }
+
+        function sendInjection() {
+            const input = document.getElementById('userInput');
+            if (input.value.trim() === "") return;
+
+            // Afficher message utilisateur
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.innerText = input.value;
+            chatWindow.appendChild(userMsg);
+
+            // Analyser l'injection
+            addLog(`Injection: ${input.value.substring(0, 15)}...`);
+            
+            // Réponse Algumaptique simulée
+            setTimeout(() => {
+                const sysMsg = document.createElement('div');
+                sysMsg.className = 'message system';
+                sysMsg.innerText = "Traitement V2.0 en cours : Injection validée par la couche synaptique.";
+                chatWindow.appendChild(sysMsg);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                addLog("Statut: 200 OK");
+            }, 600);
+
+            input.value = "";
+        }
+
+        function handleKey(e) { if (e.key === 'Enter') sendInjection(); }
+
+        function purgeDonnees() {
+            if(confirm("Confirmer l'effacement immédiat (Protocole 23 Février) ?")) {
+                chatWindow.innerHTML = '<div class="message system" style="color:red">DONNÉES EFFACÉES. SESSION FERMÉE.</div>';
+                logsContainer.innerHTML = '';
+                addLog("PURGE TOTALE EFFECTUÉE");
+                alert("Données de session détruites conformément au protocole de confidentialité.");
+            }
+        }
+    </script>
+</body>
+</html>
