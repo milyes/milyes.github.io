@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dz-ia22">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IA22 – ZOUBIROUROU NETSECUREPRO</title>
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --matrix-green: #00ff41;
+      --dz-red: #ff2a6d;
+      --text: #e0f7fa;
+      --panel: rgba(10, 20, 30, 0.85);
+    }
+    body {
+      margin: 0; padding: 0; height: 100vh; font-family: 'Courier New', monospace;
+      background: var(--bg); color: var(--text); overflow: hidden;
+      position: relative;
+    }
+    canvas#matrix { position: absolute; inset: 0; z-index: 1; opacity: 0.15; pointer-events: none; }
+    .chat-container {
+      position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column;
+      backdrop-filter: blur(4px);
+    }
+    .header {
+      background: linear-gradient(to right, #1a0033, #33001a);
+      padding: 12px 20px; border-bottom: 1px solid var(--dz-red);
+      text-align: center; font-size: 1.3rem; font-weight: bold; letter-spacing: 2px;
+      color: var(--dz-red); text-shadow: 0 0 10px var(--dz-red);
+    }
+    .messages {
+      flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px;
+    }
+    .message {
+      max-width: 80%; padding: 12px 16px; border-radius: 8px; line-height: 1.45;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .user { align-self: flex-end; background: rgba(0, 255, 65, 0.18); border: 1px solid var(--matrix-green); }
+    .bot  { align-self: flex-start; background: rgba(255, 42, 109, 0.18); border: 1px solid var(--dz-red); }
+    .thinking { font-style: italic; color: #888; }
+    .input-area {
+      padding: 16px; background: rgba(0,0,0,0.6); border-top: 1px solid #333;
+      display: flex; gap: 10px;
+    }
+    #input { flex: 1; padding: 12px; border: 1px solid var(--matrix-green); border-radius: 6px;
+      background: #0d1117; color: var(--text); font-family: inherit; font-size: 1rem; outline: none; }
+    #input:focus { box-shadow: 0 0 12px var(--matrix-green); border-color: var(--matrix-green); }
+    button { padding: 12px 24px; background: var(--dz-red); color: white; border: none; border-radius: 6px;
+      cursor: pointer; font-weight: bold; transition: all 0.2s; }
+    button:hover { background: #ff4d82; box-shadow: 0 0 15px #ff2a6d; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .rain { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="chat-container">
+  <div class="header">IA22 – ZOUBIROUROU NETSECUREPRO 2025</div>
+  
+  <div class="messages" id="messages">
+    <div class="message bot">MILYES ACTIVÉ – Souveraineté numérique engagée. Pose ta question boss 🔥🛡️</div>
+  </div>
+  
+  <div class="input-area">
+    <input id="input" type="text" placeholder="Demande-moi n'importe quoi... (Enter pour envoyer)" autocomplete="off"/>
+    <button onclick="sendMessage()">SEND</button>
+  </div>
+</div>
+
+<script>
+// Matrix rain background
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(10, 14, 20, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#00ff41';
+  ctx.font = fontSize + 'px monospace';
+  
+  drops.forEach((y, i) => {
+    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+    const x = i * fontSize;
+    ctx.fillText(text, x, y * fontSize);
+    if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  });
+}
+setInterval(drawMatrix, 40);
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// Chat logic
+const messagesDiv = document.getElementById('messages');
+const input = document.getElementById('input');
+
+function addMessage(text, isUser = false) {
+  const msg = document.createElement('div');
+  msg.className = `message ${isUser ? 'user' : 'bot'}`;
+  msg.innerHTML = text.replace(/\n/g, '<br>'); // basic markdown line break
+  messagesDiv.appendChild(msg);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function showThinking() {
+  const think = document.createElement('div');
+  think.className = 'message bot thinking';
+  think.id = 'thinking';
+  think.textContent = 'IA22 réfléchit... ░░░░░';
+  messagesDiv.appendChild(think);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  return think;
+}
+
+async function sendMessage() {
+  const text = input.value.trim();
+  if (!text) return;
+  
+  addMessage(text, true);
+  input.value = '';
+  
+  const thinking = showThinking();
+  
+  try {
+    // →→→ CHANGE CETTE URL VERS TON FASTAPI ENDPOINT ←←←
+    // Exemples:
+    // Local Termux/FastAPI → http://127.0.0.1:8000/chat
+    // Ngrok → https://xxxx.ngrok.io/chat
+    const response = await fetch('http://127.0.0.1:8000/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        // Ajoute context/history si ton backend le supporte
+      })
+    });
+    
+    if (!response.ok) throw new Error('Backend error');
+    
+    const data = await response.json();
+    thinking.remove();
+    addMessage(data.response || data.answer || '[IA22] Réponse reçue');
+    
+  } catch (err) {
+    thinking.remove();
+    addMessage(`[ERREUR] ${err.message} – Vérifie si le serveur IA22 tourne (FastAPI / Logic.py)`, false);
+  }
+}
+
+// Enter = send
+input.addEventListener('keypress', e => {
+  if (e.key === 'Enter') sendMessage();
+});
+
+// Clear chat (optionnel – double tap header par ex)
+document.querySelector('.header').addEventListener('dblclick', () => {
+  if (confirm('Clear chat IA22 ?')) {
+    messagesDiv.innerHTML = '<div class="message bot">Session réinitialisée – MILYES READY 🔥</div>';
+  }
+});
+</script>
+</body>
+</html>
