@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NetSecurePro – IA Souveraine, Cybersécurité Mobile, Développement Offline-First" />
+  <title>NetSecurePro | IA22 & Cybersécurité Souveraine</title>
+  <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind 3.x CDN pour simplicité -->
+  <style>
+    body { background: #0f001a; color: #e0e0ff; }
+    .matrix-rain { position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: 0.15; }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden">
+
+  <!-- Matrix rain background -->
+  <canvas id="matrix" class="matrix-rain"></canvas>
+
+  <!-- Splash -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-purple-950 via-black to-red-950/30">
+    <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-wider text-purple-300 drop-shadow-lg">NetSecurePro</h1>
+    <p class="text-2xl md:text-3xl mb-10 text-purple-200">IA Souveraine • Cybersécurité • Développement Mobile Intelligent</p>
+    <a href="#assistant" class="bg-purple-700 hover:bg-purple-600 px-10 py-5 rounded-xl text-xl font-bold shadow-xl transition">Activer IA22</a>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20 px-6 md:px-12 bg-black/60">
+    <h2 class="text-4xl font-bold text-center mb-16 text-purple-400">Nos Domaines d'Excellence</h2>
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <div class="bg-gray-900/70 p-8 rounded-2xl border border-purple-800/50 hover:border-purple-500 transition">
+        <h3 class="text-2xl font-bold mb-4 text-red-400">Audit & Défense Cybersécurité</h3>
+        <p class="text-gray-300">Vulnérabilités, monitoring NÉO_DZ, forensics packet-level, zero-retention.</p>
+      </div>
+      <div class="bg-gray-900/70 p-8 rounded-2xl border border-purple-800/50 hover:border-purple-500 transition">
+        <h3 class="text-2xl font-bold mb-4 text-purple-400">Intelligence Artificielle Souveraine</h3>
+        <p class="text-gray-300">IA22_LOGIC, assistants offline, modules personnalisés, MULTICLASS_CLONE.</p>
+      </div>
+      <div class="bg-gray-900/70 p-8 rounded-2xl border border-purple-800/50 hover:border-purple-500 transition">
+        <h3 class="text-2xl font-bold mb-4 text-red-400">Applications Mobiles IA</h3>
+        <p class="text-gray-300">Flutter APK, Termux CLI, offline-first, AIMEDIXAL (détection santé locale).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Assistant IA -->
+  <section id="assistant" class="py-20 px-6 md:px-12 bg-gradient-to-t from-black to-purple-950/40 text-center">
+    <h2 class="text-4xl font-bold mb-10 text-purple-300">Assistant IA22 – MILYES ACTIVÉ</h2>
+    <p class="text-xl mb-8 text-gray-300 max-w-3xl mx-auto">Posez votre question. Réponses souveraines, locales ou via tunnel sécurisé.</p>
+    
+    <div class="max-w-2xl mx-auto">
+      <textarea id="userInput" rows="4" class="w-full p-5 bg-gray-900 border border-purple-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-purple-400" placeholder="Ex: Explique-moi locke0.py... ou audit mon APK..."></textarea>
+      <button onclick="sendToIA()" class="mt-6 px-12 py-4 bg-purple-700 hover:bg-purple-600 rounded-xl text-xl font-bold shadow-lg transition">Envoyer → IA22</button>
+      <div id="iaResponse" class="mt-10 p-6 bg-gray-900/80 rounded-xl border border-purple-800/50 min-h-[120px] text-left text-green-300 whitespace-pre-wrap"></div>
+    </div>
+  </section>
+
+  <!-- Contact & Disclaimer -->
+  <section id="contact" class="py-16 px-6 bg-black/80 text-center">
+    <h2 class="text-4xl font-bold mb-10 text-purple-400">Contact Sécurisé</h2>
+    <p class="text-xl mb-8">milys@netsecurepro.ca – Protocole chiffré préféré</p>
+    <a href="mailto:milyes@netsecurepro.ca?subject=NetSecurePro%20-%20Contact%20IA22" class="inline-block px-10 py-5 bg-red-700 hover:bg-red-600 rounded-xl text-xl font-bold">Ouvrir Email Sécurisé</a>
+    
+    <div class="mt-12 max-w-4xl mx-auto text-sm text-gray-400">
+      <p class="mb-4">© 2025–2026 NetSecurePro – Projet personnel de Mohammed Ilyes Zoubirou</p>
+      <p class="mb-2"><a href="https://orcid.org/0009-0007-7571-3178" class="text-purple-400 hover:underline">ORCID 0009-0007-7571-3178</a> | <a href="https://x.com/MZoubirou" class="text-purple-400 hover:underline">@MZoubirou</a></p>
+      <p class="italic">Aucune collecte de données. Usage illégal interdit. Responsabilité utilisateur exclusive. IA souveraine – offline first.</p>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    // Matrix rain simple
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(10, 0, 20, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#a855f7'; // purple DZ
+      ctx.font = fontSize + 'px monospace';
+      drops.forEach((y, i) => {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, y * fontSize);
+        if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(draw, 50);
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+    // IA send (upgrade vers fetch réel)
+    async function sendToIA() {
+      const input = document.getElementById('userInput').value.trim();
+      const responseEl = document.getElementById('iaResponse');
+      if (!input) {
+        responseEl.innerHTML = '<span class="text-red-400">Entrez une question valide.</span>';
+        return;
+      }
+
+      responseEl.innerHTML = '<span class="text-yellow-300">IA22 réfléchit... ░░░░░</span>';
+
+      try {
+        // → CHANGE VERS TON ENDPOINT RÉEL (tunnel / local)
+        const res = await fetch('https://your-ngrok-or-cf-tunnel-here/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: input })
+        });
+
+        if (!res.ok) throw new Error('Tunnel ou serveur IA22 down');
+
+        const data = await res.json();
+        responseEl.innerHTML = data.response || data.answer || '<span class="text-green-400">Réponse souveraine reçue 🔥</span>';
+      } catch (err) {
+        // Fallback statique si tunnel down
+        const query = input.toLowerCase();
+        let fallback = "MILYES ACTIVÉ – Question bien reçue. Un clone IA22 traite en local.";
+        if (query.includes('audit')) fallback = "Audit cybersécurité : 1. Scan vulnérabilités → 2. Analyse forensics NÉO_DZ → 3. Rapport chiffré. Contact pour devis.";
+        else if (query.includes('ia') || query.includes('intelligence') || query.includes('ia22')) fallback = "IA22_LOGIC actif : modules personnalisés, offline-first, MULTICLASS_CLONE disponible.";
+        else if (query.includes('mobile') || query.includes('apk') || query.includes('flutter') || query.includes('termux')) fallback = "Développement mobile souverain : APK IA locale, Termux toolkit, Flutter + WebView.";
+        responseEl.innerHTML = `<span class="text-green-400">${fallback}</span><br><small class="text-gray-500">(Mode fallback – tunnel IA_TUNNEL semble down)</small>`;
+      }
+    }
+  </script>
+</body>
+</html>
