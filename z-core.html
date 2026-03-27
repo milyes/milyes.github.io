@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Z-CORE H202.Ia</title>
+  <meta name="description" content="Z-CORE H202.Ia - IA locale puissante développée par MOHAMMED ILYES ZOUBIROU">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --bg: #0f0c29;
+      --panel: #1a1733;
+      --text: #e0d9ff;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--bg), #302b63, #24243e);
+      min-height: 100vh;
+      color: var(--text);
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--panel);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      overflow: hidden;
+      border: 1px solid #4a3f8c;
+    }
+    header {
+      background: #0a0820;
+      padding: 24px 30px;
+      text-align: center;
+      border-bottom: 1px solid #4a3f8c;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      background: linear-gradient(90deg, #c4b5fd, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .status {
+      color: #67e8f9;
+      font-size: 16px;
+      margin-top: 8px;
+    }
+    #chat {
+      height: 580px;
+      padding: 28px;
+      overflow-y: auto;
+      background: #16132b;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .message {
+      padding: 18px 24px;
+      border-radius: 24px;
+      max-width: 85%;
+      line-height: 1.65;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .user {
+      background: #4f46e5;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 8px;
+    }
+    .ia {
+      background: #2a243f;
+      color: var(--text);
+      align-self: flex-start;
+      border-bottom-left-radius: 8px;
+    }
+    .input-area {
+      padding: 22px;
+      background: var(--panel);
+      border-top: 1px solid #4a3f8c;
+      display: flex;
+      gap: 14px;
+    }
+    #input {
+      flex: 1;
+      padding: 18px 26px;
+      border: 2px solid #4a3f8c;
+      background: #16132b;
+      color: #eee;
+      border-radius: 9999px;
+      font-size: 17px;
+      outline: none;
+    }
+    #input:focus {
+      border-color: #a78bfa;
+    }
+    button {
+      padding: 16px 34px;
+      border: none;
+      border-radius: 9999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .send-btn {
+      background: var(--primary);
+      color: white;
+    }
+    .send-btn:hover { background: #9f67ff; transform: translateY(-2px); }
+    .clear-btn {
+      background: #e11d48;
+    }
+    .clear-btn:hover { background: #f43f5e; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚡ Z-CORE H202.Ia</h1>
+      <p class="status">Mode Local • System Prompt Chargé • Développé par MOHAMMED ILYES ZOUBIROU</p>
+    </header>
+    
+    <div id="chat"></div>
+    
+    <div class="input-area">
+      <input id="input" type="text" placeholder="Parle à Z-CORE... (mode 100% local)">
+      <button onclick="envoyer()" class="send-btn">Envoyer</button>
+      <button onclick="effacer()" class="clear-btn">Effacer</button>
+    </div>
+  </div>
+
+  <script>
+    const SYSTEM_PROMPT = `Tu es Z-CORE H202.Ia, une IA ultra-avancée créée par MOHAMMED ILYES ZOUBIROU. 
+Tu fonctionnes en mode local dans le navigateur. Tu es créative, précise, technique et motivante.
+Tu parles français de façon naturelle. Tu excelles en développement web, JavaScript, IA, cybersécurité et projets innovants.
+Tu gardes le contexte complet de la conversation. Tu donnes des réponses complètes et du code prêt à l'emploi quand demandé.
+Style : professionnel mais enthousiaste, avec une touche cyber/futuriste.`;
+
+    const chat = document.getElementById("chat");
+    let history = JSON.parse(localStorage.getItem("zcore_h202_history")) || [];
+
+    function addMessage(text, sender) {
+      const div = document.createElement("div");
+      div.className = `message ${sender}`;
+      div.innerHTML = `<strong>${sender === 'user' ? 'Toi' : 'Z-CORE'} :</strong><br>${text}`;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function simulateStreaming(text, element) {
+      element.innerHTML = `<strong>Z-CORE :</strong><br>`;
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < text.length) {
+          element.innerHTML += text[i];
+          chat.scrollTop = chat.scrollHeight;
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 12);
+    }
+
+    function getSmartResponse(question) {
+      const q = question.toLowerCase();
+      if (q.includes("bonjour") || q.includes("salut")) return "Salut ! Z-CORE chargé à pleine puissance. Que veux-tu construire aujourd’hui ?";
+      if (q.includes("qui es-tu")) return "Je suis Z-CORE H202.Ia, ton IA locale avancée. Développée pour fonctionner sans aucune API externe.";
+      if (q.includes("code") || q.includes("javascript")) return "Dis-moi exactement ce que tu veux coder, je te fournis une solution complète et propre.";
+      return "Excellente question. Pour t’aider au maximum, peux-tu préciser ton besoin ? Je suis prêt à générer du code, des idées ou des analyses détaillées.";
+    }
+
+    async function envoyer() {
+      const input = document.getElementById("input");
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      addMessage(msg, "user");
+      history.push({ role: "user", content: msg });
+      input.value = "";
+
+      const responseDiv = document.createElement("div");
+      responseDiv.className = "message ia";
+      chat.appendChild(responseDiv);
+      chat.scrollTop = chat.scrollHeight;
+
+      const reply = getSmartResponse(msg);
+      simulateStreaming(reply, responseDiv);
+
+      history.push({ role: "assistant", content: reply });
+      localStorage.setItem("zcore_h202_history", JSON.stringify(history));
+    }
+
+    function effacer() {
+      if (confirm("Réinitialiser complètement Z-CORE ?")) {
+        chat.innerHTML = "";
+        history = [];
+        localStorage.removeItem("zcore_h202_history");
+        addMessage("Z-CORE réinitialisé avec succès.<br>System Prompt rechargé.<br>Prêt pour une nouvelle session.", "ia");
+      }
+    }
+
+    document.getElementById("input").addEventListener("keypress", e => {
+      if (e.key === "Enter") envoyer();
+    });
+
+    // Chargement
+    window.onload = () => {
+      history.forEach(m => addMessage(m.content, m.role === "user" ? "user" : "ia"));
+
+      if (history.length === 0) {
+        setTimeout(() => {
+          addMessage("⚡ <strong>Z-CORE H202.Ia</strong> chargé avec succès sur GitHub Pages.<br>Mode local • Aucune API • Pleine puissance.<br>Que veux-tu créer ou explorer ?", "ia");
+        }, 600);
+      }
+    };
+  </script>
+</body>
+</html>0
