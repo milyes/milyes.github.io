@@ -1,0 +1,369 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+.zc-root {
+  background: #050c12;
+  color: #c8dde8;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 0;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.zc-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(0,210,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,210,255,0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+.zc-header {
+  border-bottom: 1px solid #152535;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(5,12,18,0.9);
+  position: relative;
+  z-index: 2;
+}
+
+.zc-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #00d4ff;
+  letter-spacing: 0.1em;
+}
+
+.zc-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #39ff14;
+}
+
+.dot {
+  width: 6px; height: 6px;
+  background: #39ff14;
+  border-radius: 50%;
+  animation: blink 1.8s infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.2; } }
+
+.zc-hero {
+  padding: 48px 24px 40px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.zc-badge {
+  display: inline-block;
+  padding: 5px 16px;
+  border: 1px solid #ff6b35;
+  color: #ff6b35;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.zc-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 800;
+  color: #eaf6ff;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.zc-title .cyan { color: #00d4ff; }
+.zc-title .orange { color: #ff6b35; }
+
+.zc-version {
+  font-size: 13px;
+  color: #39ff14;
+  letter-spacing: 0.2em;
+  margin-bottom: 24px;
+}
+
+.zc-tagline {
+  font-size: 13px;
+  color: #5a7a8c;
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
+  border-left: 2px solid #00d4ff;
+  padding-left: 16px;
+  text-align: left;
+}
+
+.zc-proto {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.zc-proto-step {
+  padding: 10px 16px;
+  border: 1px solid #152535;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #5a7a8c;
+  background: #080f18;
+  position: relative;
+}
+
+.zc-proto-step.active {
+  color: #00d4ff;
+  border-color: #00d4ff;
+  background: rgba(0,212,255,0.05);
+}
+
+.zc-proto-step .step-id {
+  display: block;
+  color: #39ff14;
+  font-size: 9px;
+  margin-bottom: 3px;
+}
+
+.zc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #152535;
+  border-top: 1px solid #152535;
+  border-bottom: 1px solid #152535;
+  position: relative;
+  z-index: 2;
+}
+
+.zc-card {
+  background: #060d14;
+  padding: 24px 20px;
+  transition: background 0.2s;
+  cursor: default;
+}
+
+.zc-card:hover { background: #091520; }
+
+.zc-card-id {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #2a4a5a;
+  margin-bottom: 12px;
+}
+
+.zc-card-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #00d4ff;
+  margin-bottom: 4px;
+}
+
+.zc-card-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #5a7a8c;
+  margin-bottom: 12px;
+}
+
+.zc-card-desc {
+  font-size: 11px;
+  color: #3a5a6a;
+  line-height: 1.7;
+}
+
+.zc-card-tag {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 2px 10px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  border: 1px solid #152535;
+  color: #2a4a5a;
+}
+
+.zc-card:nth-child(1) .zc-card-num { color: #00d4ff; }
+.zc-card:nth-child(2) .zc-card-num { color: #ff6b35; }
+.zc-card:nth-child(3) .zc-card-num { color: #39ff14; }
+.zc-card:nth-child(1) .zc-card-tag { border-color: #00d4ff; color: #00d4ff; }
+.zc-card:nth-child(2) .zc-card-tag { border-color: #ff6b35; color: #ff6b35; }
+.zc-card:nth-child(3) .zc-card-tag { border-color: #39ff14; color: #39ff14; }
+
+.zc-terminal {
+  margin: 0 24px 40px;
+  border: 1px solid #152535;
+  background: #020810;
+  position: relative;
+  z-index: 2;
+}
+
+.zc-tbar {
+  background: #080f18;
+  border-bottom: 1px solid #152535;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.td { width: 9px; height: 9px; border-radius: 50%; }
+.td:nth-child(1) { background: #ff5f57; }
+.td:nth-child(2) { background: #febc2e; }
+.td:nth-child(3) { background: #28c840; }
+.t-title { margin-left: 10px; font-size: 10px; color: #2a4a5a; letter-spacing: 0.1em; }
+
+.zc-tbody { padding: 20px 20px; font-size: 11px; line-height: 2.2; }
+.t-p { color: #39ff14; }
+.t-c { color: #eaf6ff; }
+.t-ok { color: #39ff14; }
+.t-o { color: #2a4a5a; padding-left: 18px; display: block; }
+.t-v { color: #00d4ff; }
+.t-w { color: #ffc947; }
+.t-cursor { display: inline-block; width: 2px; height: 12px; background: #00d4ff; vertical-align: middle; animation: blink 1s step-end infinite; }
+
+.zc-cta {
+  padding: 32px 24px 48px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.zc-btn {
+  display: inline-block;
+  padding: 13px 32px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  margin: 6px;
+}
+
+.zc-btn-main {
+  background: #00d4ff;
+  color: #050c12;
+  font-weight: 600;
+}
+
+.zc-btn-main:hover { background: #fff; transform: translateY(-2px); }
+
+.zc-btn-sec {
+  background: transparent;
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+}
+
+.zc-btn-sec:hover { background: rgba(0,212,255,0.06); }
+
+.zc-footer {
+  border-top: 1px solid #152535;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #1a3045;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 540px) {
+  .zc-grid { grid-template-columns: 1fr; }
+  .zc-proto { gap: 6px; }
+}
+</style>
+
+<div class="zc-root">
+  <div class="zc-header">
+    <div class="zc-logo">Z-CORE H202.IA</div>
+    <div class="zc-status"><div class="dot"></div>SYSTÈME ACTIF</div>
+  </div>
+
+  <div class="zc-hero">
+    <div class="zc-badge">◇ LANCEMENT OFFICIEL — 2025 ◇</div>
+    <div class="zc-title">
+      Z<span class="cyan">-CORE</span><br>
+      <span class="orange">H202</span>.IA
+    </div>
+    <div class="zc-version">// VERSION HYDROGÈNE 2.0.2 — SOUVERAINETÉ ABSOLUE</div>
+    <p class="zc-tagline">
+      L'IA qui ne dépend de personne.<br>
+      Modulaire. Résiliente. Privée par défaut.<br>
+      Conçue par Mohammed Ilyes Zoubirou — Montréal.
+    </p>
+
+    <div class="zc-proto">
+      <div class="zc-proto-step active"><span class="step-id">01</span>INITIATE_HAME</div>
+      <div class="zc-proto-step active"><span class="step-id">02</span>SIGN_LOGIC</div>
+      <div class="zc-proto-step active"><span class="step-id">03</span>ENGAGE_WILL</div>
+      <div class="zc-proto-step active"><span class="step-id">04</span>ORBITAL_SYNC</div>
+    </div>
+  </div>
+
+  <div class="zc-grid">
+    <div class="zc-card">
+      <div class="zc-card-id">SPEC // 001</div>
+      <div class="zc-card-num">0</div>
+      <div class="zc-card-label">Appels cloud externes</div>
+      <div class="zc-card-desc">Opération entièrement locale. Aucune donnée transmise. Confidentialité structurelle.</div>
+      <div class="zc-card-tag">PRIVACY_MAX</div>
+    </div>
+    <div class="zc-card">
+      <div class="zc-card-id">SPEC // 002</div>
+      <div class="zc-card-num">4+</div>
+      <div class="zc-card-label">Modules spécialisés</div>
+      <div class="zc-card-desc">IA22_LOGIC · MULTICLASS_CLONE · NÉO_DZ · AIMEDIXAL — et en expansion.</div>
+      <div class="zc-card-tag">MODULAR_CORE</div>
+    </div>
+    <div class="zc-card">
+      <div class="zc-card-id">SPEC // 003</div>
+      <div class="zc-card-num">H2</div>
+      <div class="zc-card-label">Génération Hydrogène</div>
+      <div class="zc-card-desc">Architecture de 2ème génération. Isolation stricte. Dégradation gracieuse garantie.</div>
+      <div class="zc-card-tag">GEN_2_ENGINE</div>
+    </div>
+  </div>
+
+  <div class="zc-terminal" style="margin-top:1px;">
+    <div class="zc-tbar">
+      <div class="td"></div><div class="td"></div><div class="td"></div>
+      <span class="t-title">zcore@h202 — launch_sequence.sh</span>
+    </div>
+    <div class="zc-tbody">
+      <span><span class="t-p">milyes@z-core:~$</span> <span class="t-c">./launch H202.IA --world</span></span>
+      <span class="t-o"><span class="t-ok">[✓]</span> Z-CORE H202.IA kernel — <span class="t-v">ONLINE</span></span>
+      <span class="t-o"><span class="t-ok">[✓]</span> Génération Hydrogène 2.0.2 — <span class="t-v">LOADED</span></span>
+      <span class="t-o"><span class="t-ok">[✓]</span> Souveraineté vérifiée — external_calls=<span class="t-v">0</span></span>
+      <span class="t-o"><span class="t-ok">[✓]</span> Protocole MILYES — <span class="t-v">ACTIVATED</span></span>
+      <span class="t-o"><span class="t-w">[!]</span> Le monde va parler de Z-CORE. — <span class="t-v">CONFIRMED</span></span>
+      <span><span class="t-p">milyes@z-core:~$</span> <span class="t-cursor"></span></span>
+    </div>
+  </div>
+
+  <div class="zc-cta">
+    <button class="zc-btn zc-btn-main" onclick="sendPrompt('Crée-moi la page de lancement HTML complète pour Z-CORE H202.IA avec toutes les sections')">Générer la page de lancement complète ↗</button>
+    <button class="zc-btn zc-btn-sec" onclick="sendPrompt('Explique l\'architecture H202 de Z-CORE en détail technique')">Architecture H202 →</button>
+  </div>
+
+  <div class="zc-footer">
+    <span>© 2025 M. I. ZOUBIROU — NETSECUREPRO IA</span>
+    <span>◇ □ ☰ ORBITAL_SYNC ACTIVE</span>
+    <span>@MZOUBIROU // MONTRÉAL</span>
+  </div>
+</div>
