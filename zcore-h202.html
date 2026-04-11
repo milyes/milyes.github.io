@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z-CORE H202.IA — Intelligence Artificielle Souveraine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;600;700&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════════ */
+:root {
+  --white:   #ffffff;
+  --bg:      #f4f7fb;
+  --bg2:     #edf2f8;
+  --panel:   #ffffff;
+  --border:  #d8e4ef;
+  --border2: #c0d4e8;
+  --blue:    #0062b8;
+  --blue2:   #004d9a;
+  --blue-lt: #e3eef9;
+  --orange:  #d95b18;
+  --orange-lt: #fdf0e8;
+  --green:   #177a3a;
+  --green-lt: #e6f5ec;
+  --ink:     #0d1e2d;
+  --ink2:    #2a4055;
+  --muted:   #5a7890;
+  --faint:   #9ab4c8;
+  --mono: 'IBM Plex Mono', monospace;
+  --display: 'Syne', sans-serif;
+  --serif: 'Fraunces', serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink2);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Subtle dot grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,98,184,0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 62px;
+}
+
+.nav-logo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--blue);
+  letter-spacing: 0.04em;
+}
+.nav-logo em { color: var(--orange); font-style: normal; }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+}
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.12em;
+}
+.pulse-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(23,122,58,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(23,122,58,0); }
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 100px 48px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-inner {
+  max-width: 900px;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.7s ease both;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 48px; height: 2px;
+  background: var(--orange);
+}
+.eyebrow-text {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.hero-h1 {
+  font-family: var(--display);
+  font-size: clamp(52px, 9vw, 110px);
+  font-weight: 800;
+  line-height: 0.95;
+  color: var(--ink);
+  margin-bottom: 12px;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-h1 .blue { color: var(--blue); }
+.hero-h1 .orange { color: var(--orange); }
+
+.hero-version {
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  margin-bottom: 36px;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-desc {
+  max-width: 580px;
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1.9;
+  margin-bottom: 48px;
+  padding-left: 20px;
+  border-left: 3px solid var(--blue);
+  animation: fadeUp 0.7s 0.3s ease both;
+  font-family: var(--serif);
+  font-weight: 300;
+}
+.hero-desc strong { font-weight: 600; color: var(--ink); font-family: var(--mono); }
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s 0.4s ease both;
+}
+
+/* ══════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+.btn-blue {
+  background: var(--blue);
+  color: #fff;
+}
+.btn-blue:hover {
+  background: var(--blue2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,98,184,0.22);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--blue);
+  border: 1.5px solid var(--blue);
+}
+.btn-outline:hover {
+  background: var(--blue-lt);
+}
+.btn-orange {
+  background: var(--orange);
+  color: #fff;
+}
+.btn-orange:hover {
+  background: #c04e10;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(217,91,24,0.22);
+}
+
+/* ══════════════════════════════════════
+   PROTOCOL STRIP
+══════════════════════════════════════ */
+.proto-strip {
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.proto-item {
+  flex: 1;
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.2s;
+}
+.proto-item:last-child { border-right: none; }
+.proto-item:hover { background: rgba(255,255,255,0.05); }
+
+.proto-num {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 4px;
+}
+.proto-name {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #fff;
+  font-weight: 600;
+}
+.proto-check { color: #4ade80; font-size: 13px; margin-top: 4px; }
+
+/* ══════════════════════════════════════
+   SECTION BASE
+══════════════════════════════════════ */
+.section {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 100px 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--orange);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--orange);
+}
+
+h2 {
+  font-family: var(--display);
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+h2 .blue { color: var(--blue); }
+h2 .orange { color: var(--orange); }
+
+.section-lead {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 60px;
+}
+
+/* ══════════════════════════════════════
+   Z-CORE ARCHITECTURE
+══════════════════════════════════════ */
+#architecture {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.arch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+}
+
+.arch-card {
+  background: var(--white);
+  padding: 40px 36px;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.arch-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--blue);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s;
+}
+.arch-card:hover::after { transform: scaleY(1); }
+.arch-card:hover { background: var(--bg); }
+
+.arch-id {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--faint);
+  margin-bottom: 16px;
+}
+
+.arch-card h3 {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.arch-card p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.arch-stat {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════
+   MODULES
+══════════════════════════════════════ */
+#modules { border-bottom: 1px solid var(--border); }
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.mod-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 36px 30px;
+  position: relative;
+  transition: all 0.25s;
+  overflow: hidden;
+}
+
+.mod-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+.mod-card:hover::before { transform: scaleX(1); }
+.mod-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,98,184,0.1);
+}
+
+.mod-card:nth-child(2)::before { background: var(--orange); }
+.mod-card:nth-child(3)::before { background: var(--green); }
+.mod-card:nth-child(4)::before { background: #7c3aed; }
+.mod-card:nth-child(2):hover { border-color: var(--orange); box-shadow: 0 12px 40px rgba(217,91,24,0.1); }
+.mod-card:nth-child(3):hover { border-color: var(--green); box-shadow: 0 12px 40px rgba(23,122,58,0.1); }
+.mod-card:nth-child(4):hover { border-color: #7c3aed; box-shadow: 0 12px 40px rgba(124,58,237,0.1); }
+
+.mod-id {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+  margin-bottom: 18px;
+}
+
+.mod-icon {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 18px;
+  background: var(--blue-lt);
+}
+.mod-card:nth-child(2) .mod-icon { background: var(--orange-lt); }
+.mod-card:nth-child(3) .mod-icon { background: var(--green-lt); }
+.mod-card:nth-child(4) .mod-icon { background: #f3e8ff; }
+
+.mod-card h3 {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.mod-card p { font-size: 12px; color: var(--muted); line-height: 1.75; }
+
+.mod-tag {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 4px 12px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+.mod-card:nth-child(2) .mod-tag { background: var(--orange-lt); color: var(--orange); }
+.mod-card:nth-child(3) .mod-tag { background: var(--green-lt); color: var(--green); }
+.mod-card:nth-child(4) .mod-tag { background: #f3e8ff; color: #6d28d9; }
+
+/* ══════════════════════════════════════
+   TERMINAL
+══════════════════════════════════════ */
+#terminal-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.terminal {
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  max-width: 780px;
+  overflow: hidden;
+}
+
+.t-bar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 11px 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.t-dot { width: 10px; height: 10px; border-radius: 50%; }
+.t-dot:nth-child(1) { background: #ff5f57; }
+.t-dot:nth-child(2) { background: #febc2e; }
+.t-dot:nth-child(3) { background: #28c840; }
+.t-title { margin-left: 12px; font-size: 10px; color: var(--faint); letter-spacing: 0.1em; }
+
+.t-body {
+  padding: 28px 28px;
+  font-size: 12px;
+  line-height: 2.3;
+  background: #fafcfe;
+}
+
+.t-row { display: block; }
+.t-prompt { color: var(--green); font-weight: 700; }
+.t-cmd { color: var(--ink); }
+.t-out { display: block; padding-left: 22px; color: var(--muted); }
+.t-ok { color: var(--green); font-weight: 700; }
+.t-val { color: var(--blue); font-weight: 600; }
+.t-warn { color: var(--orange); font-weight: 700; }
+.t-hi { color: var(--ink); font-weight: 600; }
+.t-cursor {
+  display: inline-block;
+  width: 2px; height: 13px;
+  background: var(--blue);
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ══════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════ */
+.stats-bar {
+  background: var(--blue);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  padding: 36px 24px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.stat-lbl {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.stat-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ══════════════════════════════════════
+   PROFIL
+══════════════════════════════════════ */
+#profil { border-bottom: 1px solid var(--border); }
+
+.profil-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.profil-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 36px;
+  position: relative;
+}
+.profil-card::before {
+  content: 'PROFILE_001';
+  position: absolute;
+  top: 14px; right: 18px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--faint);
+}
+
+.avatar {
+  width: 68px; height: 68px;
+  background: linear-gradient(135deg, var(--blue), var(--orange));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.profil-name {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.profil-role { font-size: 11px; color: var(--blue); font-weight: 600; letter-spacing: 0.08em; margin-bottom: 18px; }
+.profil-loc { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.profil-loc span { color: var(--ink2); font-weight: 600; }
+
+.skill-wrap { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 6px; }
+.skill {
+  padding: 5px 12px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: all 0.2s;
+  cursor: default;
+}
+.skill:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-lt); }
+
+.social-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.social-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 16px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  color: var(--ink2);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.social-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-lt); }
+
+.profil-text { font-size: 14px; color: var(--ink2); }
+.profil-text p + p { margin-top: 18px; }
+.profil-text strong { color: var(--ink); }
+.profil-text .note {
+  margin-top: 28px;
+  padding: 16px 18px;
+  background: var(--orange-lt);
+  border-left: 3px solid var(--orange);
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ══════════════════════════════════════
+   PROTOCOLE MILYES
+══════════════════════════════════════ */
+#protocol {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.protocol-box {
+  border: 1.5px solid var(--blue);
+  padding: 52px 48px;
+  position: relative;
+  max-width: 820px;
+  background: linear-gradient(135deg, rgba(0,98,184,0.02) 0%, rgba(255,255,255,0) 60%);
+}
+
+.protocol-box::before {
+  content: '◇ □ ☰';
+  position: absolute;
+  top: 28px; right: 36px;
+  font-size: 22px;
+  color: rgba(0,98,184,0.12);
+  letter-spacing: 0.4em;
+}
+
+.protocol-box::after {
+  content: '';
+  position: absolute;
+  top: -1px; left: 40px;
+  width: 80px; height: 3px;
+  background: var(--orange);
+}
+
+.proto-h {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.proto-sub { font-size: 12px; color: var(--muted); margin-bottom: 36px; }
+
+.proto-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.p-step {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 16px 14px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.p-step:hover {
+  background: var(--blue-lt);
+  border-color: var(--blue);
+}
+.p-step-n { font-size: 9px; color: var(--green); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 6px; }
+.p-step-name { font-size: 10px; letter-spacing: 0.1em; color: var(--ink2); font-weight: 600; }
+
+.proto-philosophy {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.proto-philosophy strong { font-weight: 600; font-family: var(--mono); font-size: 13px; color: var(--blue); }
+
+.disclaimer {
+  padding: 18px 20px;
+  background: var(--bg);
+  border-left: 3px solid var(--faint);
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.disclaimer strong { color: var(--green); font-size: 10px; letter-spacing: 0.1em; }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.4);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.foot-logo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+.foot-logo span { color: #60aaee; }
+.foot-logo em { color: var(--orange); font-style: normal; }
+
+.foot-mid {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+.foot-right {
+  text-align: right;
+  font-size: 11px;
+}
+.foot-right a { color: #f4a070; text-decoration: none; }
+.foot-right a:hover { color: #fff; }
+
+/* ══════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.on { opacity: 1; transform: none; }
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  #hero { padding: 90px 24px 60px; }
+  .section { padding: 60px 24px; }
+  .arch-grid { grid-template-columns: 1fr; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .profil-grid { grid-template-columns: 1fr; gap: 36px; }
+  .proto-steps { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  footer { padding: 32px 24px; }
+  .protocol-box { padding: 32px 24px; }
+}
+
+@media (max-width: 540px) {
+  .hero-h1 { font-size: 52px; }
+  .proto-strip { flex-wrap: wrap; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .proto-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">Z<span>-CORE</span> <em>H202</em>.IA</div>
+  <div class="nav-links">
+    <a href="#architecture">Architecture</a>
+    <a href="#modules">Modules</a>
+    <a href="#profil">Profil</a>
+    <a href="#protocol">Protocole</a>
+  </div>
+  <div class="nav-right">
+    <div class="pulse-dot"></div>
+    SYSTÈME ACTIF
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-text">◇ Lancement Officiel 2025 — NetSecurePro IA</span>
+    </div>
+    <h1 class="hero-h1">
+      Z<span class="blue">-CORE</span><br>
+      <span class="orange">H202</span>.IA
+    </h1>
+    <div class="hero-version">// VERSION HYDROGÈNE 2.0.2 — SOUVERAINETÉ ABSOLUE</div>
+    <p class="hero-desc">
+      L'Intelligence Artificielle qui ne dépend de personne.<br>
+      <strong>Modulaire. Résiliente. Privée par défaut.</strong><br>
+      Conçue par Mohammed Ilyes Zoubirou depuis Montréal —<br>
+      pour un monde où la souveraineté des données n'est pas une option.
+    </p>
+    <div class="hero-cta">
+      <a href="#modules" class="btn btn-blue">Découvrir les Modules →</a>
+      <a href="#architecture" class="btn btn-outline">Architecture H202</a>
+      <a href="https://github.com/milyes" target="_blank" class="btn btn-orange">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROTOCOL STRIP ═══ -->
+<div class="proto-strip">
+  <div class="proto-item">
+    <div class="proto-num">ÉTAPE 01</div>
+    <div class="proto-name">INITIATE_HAME</div>
+    <div class="proto-check">✓</div>
+  </div>
+  <div class="proto-item">
+    <div class="proto-num">ÉTAPE 02</div>
+    <div class="proto-name">SIGN_LOGIC</div>
+    <div class="proto-check">✓</div>
+  </div>
+  <div class="proto-item">
+    <div class="proto-num">ÉTAPE 03</div>
+    <div class="proto-name">ENGAGE_WILL</div>
+    <div class="proto-check">✓</div>
+  </div>
+  <div class="proto-item">
+    <div class="proto-num">ÉTAPE 04</div>
+    <div class="proto-name">ORBITAL_SYNC</div>
+    <div class="proto-check">✓</div>
+  </div>
+</div>
+
+<!-- ═══ ARCHITECTURE ═══ -->
+<section id="architecture">
+  <div class="section reveal">
+    <div class="section-label">Framework Principal</div>
+    <h2>Architecture <span class="blue">Z-CORE H202</span></h2>
+    <p class="section-lead">Le noyau Hydrogène 2.0.2 — une refonte complète orientée souveraineté structurelle et isolation modulaire maximale.</p>
+
+    <div class="arch-grid">
+      <div class="arch-card reveal reveal-delay-1">
+        <div class="arch-id">PILIER // 001</div>
+        <h3>Souveraineté Totale</h3>
+        <p>Architecture 100% locale. Aucune donnée ne quitte l'environnement contrôlé. Chiffrement bout-en-bout sur toutes les couches de communication inter-modules. Zero Trust par défaut.</p>
+        <div class="arch-stat">[ PRIVACY_LEVEL ] → MAXIMAL &nbsp;·&nbsp; EXTERNAL_CALLS → 0</div>
+      </div>
+      <div class="arch-card reveal reveal-delay-2">
+        <div class="arch-id">PILIER // 002</div>
+        <h3>Isolation Modulaire</h3>
+        <p>Chaque domaine (médical, forensics, logique, géopolitique) fonctionne comme un clone IA indépendant. Isolation sémantique garantie, interopérabilité maîtrisée via bus Z-CORE.</p>
+        <div class="arch-stat">[ MODULES_ACTIVE ] → 4 &nbsp;·&nbsp; ISOLATION → STRICT</div>
+      </div>
+      <div class="arch-card reveal reveal-delay-3">
+        <div class="arch-id">PILIER // 003</div>
+        <h3>Résilience Hydrogène</h3>
+        <p>Z-CORE H202 opère sous contrainte sévère. Dégradation gracieuse garantie sur défaillance partielle. Redondance logique à chaque couche décisionnelle — aucun point de défaillance unique.</p>
+        <div class="arch-stat">[ RESILIENCE ] → GRADE_A &nbsp;·&nbsp; FALLBACK → ENABLED</div>
+      </div>
+      <div class="arch-card reveal reveal-delay-4">
+        <div class="arch-id">PILIER // 004</div>
+        <h3>DevOps Intégré</h3>
+        <p>Pipeline CI/CD autonome. Déploiement containerisé Docker/K8s. Monitoring comportemental temps-réel avec détection d'anomalies basée sur les patterns du noyau H202.</p>
+        <div class="arch-stat">[ DEPLOY ] → DOCKER &nbsp;·&nbsp; MONITOR → ACTIVE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS BAR ═══ -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">0</div>
+    <div class="stat-lbl">Appels Cloud</div>
+    <div class="stat-sub">Opération 100% locale</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4+</div>
+    <div class="stat-lbl">Modules Actifs</div>
+    <div class="stat-sub">En expansion continue</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">H2</div>
+    <div class="stat-lbl">Génération</div>
+    <div class="stat-sub">Architecture 2ème gen.</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">∞</div>
+    <div class="stat-lbl">Souveraineté</div>
+    <div class="stat-sub">Sans compromis</div>
+  </div>
+</div>
+
+<!-- ═══ MODULES ═══ -->
+<section id="modules">
+  <div class="section reveal">
+    <div class="section-label">Systèmes Spécialisés</div>
+    <h2>Modules <span class="blue">Actifs</span></h2>
+    <p class="section-lead">Chaque module est un clone IA dédié à un domaine précis, isolé sémantiquement, partageant le noyau Z-CORE H202.</p>
+
+    <div class="modules-grid">
+      <div class="mod-card reveal reveal-delay-1">
+        <div class="mod-id">MOD_001 // IA22_LOGIC</div>
+        <div class="mod-icon">⚙️</div>
+        <h3>IA22 Logic Engine</h3>
+        <p>Moteur de raisonnement structuré multi-couches. Traitement logique formel avec arbres de décision adaptatifs, résolution de conflits sémantiques et inférence probabiliste contrôlée.</p>
+        <span class="mod-tag">Raisonnement IA</span>
+      </div>
+      <div class="mod-card reveal reveal-delay-2">
+        <div class="mod-id">MOD_002 // MULTICLASS_CLONE</div>
+        <div class="mod-icon">🧬</div>
+        <h3>MultiClass Clone</h3>
+        <p>Système de clonage IA par domaine. Génère des instances spécialisées — juridique, médical, géopolitique, forensics — partageant le noyau H202 mais isolées sémantiquement entre elles.</p>
+        <span class="mod-tag">Multi-Domaine</span>
+      </div>
+      <div class="mod-card reveal reveal-delay-3">
+        <div class="mod-id">MOD_003 // NÉO_DZ</div>
+        <div class="mod-icon">🛡️</div>
+        <h3>Néo DZ Security</h3>
+        <p>Module de cybersécurité souveraine. Analyse de menaces comportementale, détection d'intrusion, forensics réseau avancé. Conçu pour opérer hors toute infrastructure cloud.</p>
+        <span class="mod-tag">Cybersécurité</span>
+      </div>
+      <div class="mod-card reveal reveal-delay-4">
+        <div class="mod-id">MOD_004 // AIMEDIXAL</div>
+        <div class="mod-icon">🏥</div>
+        <h3>AiMedixal</h3>
+        <p>IA médicale de détection précoce. Algorithmes de classification pour Parkinson et Diabète basés sur des patterns biomédicaux structurés. Validation clinique en cours — usage recherche uniquement.</p>
+        <span class="mod-tag">IA Médicale</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TERMINAL ═══ -->
+<section id="terminal-section">
+  <div class="section reveal">
+    <div class="section-label">Interface Système</div>
+    <h2>Z-CORE <span class="blue">Terminal</span></h2>
+    <p class="section-lead">Journal d'activité en lecture seule du noyau Z-CORE H202.IA.</p>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-dot"></div>
+        <div class="t-dot"></div>
+        <div class="t-dot"></div>
+        <span class="t-title">zcore@h202.ia — launch_sequence.sh — bash</span>
+      </div>
+      <div class="t-body">
+        <span class="t-row"><span class="t-prompt">milyes@z-core:~$</span><span class="t-cmd"> ./launch_h202.sh --mode=sovereign --target=world</span></span>
+        <span class="t-out"><span class="t-ok">[✓]</span> Z-CORE H202.IA kernel — <span class="t-val">ONLINE</span></span>
+        <span class="t-out"><span class="t-ok">[✓]</span> Génération Hydrogène 2.0.2 — <span class="t-val">LOADED</span></span>
+        <span class="t-out"><span class="t-ok">[✓]</span> Souveraineté vérifiée — external_calls=<span class="t-val">0</span></span>
+        <span class="t-out"><span class="t-ok">[✓]</span> Module IA22_LOGIC → <span class="t-val">ONLINE</span></span>
+        <span class="t-out"><span class="t-ok">[✓]</span> Module MULTICLASS_CLONE → <span class="t-val">ONLINE</span></span>
+        <span class="t-out"><span class="t-ok">[✓]</span> Module NÉO_DZ → <span class="t-val">ONLINE</span></span>
+        <span class="t-out"><span class="t-warn">[!]</span> Module AIMEDIXAL → <span class="t-warn">RESEARCH_MODE</span> (validation clinique en cours)</span>
+        <span class="t-out"><span class="t-ok">[✓]</span> Protocole MILYES — <span class="t-val">◇ □ ☰ ORBITAL_SYNC ✓</span></span>
+        <span class="t-row" style="margin-top:6px"><span class="t-prompt">milyes@z-core:~$</span><span class="t-cmd"> status --operator</span></span>
+        <span class="t-out">Opérateur : <span class="t-hi">Mohammed Ilyes Zoubirou</span></span>
+        <span class="t-out">Localisation : <span class="t-hi">Montréal, Québec — Canada</span></span>
+        <span class="t-out">Contact X  : <span class="t-val">@MZoubirou</span></span>
+        <span class="t-out">Statut     : <span class="t-val">Le monde va parler de Z-CORE.</span> <span class="t-ok">— CONFIRMED</span></span>
+        <span class="t-row" style="margin-top:6px"><span class="t-prompt">milyes@z-core:~$</span> <span class="t-cursor"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROFIL ═══ -->
+<section id="profil">
+  <div class="section reveal">
+    <div class="section-label">Opérateur Principal</div>
+    <h2>À Propos <span class="blue">&amp; Contact</span></h2>
+
+    <div class="profil-grid">
+      <div>
+        <div class="profil-card reveal reveal-delay-1">
+          <div class="avatar">MZ</div>
+          <div class="profil-name">Mohammed Ilyes Zoubirou</div>
+          <div class="profil-role">Développeur IA &amp; Cybersécurité · DevOps</div>
+          <div class="profil-loc">📍 <span>Montréal, Québec — Canada</span></div>
+          <div class="skill-wrap">
+            <span class="skill">Python</span>
+            <span class="skill">Machine Learning</span>
+            <span class="skill">Docker / K8s</span>
+            <span class="skill">Linux · Bash</span>
+            <span class="skill">Cybersécurité</span>
+            <span class="skill">Forensics</span>
+            <span class="skill">CI/CD</span>
+            <span class="skill">Z-CORE</span>
+          </div>
+        </div>
+        <div class="social-row" style="margin-top:16px">
+          <a href="https://github.com/milyes" target="_blank" class="social-btn">⌥ GitHub</a>
+          <a href="https://x.com/MZoubirou" target="_blank" class="social-btn">✕ @MZoubirou</a>
+          <a href="mailto:contact@netsecurepro.ai" class="social-btn">✉ Email</a>
+        </div>
+      </div>
+
+      <div class="profil-text reveal reveal-delay-2">
+        <p>Je suis un développeur IA et cybersécurité basé à Montréal, spécialisé dans la conception de systèmes intelligents <strong>souverains</strong> — des architectures qui fonctionnent hors dépendance cloud, avec une confidentialité totale des données.</p>
+        <p>Mon approche : construire une <strong>intelligence artificielle de terrain</strong>, adaptée aux environnements contraints, aux problèmes médicaux réels, et aux besoins de sécurité avancée. Pas de buzzwords. Que du code qui tourne.</p>
+        <p><strong>Z-CORE H202.IA</strong> est mon framework de R&amp;D central — la 2ème génération d'une architecture modulaire où chaque module est un système spécialisé, isolé et résilient. <strong>NetSecurePro IA</strong> en est l'interface opérationnelle publique.</p>
+        <div class="note">
+          ⚠ Tous les projets présentés sont des travaux de recherche personnels indépendants. Aucune collecte de données utilisateur. Les modules médicaux (AiMedixal) sont en phase de validation — non destinés à un usage clinique. Propriété intellectuelle de Mohammed Ilyes Zoubirou. Usage commercial interdit sans accord écrit.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROTOCOLE ═══ -->
+<section id="protocol">
+  <div class="section reveal">
+    <div class="section-label">Signature Souveraine</div>
+    <h2>Protocole <span class="blue">MILYES</span></h2>
+
+    <div class="protocol-box">
+      <div class="proto-h">◇ MILYES PROTOCOL — ACTIVATED ◇</div>
+      <p class="proto-sub">Séquence d'activation du noyau souverain. Chaque étape valide un niveau d'intégrité opérationnelle.</p>
+
+      <div class="proto-steps">
+        <div class="p-step">
+          <div class="p-step-n">01 //</div>
+          <div class="p-step-name">INITIATE_HAME</div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-n">02 //</div>
+          <div class="p-step-name">SIGN_LOGIC</div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-n">03 //</div>
+          <div class="p-step-name">ENGAGE_WILL</div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-n">04 //</div>
+          <div class="p-step-name">ORBITAL_SYNC</div>
+        </div>
+      </div>
+
+      <p class="proto-philosophy">
+        Ce protocole représente une philosophie de développement entière : <strong>initier</strong> avec intention et clarté, <strong>signer</strong> chaque ligne de code avec la rigueur de la logique formelle, <strong>engager</strong> la volonté de construire sans compromis sur la souveraineté, et <strong>synchroniser</strong> l'IA avec les besoins réels du monde — pas avec les tendances marketing.
+      </p>
+
+      <div class="disclaimer">
+        <strong>DISCLAIMER // </strong>
+        NetSecurePro IA &amp; Z-CORE H202.IA sont des projets de recherche personnels. Aucune donnée utilisateur n'est collectée ou stockée. Les modules médicaux (AiMedixal) sont en phase de validation clinique — non destinés à un usage médical direct. Toute la propriété intellectuelle appartient à Mohammed Ilyes Zoubirou. Tout usage commercial est strictement interdit sans autorisation écrite préalable.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="foot-logo">Z<span>-CORE</span> <em>H202</em>.IA — NetSecurePro</div>
+  <div class="foot-mid">◇ □ ☰ &nbsp; ORBITAL_SYNC ACTIVE &nbsp; ◇ □ ☰</div>
+  <div class="foot-right">
+    <a href="https://x.com/MZoubirou" target="_blank">@MZoubirou</a> · Montréal, QC<br>
+    <span style="color:rgba(255,255,255,0.2)">© 2025 M. I. Zoubirou — Tous droits réservés</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) cur = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--blue)' : '';
+    });
+  });
+</script>
+</body>
+</html>
